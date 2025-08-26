@@ -2,7 +2,7 @@ import SectionBody from "@/components/ui/SectionBody";
 import DefaultSection from "@/components/ui/Section";
 import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { FiMail, FiGithub, FiLinkedin } from "react-icons/fi";
+import { FiMail, FiGithub, FiLinkedin, FiPhone } from "react-icons/fi";
 import SectionTitle from "@/components/ui/SectionTitle";
 import emailjs from '@emailjs/browser';
 
@@ -10,17 +10,22 @@ const socialLinks = [
   {
     name: "Email",
     icon: <FiMail size={24} />,
-    link: "mailto:vini.marcksv@gmail.com"
+    link: "mailto:alexand7e@gmail.com"
   },
   {
     name: "GitHub",
     icon: <FiGithub size={24} />,
-    link: "https://github.com/Marck-vsv"
+    link: "https://github.com/alexand7e"
   },
   {
     name: "LinkedIn",
     icon: <FiLinkedin size={24} />,
-    link: "https://www.linkedin.com/in/vinisv/"
+    link: "https://www.linkedin.com/in/alexandre-barros-dos-santos-4b67a9233/"
+  },
+  {
+    name: "Telefone",
+    icon: <FiPhone size={24} />,
+    link: "tel:+5586981813317"
   }
 ];
 
@@ -47,6 +52,16 @@ export default function Contact({
       return;
     }
 
+    // Adicionar data automaticamente
+    const formData = new FormData(form.current);
+    formData.append('date', new Date().toLocaleString('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    }));
+
     const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
     const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
     const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
@@ -57,7 +72,13 @@ export default function Contact({
         return;
     }
 
-    emailjs.sendForm(serviceId, templateId, form.current, publicKey)
+    // Usar EmailJS com os dados atualizados
+    emailjs.send(serviceId, templateId, {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      message: formData.get('message'),
+      date: formData.get('date')
+    }, publicKey)
       .then(() => {
         setSubmitSuccess(true);
         form.current?.reset();
@@ -92,8 +113,9 @@ export default function Contact({
           >
             <h3 className="text-xl md:text-2xl font-bold text-tertiary mb-6">Get in touch</h3>
             <p className="text-tertiary mb-8">
-              I&apos;m currently available for freelance work and open to new opportunities. 
-              Whether you have a question or just want to say hi, I&apos;ll try my best to get back to you!
+              I&apos;m currently working as AI Programs Manager at the Piauí State Secretariat of Artificial Intelligence. 
+              I&apos;m open to collaborations in data science, AI projects, and digital transformation initiatives. 
+              Whether you have a question or want to discuss potential partnerships, I&apos;ll be happy to connect!
             </p>
             
             <div className="flex flex-wrap gap-4">
@@ -150,7 +172,7 @@ export default function Contact({
                   name="message"
                   required
                   rows={5}
-                  className="w-full bg-secondary border border-accent rounded-lg px-4 py-2 text-tertiary focus:outline-none focus:ring-2 focus:ring-accent"
+                  className="w-full bg-secondary border border-accent rounded-lg px-4 py-2 text-tertiary focus:outline-none focus:ring-accent"
                 />
               </div>
               

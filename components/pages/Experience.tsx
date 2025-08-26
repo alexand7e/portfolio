@@ -6,28 +6,40 @@ import ExperienceCard from "@/components/ui/ExperienceCard";
 
 const experiences = [
   {
-    title: "Front-end Developer",
-    company: "Metaggov (Freelance)",
-    period: "Apr 2025 - Present",
-    description: "Developed and maintained an internal client management system for public agencies. Created reusable components using Vue.js, NuxtJS, and Bulma, optimized performance, and improved accessibility within a Kanban methodology."
+    title: "Gerente de Programas em IA",
+    company: "Secretaria de Inteligência Artificial, Economia Digital, Ciência, Tecnologia e Inovação (SIA)",
+    period: "Abr 2025 - Presente",
+    description: "Lidero e apoio projetos estratégicos para o Estado, promovendo a disseminação e uso qualificado de ferramentas de IA em diferentes áreas da gestão pública. Atuo sob a Diretoria de Desenvolvimento de IA, com interface direta com as Coordenações de Formação em IA, Políticas e Ética, e Popularização da Ciência."
   },
   {
-    title: "Intern",
-    company: "SIA - Piauí State",
-    period: "Oct 2024 - Present",
-    description: "Developed scalable web applications using Next.js, Nest.js, Go, and Python. Analyzed administrative processes, drafted technical documents, and supported data analysis and project initiatives for the state."
+    title: "Coordenador de Dados Estratégicos",
+    company: "Secretaria de Inteligência Artificial (SIA) - Governo do Piauí",
+    period: "Jun 2024 - Abr 2025",
+    description: "Coordenei iniciativas de dados estratégicos para o Estado, desenvolvendo soluções de análise e visualização de dados para tomada de decisão governamental."
   },
   {
-    title: "Developer",
-    company: "CEUT",
-    period: "Jun 2022 - Jun 2024",
-    description: "Led front-end development for a project integrating technology into psychology services, creating an electronic patient record system and an online service platform to improve care for students and the community."
+    title: "Gerente de Tecnologia",
+    company: "Teaser Soluções",
+    period: "Out 2024 - Presente",
+    description: "Gerenciei projetos de tecnologia e inovação, liderando equipes de desenvolvimento e implementando soluções digitais para clientes."
   },
   {
-    title: "Fullstack Developer",
-    company: "Balcão Legal (Freelance)",
-    period: "Apr 2022 - Jun 2024",
-    description: "Maintained microservices using Spring Framework and PostgreSQL. Developed the front-end with Next.js, TypeScript, and Tailwind CSS, implementing features based on requirement documents."
+    title: "Bolsista de Pesquisa",
+    company: "Fundação de Amparo à Pesquisa do Estado do Piauí (FAPEPI)",
+    period: "Set 2023 - Jan 2025",
+    description: "Integrei equipe de pesquisa no estudo de Emprego e Renda no Estado do Piauí, aplicando metodologias de análise de dados e ciência econômica."
+  },
+  {
+    title: "Analista de Dados",
+    company: "Servfaz - Serviços de Mão de Obra",
+    period: "Jul 2023 - Jun 2024",
+    description: "Atuei na Superintendência de Transformação Digital da Secretaria de Planejamento do Piauí, realizando análise e consolidação de bases de dados governamentais."
+  },
+  {
+    title: "Analista de Gestão de Orçamento",
+    company: "Governo do Estado do Piauí",
+    period: "Fev 2022 - Jul 2023",
+    description: "Desenvolvi relatórios de acompanhamento orçamentário legal e interno na Superintendência de Planejamento e Orçamento Estadual, com foco no controle orçamentário."
   }
 ];
 
@@ -47,7 +59,7 @@ export default function Experience({
       <SectionBody>
         <SectionTitle 
           title="Experience"
-          subtitle="My professional journey and the experiences that shaped my skills"
+          subtitle="Minha jornada profissional focada em transformação digital, IA e gestão pública"
         />
         <div className="max-w-4xl mx-auto pb-12">
           {experiences.map((exp, index) => (
