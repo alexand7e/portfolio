@@ -4,9 +4,6 @@ const nextConfig = {
     images: {
         domains: ['github.com'], // Replace with your allowed domains
     },
-    experimental: {
-        outputFileTracingRoot: undefined,
-    },
 };
 
 export default nextConfig;
