@@ -93,5 +93,7 @@ export function getPostsByTag(tag: string): BlogPostMeta[] {
 export function getAllTags(): string[] {
   const allPosts = getSortedPostsData();
   const tags = allPosts.flatMap(post => post.tags);
-  return [...new Set(tags)]; // Remove duplicates
+  // Corrigir compatibilidade do TypeScript
+  const uniqueTags = Array.from(new Set(tags));
+  return uniqueTags;
 }
