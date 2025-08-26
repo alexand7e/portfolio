@@ -12,8 +12,8 @@ const jMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "Marck-vsv page",
-    description: "",
+    title: "Alexandre Barros - Engenheiro e Cientista de Dados",
+    description: "Portfolio de Alexandre Barros dos Santos, Engenheiro e Cientista de Dados, Gerente de Programas em IA na Secretaria de Inteligência Artificial do Piauí. Especialista em análise de dados, Python, R e transformação digital.",
 };
 
 export default function RootLayout({
@@ -22,7 +22,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
+        <html lang="pt-BR">
             <body className={jMono.className}>
                 <StairTransition />
                 {children}

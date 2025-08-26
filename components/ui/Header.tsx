@@ -9,7 +9,7 @@ export const Header = () => {
     return (
         <header className={`sticky top-4 lg:top-0 flex justify-between items-center z-20 px-6 py-4 bg-primary/90 backdrop-blur-sm`}>
             <a href={"#home"} className={`text-4xl ${beforeStyle} ${afterStyle}`}>
-                Marck
+                Alexandre
             </a>
             
             <div className="lg:hidden">

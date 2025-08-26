@@ -8,23 +8,27 @@ import { IoClose } from "react-icons/io5";
 const options = [
     {
         title: "home",
-        href: "#home"
+        href: "/"
     },
     {
         title: "skills",
-        href: "#skills",
+        href: "/#skills",
     },
     {
         title: "experience",
-        href: "#experience",
+        href: "/#experience",
     },
     {
         title: "projects",
-        href: "#projects",
+        href: "/#projects",
+    },
+    {
+        title: "blog",
+        href: "/blog",
     },
     {
         title: "contact",
-        href: "#contact",
+        href: "/#contact",
     }
 ]
 

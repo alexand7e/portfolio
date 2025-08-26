@@ -21,11 +21,11 @@ export default function HomePage ({
     useEffect(() => {
         const fetchGithubStats = async () => {
             try {
-                const userResponse = await fetch('https://api.github.com/users/Marck-vsv');
+                const userResponse = await fetch('https://api.github.com/users/alexand7e');
                 if (!userResponse.ok) throw new Error('User not found');
                 const userData = await userResponse.json();
 
-                const reposResponse = await fetch('https://api.github.com/users/Marck-vsv/repos');
+                const reposResponse = await fetch('https://api.github.com/users/alexand7e/repos');
                 if (!reposResponse.ok) throw new Error('Repos not found');
                 const reposData = await reposResponse.json();
 
@@ -57,7 +57,7 @@ export default function HomePage ({
             <SectionBody className={"flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8"}>
                 <div className={"flex flex-col gap-4 items-center lg:items-start text-center lg:text-left"}>
                     <span className={"text-xl"}>
-                        Front-end Developer
+                        Engenheiro e Cientista de Dados
                     </span>
                     
                     <div className={"text-4xl md:text-5xl xl:text-6xl"}>
@@ -65,14 +65,14 @@ export default function HomePage ({
                             Hello, I&apos;m
                         </h1>
                         <h2 className={"text-accent"}>
-                            Marcos Vinicius<span className={"text-tertiary"}>.</span>
+                            Alexandre Barros<span className={"text-tertiary"}>.</span>
                         </h2>
                     </div>
                     
                     <p
                         className={"w-full max-w-xl break-words whitespace-pre-line hyphens-auto"}
                     >
-                        A passionate Front-end Developer who thrives on new challenges and innovative technologies. With a strong command of React, Next.js, Vue, and TypeScript, I specialize in building cutting-edge solutions to solve complex problems.
+                        Economista formado pela UFPI e especialista em Ciência da Computação. Atuo como Gerente de Programas em IA na Secretaria de Inteligência Artificial do Piauí, liderando projetos estratégicos de transformação digital e inovação tecnológica para o Estado.
                     </p>
                     
                     <Link
@@ -86,8 +86,8 @@ export default function HomePage ({
                 <div className={"relative w-full max-w-[20rem] md:max-w-[25rem] aspect-square"}>
                     <Image 
                         className={"rounded-full border-accent border-4 p-4"}
-                        src={"https://github.com/Marck-vsv.png"}
-                        alt={"Image pfp"}
+                        src={"https://github.com/alexand7e.png"}
+                        alt={"Alexandre Barros - Profile Picture"}
                         layout={"fill"}  
                         objectFit={"contain"}
                     />
