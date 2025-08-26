@@ -6,19 +6,47 @@ import ProjectCard from "@/components/ui/ProjectCard";
 
 const projects = [
   {
-    title: "Marckcord",
-    description: "A project aimed at replicating all of Discord's features in a learning context, focusing on real-time communication and server management.",
-    technologies: ["Next.js", "NestJS", "TypeScript", "Socket.io", "PostgreSQL"],
-    github: "https://github.com/Marck-vsv/marckcord-api",
+    title: "Microdados-CAGED",
+    description: "Análise e processamento de microdados do CAGED (Cadastro Geral de Empregados e Desempregados) utilizando Python para extrair insights sobre o mercado de trabalho brasileiro.",
+    technologies: ["Python", "Pandas", "NumPy", "Jupyter", "Análise de Dados"],
+    github: "https://github.com/alexand7e/Microdados-CAGED",
     demo: "#"
   },
   {
-    title: "Reclame-ali",
-    description: "A full-stack application for managing complaints, allowing users to submit issues and track their resolution status.",
-    technologies: ["Next.js", "NestJS", "TypeScript", "Tailwind CSS", "PostgreSQL"],
-    github: "https://github.com/Marck-vsv/reclame-ali",
+    title: "Dataset-PI",
+    description: "Compilação e análise de datasets específicos do Estado do Piauí, incluindo indicadores socioeconômicos e dados governamentais para pesquisa e tomada de decisão.",
+    technologies: ["Jupyter Notebook", "Python", "Análise Exploratória", "Visualização"],
+    github: "https://github.com/alexand7e/Dataset-PI",
     demo: "#"
   },
+  {
+    title: "R-Reps",
+    description: "Repositório de análises estatísticas e econométricas utilizando R, focando em metodologias de pesquisa aplicada e análise de dados econômicos.",
+    technologies: ["R", "Estatística", "Econometria", "Análise de Dados"],
+    github: "https://github.com/alexand7e/R-Reps",
+    demo: "#"
+  },
+  {
+    title: "Monografia-R-PNADC",
+    description: "Trabalho de conclusão de curso utilizando R para análise da PNADC (Pesquisa Nacional por Amostra de Domicílios Contínua), aplicando conceitos de ciência de dados em economia.",
+    technologies: ["R", "PNADC", "Análise Estatística", "Economia"],
+    github: "https://github.com/alexand7e/Monografia-R-PNADC",
+    demo: "#"
+  },
+  {
+    title: "Engenharia-de-Prompt-PIT",
+    description: "Projeto de pesquisa em engenharia de prompts para inteligência artificial, explorando técnicas de otimização e eficiência em sistemas de IA.",
+    technologies: ["Jupyter Notebook", "IA", "Engenharia de Prompts", "Machine Learning"],
+    github: "https://github.com/alexand7e/Engenharia-de-Prompt-PIT",
+    demo: "#"
+  },
+  {
+    title: "Chatbot Project",
+    description: "Desenvolvimento de chatbot inteligente utilizando técnicas de processamento de linguagem natural e machine learning para aplicações governamentais.",
+    technologies: ["HTML", "JavaScript", "NLP", "Machine Learning", "IA"],
+    github: "https://github.com/alexand7e/chatbot-project",
+    demo: "#"
+  }
 ];
 
 export default function Projects({
@@ -37,7 +65,7 @@ export default function Projects({
       <SectionBody>
         <SectionTitle 
           title="Projects"
-          subtitle="Some of my recent projects. Each one is a unique challenge and learning experience."
+          subtitle="Principais projetos em ciência de dados, análise econômica e inteligência artificial que desenvolvi"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (

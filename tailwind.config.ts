@@ -30,6 +30,9 @@ const config: Config = {
             primary: "var(--font-jetbrains)",  
         },
     },
-    plugins: [],
+    plugins: [
+        require('@tailwindcss/typography'),
+        require('@tailwindcss/line-clamp'),
+    ],
 };
 export default config;

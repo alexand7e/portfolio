@@ -6,30 +6,36 @@ import SkillCard from "@/components/ui/SkillCard";
 
 const skills = [
   {
-    category: "Frontend",
+    category: "Ciência de Dados & Análise",
     items: [
-      { name: "React / Next.js", level: 95 },
-      { name: "Vue / Nuxt", level: 85 },
-      { name: "TypeScript", level: 90 },
-      { name: "Tailwind CSS", level: 95 },
-      { name: "React Native", level: 75 },
+      { name: "Python", level: 95 },
+      { name: "R", level: 90 },
+      { name: "Jupyter Notebook", level: 95 },
+      { name: "Pandas & NumPy", level: 90 },
+      { name: "Análise Estatística", level: 95 },
+      { name: "Econometria", level: 85 },
     ]
   },
   {
-    category: "Backend",
+    category: "DevOps & Infraestrutura",
     items: [
-      { name: "NestJS", level: 80 },
-      { name: "Go", level: 70 },
-      { name: "PostgreSQL", level: 80 },
-      { name: "MySQL", level: 75 },
-    ]
-  },
-  {
-    category: "Tools & Methods",
-    items: [
+      { name: "Docker", level: 85 },
+      { name: "Apache Airflow", level: 80 },
       { name: "Git & GitHub", level: 90 },
-      { name: "Figma", level: 70 },
-      { name: "Agile (Scrum/Kanban)", level: 85 },
+      { name: "CI/CD", level: 75 },
+      { name: "Cloud Computing", level: 70 },
+      { name: "Linux", level: 80 },
+    ]
+  },
+  {
+    category: "Banco de Dados & Ferramentas",
+    items: [
+      { name: "PostgreSQL", level: 85 },
+      { name: "Power BI", level: 80 },
+      { name: "Excel Avançado", level: 90 },
+      { name: "SQL", level: 85 },
+      { name: "Tableau", level: 70 },
+      { name: "Metodologias Ágeis", level: 80 },
     ]
   }
 ];
@@ -50,7 +56,7 @@ export default function Skills({
       <SectionBody>
         <SectionTitle 
           title="Skills"
-          subtitle="Here are some of the technologies and tools I work with"
+          subtitle="Tecnologias e ferramentas que utilizo para análise de dados, desenvolvimento e gestão de projetos"
         />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {skills.map((skillCategory, index) => (
