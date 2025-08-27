@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   description: 'Artigos sobre tecnologia, ciência de dados e desenvolvimento web',
 };
 
+// Forçar revalidação a cada 60 segundos
+export const revalidate = 60;
+
 export default function BlogPage() {
   const posts = getSortedPostsData();
 
