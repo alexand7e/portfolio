@@ -88,8 +88,14 @@ export default function HomePage ({
                         className={"rounded-full border-accent border-4 p-4"}
                         src={"https://github.com/alexand7e.png"}
                         alt={"Alexandre Barros - Profile Picture"}
-                        layout={"fill"}  
-                        objectFit={"contain"}
+                        width={400}
+                        height={400}
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'contain'
+                        }}
+                        priority
                     />
                 </div>
             </SectionBody>
