@@ -1,7 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['alexand7e.dev.br'], // Replace with your allowed domains
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'github.com',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'alexand7e.dev.br',
+                port: '',
+                pathname: '/**',
+            },
+        ],
     },
     env: {
         PORT: '7000',
