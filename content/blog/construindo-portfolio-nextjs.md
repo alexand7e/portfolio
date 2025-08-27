@@ -344,4 +344,4 @@ O resto vem com o tempo, com feedback, com iteração.
 
 ---
 
-*Última atualização: Janeiro de 2025 | Feito com ❤️ e muito ☕*
+*Última atualização: Julho de 2025 | Feito com ❤️ e muito ☕*
