@@ -2,7 +2,10 @@
 const nextConfig = {
     output: 'standalone',
     images: {
-        domains: ['github.com'], // Replace with your allowed domains
+        domains: ['alexand7e.dev.br'], // Replace with your allowed domains
+    },
+    env: {
+        PORT: '7000',
     },
 };
 
