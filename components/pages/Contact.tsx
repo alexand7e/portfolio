@@ -41,20 +41,16 @@ export default function Contact({
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState("");
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitError("");
 
-    if (!form.current) {
-      setSubmitError("An unexpected error occurred. Please try again.");
-      setIsSubmitting(false);
-      return;
-    }
-
-    // Adicionar data automaticamente
-    const formData = new FormData(form.current);
+    const formData = new FormData(e.currentTarget);
+    
+    // Adicionar data atual
     formData.append('date', new Date().toLocaleString('pt-BR', {
+      timeZone: 'America/Sao_Paulo',
       day: '2-digit',
       month: '2-digit',
       year: 'numeric',
@@ -72,25 +68,32 @@ export default function Contact({
         return;
     }
 
-    // Usar EmailJS com os dados atualizados
-    emailjs.send(serviceId, templateId, {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      message: formData.get('message'),
-      date: formData.get('date')
-    }, publicKey)
-      .then(() => {
-        setSubmitSuccess(true);
-        form.current?.reset();
-        setTimeout(() => setSubmitSuccess(false), 5000);
-      })
-      .catch((error) => {
-        console.error("EmailJS error:", error);
-        setSubmitError("Something went wrong. Please try again.");
-      })
-      .finally(() => {
-        setIsSubmitting(false);
-      });
+    try {
+      // Enviar e-mail com dados organizados
+      await emailjs.send(serviceId, templateId, {
+        // Dados do usuário que entrou em contato
+        user_name: formData.get('name'),
+        user_email: formData.get('email'),
+        user_message: formData.get('message'),
+        contact_date: formData.get('date'),
+        
+        // Dados para identificação
+        portfolio_owner: "Alexandre Barros",
+        portfolio_email: "alexand7e@gmail.com",
+        
+        // Assunto personalizado
+        email_subject: `Novo contato de ${formData.get('name')} - Portfolio`
+      }, publicKey);
+
+      setSubmitSuccess(true);
+      form.current?.reset();
+      setTimeout(() => setSubmitSuccess(false), 5000);
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      setSubmitError("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   return (
