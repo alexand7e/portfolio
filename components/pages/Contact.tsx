@@ -22,11 +22,11 @@ const socialLinks = [
     icon: <FiLinkedin size={24} />,
     link: "https://www.linkedin.com/in/alexandre-barros-dos-santos-4b67a9233/"
   },
-  {
-    name: "Telefone",
-    icon: <FiPhone size={24} />,
-    link: "tel:+5586981813317"
-  }
+  // {
+  //   name: "Telefone",
+  //   icon: <FiPhone size={24} />,
+  //   link: "tel:+5586981813317"
+  // }
 ];
 
 export default function Contact({

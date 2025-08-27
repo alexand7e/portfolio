@@ -34,3 +34,41 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# deploy configuration
+deploy-config.yml
+*.backup
+*.tar.gz
+
+# environment files
+.env
+.env.local
+.env.production
+.env.staging
+docker.env
+
+# logs
+*.log
+logs/
+
+# temporary files
+*.tmp
+*.temp
+.cache/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# backup files
+backup-*/
+
+/.github/workflows/

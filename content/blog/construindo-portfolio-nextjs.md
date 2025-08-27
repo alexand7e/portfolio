@@ -1,7 +1,7 @@
 ---
 title: "Como Criei Meu Portfolio do Zero (e Por Que Você Deveria Fazer o Mesmo) 🚀"
 description: "A jornada real de um Engenheiro de Dados que decidiu sair da zona de conforto e criar algo incrível. Spoiler: valeu cada minuto!"
-date: "2025-01-27"
+date: "2025-08-25"
 author: "Alexandre Barros"
 tags: ["Next.js", "React", "TypeScript", "Portfolio", "Carreira", "Tech"]
 readTime: "6 min"

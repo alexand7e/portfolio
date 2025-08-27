@@ -1,0 +1,13 @@
+# GitHub Actions secrets and sensitive files
+*.env
+secrets/
+*.key
+*.pem
+
+# Workflow artifacts
+artifacts/
+*.zip
+*.tar.gz
+
+# Local workflow files
+workflow-local.yml

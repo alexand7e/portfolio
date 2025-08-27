@@ -72,7 +72,7 @@ export default function HomePage ({
                     <p
                         className={"w-full max-w-xl break-words whitespace-pre-line hyphens-auto"}
                     >
-                        Economista formado pela UFPI e especialista em Ciência da Computação. Atuo como Gerente de Programas em IA na Secretaria de Inteligência Artificial do Piauí, liderando projetos estratégicos de transformação digital e inovação tecnológica para o Estado.
+                        Economista formado pela UFPI e desenvolvedor de software. Atuo como Gerente de Programas em IA na Secretaria de Inteligência Artificial do Piauí, liderando projetos estratégicos de transformação digital e inovação tecnológica para o Estado.
                     </p>
                     
                     <Link
