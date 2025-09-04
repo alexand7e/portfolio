@@ -1,6 +1,7 @@
 "use client"
 import React, { HTMLProps } from "react";
 import {DesktopNav, MobileNav} from "@/components/ui/NavComponents";
+import LanguageSelector from "./LanguageSelector";
 
 export const Header = () => {
     const afterStyle: HTMLProps<HTMLElement>["className"] = `after:content-[';'] after:text-accent`
@@ -12,11 +13,14 @@ export const Header = () => {
                 Alexandre
             </a>
             
-            <div className="lg:hidden">
-                <MobileNav/>
-            </div>
-            <div className="hidden lg:block">
-                <DesktopNav/>
+            <div className="flex items-center gap-4">
+                <LanguageSelector />
+                <div className="lg:hidden">
+                    <MobileNav/>
+                </div>
+                <div className="hidden lg:block">
+                    <DesktopNav/>
+                </div>
             </div>
         </header>
     );

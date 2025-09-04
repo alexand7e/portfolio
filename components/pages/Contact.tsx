@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { FiMail, FiGithub, FiLinkedin, FiPhone } from "react-icons/fi";
 import SectionTitle from "@/components/ui/SectionTitle";
 import emailjs from '@emailjs/browser';
+import { useLanguage } from "@/lib/useLanguage";
 
 const socialLinks = [
   {
@@ -20,13 +21,13 @@ const socialLinks = [
   {
     name: "LinkedIn",
     icon: <FiLinkedin size={24} />,
-    link: "https://www.linkedin.com/in/alexandre-barros-dos-santos-4b67a9233/"
+    link: "https://linkedin.com/in/alexand7e"
   },
-  {
-    name: "Telefone",
-    icon: <FiPhone size={24} />,
-    link: "tel:+5586981813317"
-  }
+  // {
+  //   name: "Telefone",
+  //   icon: <FiPhone size={24} />,
+  //   link: "tel:+5586981813317"
+  // }
 ];
 
 export default function Contact({
@@ -36,6 +37,7 @@ export default function Contact({
   ref?: React.Ref<any>
   id?: string
 }) {
+  const { t } = useLanguage();
   const form = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -104,8 +106,8 @@ export default function Contact({
     >
       <SectionBody>
         <SectionTitle 
-          title="Contact"
-          subtitle="Have a project in mind or want to chat? Feel free to reach out!"
+          title={t.contact.title}
+          subtitle={t.contact.subtitle}
         />
         <div className="flex flex-col lg:flex-row gap-12 max-w-6xl mx-auto">
           <motion.div 
@@ -114,11 +116,9 @@ export default function Contact({
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="text-xl md:text-2xl font-bold text-tertiary mb-6">Get in touch</h3>
+            <h3 className="text-xl md:text-2xl font-bold text-tertiary mb-6">{t.contact.getInTouch}</h3>
             <p className="text-tertiary mb-8">
-              I&apos;m currently working as AI Programs Manager at the Piauí State Secretariat of Artificial Intelligence. 
-              I&apos;m open to collaborations in data science, AI projects, and digital transformation initiatives. 
-              Whether you have a question or want to discuss potential partnerships, I&apos;ll be happy to connect!
+              {t.contact.description}
             </p>
             
             <div className="flex flex-wrap gap-4">
@@ -147,7 +147,7 @@ export default function Contact({
           >
             <form ref={form} onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-tertiary mb-2">Name</label>
+                <label htmlFor="name" className="block text-tertiary mb-2">{t.contact.form.name}</label>
                 <input
                   type="text"
                   id="name"
@@ -169,7 +169,7 @@ export default function Contact({
               </div>
               
               <div>
-                <label htmlFor="message" className="block text-tertiary mb-2">Message</label>
+                <label htmlFor="message" className="block text-tertiary mb-2">{t.contact.form.message}</label>
                 <textarea
                   id="message"
                   name="message"
@@ -186,18 +186,18 @@ export default function Contact({
                   isSubmitting ? "opacity-70 cursor-not-allowed" : "hover:bg-[#00e187]"
                 }`}
               >
-                {isSubmitting ? "Sending..." : "Send Message"}
+                {isSubmitting ? t.contact.form.sending : t.contact.form.send}
               </button>
               
               {submitSuccess && (
                 <div className="p-3 bg-green-900 text-green-200 rounded-lg">
-                  Message sent successfully! I&apos;ll get back to you soon.
+                  {t.contact.success}
                 </div>
               )}
               
               {submitError && (
                 <div className="p-3 bg-red-900 text-red-200 rounded-lg">
-                  {submitError}
+                  {t.contact.error}
                 </div>
               )}
             </form>

@@ -3,6 +3,7 @@ import SectionBody from "@/components/ui/SectionBody";
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
+import { useLanguage } from "@/lib/useLanguage";
 
 export default function HomePage ({
     ref,
@@ -11,6 +12,7 @@ export default function HomePage ({
     ref?: React.Ref<any>
     id?: string
 }) {
+    const { t } = useLanguage();
     const [stats, setStats] = useState([
         { value: "0+", label: "Years on GitHub" },
         { value: "0+", label: "Repositories" },
@@ -57,12 +59,12 @@ export default function HomePage ({
             <SectionBody className={"flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8"}>
                 <div className={"flex flex-col gap-4 items-center lg:items-start text-center lg:text-left"}>
                     <span className={"text-xl"}>
-                        Engenheiro e Cientista de Dados
+                        {t.home.title}
                     </span>
                     
                     <div className={"text-4xl md:text-5xl xl:text-6xl"}>
                         <h1>
-                            Hello, I&apos;m
+                            {t.home.subtitle}
                         </h1>
                         <h2 className={"text-accent"}>
                             Alexandre Barros<span className={"text-tertiary"}>.</span>
@@ -72,14 +74,14 @@ export default function HomePage ({
                     <p
                         className={"w-full max-w-xl break-words whitespace-pre-line hyphens-auto"}
                     >
-                        Economista formado pela UFPI e especialista em Ciência da Computação. Atuo como Gerente de Programas em IA na Secretaria de Inteligência Artificial do Piauí, liderando projetos estratégicos de transformação digital e inovação tecnológica para o Estado.
+                        {t.home.description}
                     </p>
                     
                     <Link
                         href={"#contact"}
                         className={"mt-4 border-2 border-accent p-4 w-fit text-accent rounded-full font-bold hover:bg-accent hover:text-primary transition-all"}
                     >
-                        Contact me
+                        {t.home.contactButton}
                     </Link>
                 </div>
                 
@@ -88,8 +90,14 @@ export default function HomePage ({
                         className={"rounded-full border-accent border-4 p-4"}
                         src={"https://github.com/alexand7e.png"}
                         alt={"Alexandre Barros - Profile Picture"}
-                        layout={"fill"}  
-                        objectFit={"contain"}
+                        width={400}
+                        height={400}
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'contain'
+                        }}
+                        priority
                     />
                 </div>
             </SectionBody>
