@@ -3,48 +3,49 @@ import DefaultSection from "@/components/ui/Section";
 import React from "react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import ProjectCard from "@/components/ui/ProjectCard";
+import { useLanguage } from "@/lib/useLanguage";
 
 const projects = [
   {
-    title: "Microdados-CAGED",
-    description: "Análise e processamento de microdados do CAGED (Cadastro Geral de Empregados e Desempregados) utilizando Python para extrair insights sobre o mercado de trabalho brasileiro.",
-    technologies: ["Python", "Pandas", "NumPy", "Jupyter", "Análise de Dados"],
+    title: "Portfolio Pessoal",
+    description: "Portfolio moderno desenvolvido com Next.js 14, TypeScript e Tailwind CSS. Inclui blog integrado, deploy automatizado com GitHub Actions e CI/CD pipeline completo.",
+    technologies: ["Next.js 14", "TypeScript", "Tailwind CSS", "Framer Motion", "Docker", "CI/CD"],
+    github: "https://github.com/alexand7e/portfolio",
+    demo: "https://alexand7e.dev.br"
+  },
+  {
+    title: "SIA-PI - Inteligência Artificial",
+    description: "Liderança de iniciativas de IA e estratégia de dados para inovação no setor público. Desenvolvimento de soluções de análise e visualização de dados governamentais.",
+    technologies: ["Python", "Data Engineering", "AI/ML", "ETL Pipelines", "Apache Airflow", "PostgreSQL"],
+    github: "#",
+    demo: "#"
+  },
+  {
+    title: "Teaser - Soluções Enterprise",
+    description: "Desenvolvimento de soluções escaláveis e sistemas de automação para clientes enterprise. Arquitetura de microserviços e aplicações serverless.",
+    technologies: ["Node.js", "TypeScript", "React", "Docker", "Kubernetes", "AWS/GCP"],
+    github: "#",
+    demo: "#"
+  },
+  {
+    title: "ETL Pipeline - CAGED",
+    description: "Pipeline ETL robusto para processamento de microdados do CAGED utilizando Python e Apache Airflow. Análise de dados do mercado de trabalho brasileiro.",
+    technologies: ["Python", "Apache Airflow", "PostgreSQL", "ETL", "Data Analysis", "Pandas"],
     github: "https://github.com/alexand7e/Microdados-CAGED",
     demo: "#"
   },
   {
-    title: "Dataset-PI",
-    description: "Compilação e análise de datasets específicos do Estado do Piauí, incluindo indicadores socioeconômicos e dados governamentais para pesquisa e tomada de decisão.",
-    technologies: ["Jupyter Notebook", "Python", "Análise Exploratória", "Visualização"],
+    title: "Dataset-PI - Análise Governamental",
+    description: "Compilação e análise de datasets específicos do Estado do Piauí, incluindo indicadores socioeconômicos para pesquisa e tomada de decisão.",
+    technologies: ["Python", "Jupyter", "Data Analysis", "Visualization", "PostgreSQL"],
     github: "https://github.com/alexand7e/Dataset-PI",
     demo: "#"
   },
   {
-    title: "R-Reps",
-    description: "Repositório de análises estatísticas e econométricas utilizando R, focando em metodologias de pesquisa aplicada e análise de dados econômicos.",
-    technologies: ["R", "Estatística", "Econometria", "Análise de Dados"],
-    github: "https://github.com/alexand7e/R-Reps",
-    demo: "#"
-  },
-  {
-    title: "Monografia-R-PNADC",
-    description: "Trabalho de conclusão de curso utilizando R para análise da PNADC (Pesquisa Nacional por Amostra de Domicílios Contínua), aplicando conceitos de ciência de dados em economia.",
-    technologies: ["R", "PNADC", "Análise Estatística", "Economia"],
-    github: "https://github.com/alexand7e/Monografia-R-PNADC",
-    demo: "#"
-  },
-  {
-    title: "Engenharia-de-Prompt-PIT",
-    description: "Projeto de pesquisa em engenharia de prompts para inteligência artificial, explorando técnicas de otimização e eficiência em sistemas de IA.",
-    technologies: ["Jupyter Notebook", "IA", "Engenharia de Prompts", "Machine Learning"],
-    github: "https://github.com/alexand7e/Engenharia-de-Prompt-PIT",
-    demo: "#"
-  },
-  {
-    title: "Chatbot Project",
-    description: "Desenvolvimento de chatbot inteligente utilizando técnicas de processamento de linguagem natural e machine learning para aplicações governamentais.",
-    technologies: ["HTML", "JavaScript", "NLP", "Machine Learning", "IA"],
-    github: "https://github.com/alexand7e/chatbot-project",
+    title: "CI/CD Pipeline",
+    description: "Pipeline completo de integração e deploy contínuo configurado com GitHub Actions, Docker e deploy automatizado no servidor.",
+    technologies: ["GitHub Actions", "Docker", "CI/CD", "Deploy Automation", "Nginx"],
+    github: "https://github.com/alexand7e/portfolio",
     demo: "#"
   }
 ];
@@ -56,6 +57,7 @@ export default function Projects({
   ref?: React.Ref<any>
   id?: string
 }) {
+  const { t } = useLanguage();
   return (
     <DefaultSection
       ref={ref}
@@ -64,8 +66,8 @@ export default function Projects({
     >
       <SectionBody>
         <SectionTitle 
-          title="Projects"
-          subtitle="Principais projetos em ciência de dados, análise econômica e inteligência artificial que desenvolvi"
+          title={t.projects.title}
+          subtitle={t.projects.subtitle}
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (

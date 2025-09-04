@@ -22,5 +22,5 @@ RUN npm run build
 # Expor porta
 EXPOSE 7000
 
-# Comando para executar com output standalone
-CMD ["node", ".next/standalone/server.js"]
+# Comando para executar
+CMD ["npm", "start"]

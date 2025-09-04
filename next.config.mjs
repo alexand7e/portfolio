@@ -1,12 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    output: 'standalone',
-    images: {
-        domains: ['alexand7e.dev.br'], // Replace with your allowed domains
-    },
-    env: {
-        PORT: '7000',
-    },
+  experimental: {
+    appDir: true,
+  },
+  i18n: {
+    locales: ['pt', 'en'],
+    defaultLocale: 'pt',
+    localeDetection: true,
+  },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/?l=pt',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
