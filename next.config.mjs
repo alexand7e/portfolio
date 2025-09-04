@@ -1,21 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
+  output: 'standalone',
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'github.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
   i18n: {
     locales: ['pt', 'en'],
     defaultLocale: 'pt',
-    localeDetection: true,
-  },
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/?l=pt',
-        permanent: false,
-      },
-    ];
+    localeDetection: false,
   },
 };
 

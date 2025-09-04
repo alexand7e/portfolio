@@ -1,4 +1,4 @@
-import { getSortedPostsData } from '@/lib/markdown';
+import { getSortedPostsData, BlogPostMeta } from '@/lib/markdown';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import Link from 'next/link';
@@ -13,8 +13,14 @@ export const metadata: Metadata = {
 // Forçar revalidação a cada 60 segundos
 export const revalidate = 60;
 
-export default function BlogPage() {
-  const posts = getSortedPostsData();
+export default async function BlogPage() {
+  let posts: BlogPostMeta[] = [];
+  try {
+    posts = getSortedPostsData();
+  } catch (error) {
+    console.error('Error loading posts:', error);
+    posts = [];
+  }
 
   return (
     <main className="min-h-screen bg-primary">
