@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
-import React from "react";
+import React, { Suspense } from "react";
 import "./globals.css";
 
 import StairTransition from "@/components/animations/EnterAnimation";
@@ -26,9 +26,11 @@ export default function RootLayout({
         <html lang="pt-BR">
             <body className={jMono.className}>
                 <StairTransition />
-                <LanguageProvider>
-                    {children}
-                </LanguageProvider>
+                <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Carregando...</div>}>
+                    <LanguageProvider>
+                        {children}
+                    </LanguageProvider>
+                </Suspense>
             </body>
         </html>
     );
