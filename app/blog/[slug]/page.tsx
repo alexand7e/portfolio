@@ -67,15 +67,15 @@ export default async function PostPage({ params }: PostPageProps) {
           </div>
           
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-tertiary mb-4">
-            {post.title}
+            {post.title || 'Título não disponível'}
           </h1>
           
           <p className="text-xl text-tertiary/80 mb-6">
-            {post.description}
+            {post.description || 'Descrição não disponível'}
           </p>
           
           <div className="flex flex-wrap gap-2">
-            {post.tags.map((tag, index) => (
+            {post.tags && post.tags.map((tag, index) => (
               <span
                 key={index}
                 className="px-3 py-1 bg-accent/20 text-accent text-sm rounded-full"

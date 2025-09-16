@@ -56,9 +56,9 @@ export default function Skills({
       className={"!bg-secondary"}
     >
       <SectionBody>
-        <SectionTitle 
-          title={t.skills.title}
-          subtitle={t.skills.subtitle}
+        <SectionTitle
+            title={t("skills.title")}
+            subtitle={t("skills.subtitle")}
         />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {skills.map((skillCategory, index) => (

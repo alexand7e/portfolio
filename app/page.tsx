@@ -1,5 +1,5 @@
 "use client";
-import React, { Suspense } from "react";
+import React from "react";
 import HomePage from "@/components/pages/Home";
 import Experience from "@/components/pages/Experience";
 import Projects from "@/components/pages/Projects";
@@ -12,17 +12,15 @@ import LanguageTest from "@/components/ui/LanguageTest";
 function Home () {
     return (
         <main className={"w-full h-full"}>
-            <Suspense fallback={<div>Carregando...</div>}>
-                <FadeInAnimation>
-                    <Header/>
-                    <HomePage id={"home"}/>
-                    <Skills id={"skills"}/>
-                    <Experience id={"experience"}/>
-                    <Projects id={"projects"}/>
-                    <Contact id={"contact"}/>
-                </FadeInAnimation>
-                <LanguageTest />
-            </Suspense>
+            <FadeInAnimation>
+                <Header/>
+                <HomePage id={"home"}/>
+                <Skills id={"skills"}/>
+                <Experience id={"experience"}/>
+                <Projects id={"projects"}/>
+                <Contact id={"contact"}/>
+            </FadeInAnimation>
+            <LanguageTest />
         </main>
     );
 }

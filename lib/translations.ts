@@ -23,6 +23,8 @@ export interface Translations {
   projects: {
     title: string;
     subtitle: string;
+    showMore: string;
+    showLess: string;
   };
   contact: {
     title: string;
@@ -64,7 +66,9 @@ export const translations: Record<Language, Translations> = {
     },
     projects: {
       title: "Projects",
-      subtitle: "Principais projetos em desenvolvimento full-stack, data engineering e soluções de IA que desenvolvi"
+      subtitle: "Principais projetos em desenvolvimento full-stack, data engineering e soluções de IA que desenvolvi",
+      showMore: "Ver Mais",
+      showLess: "Ver Menos"
     },
     contact: {
       title: "Contact",
@@ -104,7 +108,9 @@ export const translations: Record<Language, Translations> = {
     },
     projects: {
       title: "Projects",
-      subtitle: "Main projects in full-stack development, data engineering and AI solutions that I developed"
+      subtitle: "Main projects in full-stack development, data engineering and AI solutions that I developed",
+      showMore: "Show More",
+      showLess: "Show Less"
     },
     contact: {
       title: "Contact",

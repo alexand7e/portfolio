@@ -20,7 +20,7 @@ const options = [
     },
     {
         title: "projects",
-        href: "/#projects",
+        href: "/projects",
     },
     {
         title: "blog",

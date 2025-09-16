@@ -43,7 +43,7 @@ yarn dev
 pnpm dev
 ```
 
-O projeto estará disponível em [http://localhost:3010](http://localhost:3010)
+O projeto estará disponível em [http://localhost:](http://localhost:7000)
 
 ## 📁 Estrutura do Projeto
 
