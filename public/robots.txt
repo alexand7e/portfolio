@@ -1,0 +1,23 @@
+# Robots.txt para Alexandre Barros Portfolio
+# https://alexandre-barros.dev
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://alexandre-barros.dev/sitemap.xml
+
+# Otimizações específicas
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+# Permitir crawling de recursos importantes
+Allow: /blog/
+Allow: /public/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.svg
+
+# Crawl-delay para ser gentil com os servidores
+Crawl-delay: 1
