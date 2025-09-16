@@ -1,68 +1,113 @@
 import SectionBody from "@/components/ui/SectionBody";
 import DefaultSection from "@/components/ui/Section";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import ExperienceCard from "@/components/ui/ExperienceCard";
 import { useLanguage } from "@/lib/useLanguage";
 
-const experiences = [
-  {
-    title: "Manager - Inteligência Artificial",
-    company: "SIA-PI (Secretaria de Inteligência Artificial)",
-    period: "2024 - Presente",
-    description: "Liderando iniciativas de IA e estratégia de dados para inovação no setor público. Promovendo a disseminação e uso qualificado de ferramentas de IA em diferentes áreas da gestão pública."
-  },
-  {
-    title: "Co-Founder & CTO",
-    company: "Teaser Soluções",
-    period: "2024 - Presente",
-    description: "Desenvolvendo soluções escaláveis e sistemas de automação para clientes enterprise. Liderando equipes de desenvolvimento e implementando soluções digitais inovadoras."
-  },
-  {
-    title: "Data Engineer & Full-Stack Developer",
-    company: "Freelance & Projetos",
-    period: "2023 - Presente",
-    description: "Arquitetando soluções end-to-end: desde ingestão e processamento de dados (Python/Spark) até workflows automatizados (Airflow) e aplicações para usuários (TypeScript/React)."
-  },
-  {
-    title: "Coordenador de Dados Estratégicos",
-    company: "SIA-PI - Governo do Piauí",
-    period: "2024",
-    description: "Coordenei iniciativas de dados estratégicos para o Estado, desenvolvendo soluções de análise e visualização de dados para tomada de decisão governamental."
-  },
-  {
-    title: "Analista de Dados",
-    company: "Servfaz - Serviços de Mão de Obra",
-    period: "2023 - 2024",
-    description: "Atuei na Superintendência de Transformação Digital da Secretaria de Planejamento do Piauí, realizando análise e consolidação de bases de dados governamentais."
-  }
-];
+interface Experience {
+  id: string;
+  company: string;
+  companyEn: string | null;
+  position: string;
+  positionEn: string | null;
+  description: string | null;
+  descriptionEn: string | null;
+  startDate: string;
+  endDate: string | null;
+  current: boolean;
+  location: string | null;
+  locationEn: string | null;
+  technologies: string[];
+  order: number;
+}
+
+interface ExperienceCardData {
+  title: string;
+  company: string;
+  period: string;
+  description: string;
+}
 
 export default function Experience({
-  ref,
-  id
+  className = "",
 }: {
-  ref?: React.Ref<any>
-  id?: string
+  className?: string;
 }) {
-  const { t } = useLanguage();
-  return (
-    <DefaultSection
-      ref={ref}
-      id={`${id}`}
-      className={"!bg-primary"}
-    >
-      <SectionBody>
-        <SectionTitle 
-          title={t.experience.title}
-          subtitle={t.experience.subtitle}
+  const { language, t } = useLanguage();
+  const [experiences, setExperiences] = useState<ExperienceCardData[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchExperiences = async () => {
+      try {
+        const response = await fetch('/api/experiences');
+        if (response.ok) {
+          const data: Experience[] = await response.json();
+          
+          // Transform database data to component format
+          const transformedExperiences: ExperienceCardData[] = data.map((exp) => {
+            const startYear = new Date(exp.startDate).getFullYear();
+            const endYear = exp.current ? 'Presente' : (exp.endDate ? new Date(exp.endDate).getFullYear() : '');
+            const period = exp.current ? `${startYear} - Presente` : `${startYear}${endYear ? ` - ${endYear}` : ''}`;
+            
+            return {
+              title: language === 'en' && exp.positionEn ? exp.positionEn : exp.position,
+              company: language === 'en' && exp.companyEn ? exp.companyEn : exp.company,
+              period,
+              description: language === 'en' && exp.descriptionEn ? exp.descriptionEn : (exp.description || '')
+            };
+          });
+          
+          setExperiences(transformedExperiences);
+        }
+      } catch (error) {
+        console.error('Error fetching experiences:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchExperiences();
+  }, [language]);
+
+  if (loading) {
+    return (
+      <DefaultSection id="experience" className={className}>
+        <SectionTitle
+          title={t("experience.title")}
+          subtitle={t("experience.subtitle")}
         />
-        <div className="max-w-4xl mx-auto pb-12">
-          {experiences.map((exp, index) => (
-            <ExperienceCard key={index} experience={exp} index={index} />
+        <SectionBody>
+          <div className="grid gap-6">
+            <div className="animate-pulse">
+              <div className="h-32 bg-secondary rounded-lg mb-4"></div>
+              <div className="h-32 bg-secondary rounded-lg mb-4"></div>
+              <div className="h-32 bg-secondary rounded-lg"></div>
+            </div>
+          </div>
+        </SectionBody>
+      </DefaultSection>
+    );
+  }
+
+  return (
+    <DefaultSection id="experience" className={className}>
+      <SectionTitle
+        title={t("experience.title")}
+        subtitle={t("experience.subtitle")}
+      />
+      <SectionBody>
+        <div className="grid gap-6">
+          {experiences.map((experience, index) => (
+            <ExperienceCard
+              key={index}
+              experience={experience}
+              index={index}
+            />
           ))}
         </div>
       </SectionBody>
     </DefaultSection>
-  )
+  );
 }

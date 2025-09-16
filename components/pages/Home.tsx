@@ -59,12 +59,12 @@ export default function HomePage ({
             <SectionBody className={"flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8"}>
                 <div className={"flex flex-col gap-4 items-center lg:items-start text-center lg:text-left"}>
                     <span className={"text-xl"}>
-                        {t.home.title}
+                        {t("home.title")}
                     </span>
                     
                     <div className={"text-4xl md:text-5xl xl:text-6xl"}>
                         <h1>
-                            {t.home.subtitle}
+                            {t("home.subtitle")}
                         </h1>
                         <h2 className={"text-accent"}>
                             Alexandre Barros<span className={"text-tertiary"}>.</span>
@@ -74,14 +74,14 @@ export default function HomePage ({
                     <p
                         className={"w-full max-w-xl break-words whitespace-pre-line hyphens-auto"}
                     >
-                        {t.home.description}
+                        {t("home.description")}
                     </p>
                     
                     <Link
                         href={"#contact"}
                         className={"mt-4 border-2 border-accent p-4 w-fit text-accent rounded-full font-bold hover:bg-accent hover:text-primary transition-all"}
                     >
-                        {t.home.contactButton}
+                        {t("home.contactButton")}
                     </Link>
                 </div>
                 
