@@ -7,7 +7,6 @@ import Skills from "@/components/pages/Skills";
 import Contact from "@/components/pages/Contact";
 import {Header} from "@/components/ui/Header";
 import FadeInAnimation from "@/components/animations/FadeIn";
-import LanguageTest from "@/components/ui/LanguageTest";
 
 function Home () {
     return (
@@ -20,7 +19,6 @@ function Home () {
                 <Projects id={"projects"}/>
                 <Contact id={"contact"}/>
             </FadeInAnimation>
-            <LanguageTest />
         </main>
     );
 }

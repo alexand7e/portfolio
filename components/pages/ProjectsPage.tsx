@@ -166,7 +166,7 @@ export default function ProjectsPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-primary pt-20">
-        <DefaultSection className="py-20">
+        <DefaultSection className="py-20" id="projects-page">
           <SectionTitle
             title={t("projects.title")}
             subtitle={language === 'en' ? 'Explore all my projects' : 'Explore todos os meus projetos'}
@@ -190,7 +190,7 @@ export default function ProjectsPage() {
 
   return (
     <div className="min-h-screen bg-primary pt-20">
-      <DefaultSection className="py-20">
+      <DefaultSection className="py-20" id="projects-page">
         <SectionTitle
           title={t("projects.title")}
           subtitle={language === 'en' ? 'Explore all my projects with advanced filtering and search' : 'Explore todos os meus projetos com filtros avançados e busca'}

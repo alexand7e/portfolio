@@ -97,7 +97,7 @@ const projects = [
     githubUrl: "https://github.com/alexand7e/portfolio",
     technologies: ["Next.js 14", "TypeScript", "Tailwind CSS", "Framer Motion", "Docker", "CI/CD"],
     featured: true,
-    status: "PUBLISHED"
+    status: "PUBLISHED" as const
   },
   {
     slug: "sia-pi-inteligencia-artificial",
@@ -112,7 +112,7 @@ const projects = [
     githubUrl: "#",
     technologies: ["Python", "Data Engineering", "AI/ML", "ETL Pipelines", "Apache Airflow", "PostgreSQL"],
     featured: true,
-    status: "PUBLISHED"
+    status: "PUBLISHED" as const
   },
   {
     slug: "teaser-solucoes-enterprise",
@@ -127,7 +127,7 @@ const projects = [
     githubUrl: "#",
     technologies: ["Node.js", "TypeScript", "React", "Docker", "Kubernetes", "AWS/GCP"],
     featured: true,
-    status: "PUBLISHED"
+    status: "PUBLISHED" as const
   },
   {
     slug: "etl-pipeline-caged",
@@ -142,7 +142,7 @@ const projects = [
     githubUrl: "https://github.com/alexand7e/Microdados-CAGED",
     technologies: ["Python", "Apache Airflow", "PostgreSQL", "ETL", "Data Analysis", "Pandas"],
     featured: false,
-    status: "PUBLISHED"
+    status: "PUBLISHED" as const
   },
   {
     slug: "dataset-pi-analise-governamental",
@@ -157,7 +157,7 @@ const projects = [
     githubUrl: "https://github.com/alexand7e/Dataset-PI",
     technologies: ["Python", "Jupyter", "Data Analysis", "Visualization", "PostgreSQL"],
     featured: false,
-    status: "PUBLISHED"
+    status: "PUBLISHED" as const
   },
   {
     slug: "cicd-pipeline",
@@ -172,7 +172,7 @@ const projects = [
     githubUrl: "https://github.com/alexand7e/portfolio",
     technologies: ["GitHub Actions", "Docker", "CI/CD", "Deploy Automation", "Nginx"],
     featured: false,
-    status: "PUBLISHED"
+    status: "PUBLISHED" as const
   }
 ]
 

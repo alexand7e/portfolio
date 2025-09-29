@@ -173,247 +173,221 @@ export default function ProjectEditPage({ params }: ProjectEditPageProps) {
           <div className="mt-4 flex md:mt-0 md:ml-4">
             <Link
               href="/admin/projects"
-              className="inline-flex items-center px-4 py-2 border border-secondary rounded-md shadow-sm text-sm font-medium text-tertiary bg-secondary hover:bg-secondary/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
+              className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Cancelar
+              Voltar
             </Link>
           </div>
         </div>
-      </div>
 
-      {error && (
-        <div className="mt-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-          {error}
-        </div>
-      )}
+        {error && (
+          <div className="mt-4 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded">
+            {error}
+          </div>
+        )}
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-          <div className="bg-secondary shadow px-4 py-5 sm:rounded-lg sm:p-6">
-          <div className="md:grid md:grid-cols-3 md:gap-6">
-              <div className="md:col-span-1">
-                <h3 className="text-lg font-medium leading-6 text-tertiary">Informações Básicas</h3>
-                <p className="mt-1 text-sm text-tertiary/80">
-                  Informações principais do projeto em português.
-                </p>
+          <div className="bg-white shadow rounded-lg p-6">
+            <div className="grid grid-cols-1 gap-6">
+              <div>
+                <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+                  Título (PT)
+                </label>
+                <input
+                  type="text"
+                  name="title"
+                  id="title"
+                  required
+                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  value={formData.title}
+                  onChange={handleTitleChange}
+                />
               </div>
-            <div className="mt-5 md:mt-0 md:col-span-2">
-              <div className="grid grid-cols-6 gap-6">
-                <div className="col-span-6">
-                    <label htmlFor="title" className="block text-sm font-medium text-tertiary">
-                      Título (PT)
-                    </label>
-                  <input
-                    type="text"
-                    name="title"
-                    id="title"
-                    required
-                    value={formData.title}
-                    onChange={handleTitleChange}
-                      className="mt-1 focus:ring-accent focus:border-accent block w-full shadow-sm sm:text-sm border-tertiary/30 rounded-md bg-primary text-tertiary"
-                  />
-                </div>
 
-                <div className="col-span-6">
-                    <label htmlFor="slug" className="block text-sm font-medium text-tertiary">
-                      Slug (URL)
-                    </label>
-                  <input
-                    type="text"
-                    name="slug"
-                    id="slug"
-                    required
-                    value={formData.slug}
-                    onChange={handleInputChange}
-                      className="mt-1 focus:ring-accent focus:border-accent block w-full shadow-sm sm:text-sm border-tertiary/30 rounded-md bg-primary text-tertiary"
-                  />
-                </div>
+              <div>
+                <label htmlFor="slug" className="block text-sm font-medium text-gray-700">
+                  Slug (URL)
+                </label>
+                <input
+                  type="text"
+                  name="slug"
+                  id="slug"
+                  required
+                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  value={formData.slug}
+                  onChange={handleInputChange}
+                />
+              </div>
 
-                <div className="col-span-6">
-                    <label htmlFor="description" className="block text-sm font-medium text-tertiary">
-                      Descrição (PT)
-                    </label>
-                  <textarea
-                    name="description"
-                    id="description"
-                    rows={3}
-                    required
-                    value={formData.description}
-                    onChange={handleInputChange}
-                      className="mt-1 focus:ring-accent focus:border-accent block w-full shadow-sm sm:text-sm border-tertiary/30 rounded-md bg-primary text-tertiary"
-                  />
-                </div>
+              <div>
+                <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+                  Descrição (PT)
+                </label>
+                <textarea
+                  name="description"
+                  id="description"
+                  required
+                  rows={3}
+                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  value={formData.description}
+                  onChange={handleInputChange}
+                />
               </div>
             </div>
           </div>
-        </div>
 
-          <div className="bg-secondary shadow px-4 py-5 sm:rounded-lg sm:p-6">
-          <div className="md:grid md:grid-cols-3 md:gap-6">
-              <div className="md:col-span-1">
-                <h3 className="text-lg font-medium leading-6 text-tertiary">Versão em Inglês</h3>
-                <p className="mt-1 text-sm text-tertiary/80">
-                  Traduções para o inglês (opcional).
-                </p>
+          <div className="bg-white shadow rounded-lg p-6">
+            <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">
+              Traduções para o inglês (opcional)
+            </h3>
+            <div className="grid grid-cols-1 gap-6">
+              <div>
+                <label htmlFor="titleEn" className="block text-sm font-medium text-gray-700">
+                  Título (EN)
+                </label>
+                <input
+                  type="text"
+                  name="titleEn"
+                  id="titleEn"
+                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  value={formData.titleEn}
+                  onChange={handleInputChange}
+                />
               </div>
-            <div className="mt-5 md:mt-0 md:col-span-2">
-              <div className="grid grid-cols-6 gap-6">
-                <div className="col-span-6">
-                  <label htmlFor="titleEn" className="block text-sm font-medium text-gray-700">
-                    Título (EN)
-                  </label>
-                  <input
-                    type="text"
-                    name="titleEn"
-                    id="titleEn"
-                    value={formData.titleEn}
-                    onChange={handleInputChange}
-                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                  />
-                </div>
 
-                <div className="col-span-6">
-                  <label htmlFor="descriptionEn" className="block text-sm font-medium text-gray-700">
-                    Descrição (EN)
-                  </label>
-                  <textarea
-                    name="descriptionEn"
-                    id="descriptionEn"
-                    rows={3}
-                    value={formData.descriptionEn}
-                    onChange={handleInputChange}
-                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                  />
-                </div>
+              <div>
+                <label htmlFor="descriptionEn" className="block text-sm font-medium text-gray-700">
+                  Descrição (EN)
+                </label>
+                <textarea
+                  name="descriptionEn"
+                  id="descriptionEn"
+                  rows={3}
+                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  value={formData.descriptionEn}
+                  onChange={handleInputChange}
+                />
               </div>
             </div>
           </div>
-        </div>
 
-          <div className="bg-secondary shadow px-4 py-5 sm:rounded-lg sm:p-6">
-          <div className="md:grid md:grid-cols-3 md:gap-6">
-              <div className="md:col-span-1">
-                <h3 className="text-lg font-medium leading-6 text-tertiary">Links e Recursos</h3>
-                <p className="mt-1 text-sm text-tertiary/80">
-                  URLs e recursos relacionados ao projeto.
-                </p>
+          <div className="bg-white shadow rounded-lg p-6">
+            <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">
+              Links e Imagens
+            </h3>
+            <div className="grid grid-cols-1 gap-6">
+              <div>
+                <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700">
+                  URL da Imagem
+                </label>
+                <input
+                  type="url"
+                  name="imageUrl"
+                  id="imageUrl"
+                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  value={formData.imageUrl}
+                  onChange={handleInputChange}
+                />
               </div>
-            <div className="mt-5 md:mt-0 md:col-span-2">
-              <div className="grid grid-cols-6 gap-6">
-                <div className="col-span-6">
-                  <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700">
-                    URL da Imagem
-                  </label>
-                  <input
-                    type="url"
-                    name="imageUrl"
-                    id="imageUrl"
-                    value={formData.imageUrl}
-                    onChange={handleInputChange}
-                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                  />
-                </div>
 
-                <div className="col-span-6">
-                  <ImageUpload
-                    label="Imagem de Capa (Upload)"
-                    value={formData.coverImage}
-                    onChange={(url) => setFormData(prev => ({ ...prev, coverImage: url }))}
-                  />
-                </div>
+              <div>
+                <ImageUpload
+                  label="Imagem de Capa (Upload)"
+                  value={formData.coverImage}
+                  onChange={(url) => setFormData(prev => ({ ...prev, coverImage: url }))}
+                />
+              </div>
 
-                <div className="col-span-3">
-                  <label htmlFor="demoUrl" className="block text-sm font-medium text-gray-700">
-                    URL da Demo
-                  </label>
-                  <input
-                    type="url"
-                    name="demoUrl"
-                    id="demoUrl"
-                    value={formData.demoUrl}
-                    onChange={handleInputChange}
-                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                  />
-                </div>
+              <div>
+                <label htmlFor="demoUrl" className="block text-sm font-medium text-gray-700">
+                  URL do Demo
+                </label>
+                <input
+                  type="url"
+                  name="demoUrl"
+                  id="demoUrl"
+                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  value={formData.demoUrl}
+                  onChange={handleInputChange}
+                />
+              </div>
 
-                <div className="col-span-3">
-                  <label htmlFor="githubUrl" className="block text-sm font-medium text-gray-700">
-                    URL do GitHub
-                  </label>
-                  <input
-                    type="url"
-                    name="githubUrl"
-                    id="githubUrl"
-                    value={formData.githubUrl}
-                    onChange={handleInputChange}
-                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                  />
-                </div>
-
-                <div className="col-span-6">
-                  <label className="block text-sm font-medium text-gray-700">
-                    Tecnologias
-                  </label>
-                  <div className="mt-1 flex">
-                    <input
-                      type="text"
-                      value={techInput}
-                      onChange={(e) => setTechInput(e.target.value)}
-                      onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTechnology())}
-                      className="focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-l-md"
-                      placeholder="Digite uma tecnologia"
-                    />
-                    <button
-                      type="button"
-                      onClick={addTechnology}
-                      className="inline-flex items-center px-3 py-2 border border-l-0 border-gray-300 rounded-r-md bg-gray-50 text-gray-500 text-sm"
-                    >
-                      Adicionar
-                    </button>
-                  </div>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {formData.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
-                      >
-                        {tech}
-                        <button
-                          type="button"
-                          onClick={() => removeTechnology(tech)}
-                          className="ml-1 inline-flex items-center justify-center w-4 h-4 text-blue-400 hover:text-blue-600"
-                        >
-                          ×
-                        </button>
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="col-span-6">
-                  <div className="flex items-center">
-                    <input
-                      id="featured"
-                      name="featured"
-                      type="checkbox"
-                      checked={formData.featured}
-                      onChange={handleInputChange}
-                      className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                    />
-                    <label htmlFor="featured" className="ml-2 block text-sm text-gray-900">
-                      Projeto em destaque
-                    </label>
-                  </div>
-                </div>
+              <div>
+                <label htmlFor="githubUrl" className="block text-sm font-medium text-gray-700">
+                  URL do GitHub
+                </label>
+                <input
+                  type="url"
+                  name="githubUrl"
+                  id="githubUrl"
+                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  value={formData.githubUrl}
+                  onChange={handleInputChange}
+                />
               </div>
             </div>
           </div>
-        </div>
+
+          <div className="bg-white shadow rounded-lg p-6">
+            <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">
+              Tecnologias
+            </h3>
+            <div className="flex gap-2 mb-4">
+              <input
+                type="text"
+                className="flex-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="Adicionar tecnologia"
+                value={techInput}
+                onChange={(e) => setTechInput(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTechnology())}
+              />
+              <button
+                type="button"
+                onClick={addTechnology}
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Adicionar
+              </button>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {formData.technologies.map((tech) => (
+                <span
+                  key={tech}
+                  className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800"
+                >
+                  {tech}
+                  <button
+                    type="button"
+                    onClick={() => removeTechnology(tech)}
+                    className="ml-2 inline-flex items-center justify-center w-4 h-4 rounded-full text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white"
+                  >
+                    ×
+                  </button>
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-white shadow rounded-lg p-6">
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                name="featured"
+                id="featured"
+                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                checked={formData.featured}
+                onChange={handleInputChange}
+              />
+              <label htmlFor="featured" className="ml-2 block text-sm text-gray-900">
+                Projeto em destaque
+              </label>
+            </div>
+          </div>
 
           <div className="flex justify-end">
             <Link
               href="/admin/projects"
-              className="bg-secondary py-2 px-4 border border-tertiary/30 rounded-md shadow-sm text-sm font-medium text-tertiary hover:bg-secondary/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
+              className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Cancelar
             </Link>
@@ -426,7 +400,6 @@ export default function ProjectEditPage({ params }: ProjectEditPageProps) {
             </button>
           </div>
         </form>
-      </div>
       </div>
     </div>
   )
