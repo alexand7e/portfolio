@@ -84,6 +84,8 @@ docker run -e DATABASE_URL="sua_url_do_banco" \
 
 ## 🔧 Variáveis de Ambiente
 
+⚠️ **IMPORTANTE**: NUNCA commite credenciais reais no repositório!
+
 Crie um arquivo `.env.local` baseado no `env.example`:
 
 ```env
