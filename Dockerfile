@@ -16,6 +16,9 @@ RUN npm ci
 # Copiar código fonte
 COPY . .
 
+# Gerar Prisma Client
+RUN npx prisma generate
+
 # Gerar build de produção
 RUN npm run build
 

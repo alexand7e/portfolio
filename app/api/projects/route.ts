@@ -13,7 +13,7 @@ export async function GET() {
     })
 
     // Transform the data to match the expected interface
-    const transformedProjects = projects.map(project => ({
+    const transformedProjects = projects.map((project: any) => ({
       ...project,
       liveUrl: project.demoUrl,
       order: 0 // Default order since it's not in schema
