@@ -12,7 +12,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   
   // Check if we're on the login page using usePathname hook
   const pathname = typeof window !== 'undefined' ? window.location.pathname : ''
-  const isLoginPage = pathname === '/admin/login'
+  const isLoginPage = pathname === '/admin/login' || pathname.startsWith('/admin/login')
 
   useEffect(() => {
     if (status === 'loading') return // Still loading
@@ -31,8 +31,11 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
 
   if (status === 'loading') {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-lg">Carregando...</div>
+      <div className="min-h-screen bg-primary flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto mb-4"></div>
+          <div className="text-lg text-tertiary">Carregando...</div>
+        </div>
       </div>
     )
   }
@@ -51,12 +54,12 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen bg-secondary">
+    <div className="min-h-screen bg-primary">
       <AdminNav />
       
-      {/* Main content */}
-      <main className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 text-tertiary">
-        <div className="max-w-6xl">
+      {/* Main content with consistent spacing and layout */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="space-y-8">
           {children}
         </div>
       </main>

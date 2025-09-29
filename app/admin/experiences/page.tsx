@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { format } from 'date-fns'
+import { format, formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 
 interface Experience {
@@ -82,152 +82,163 @@ export default function ExperiencesPage() {
 
   if (loading) {
     return (
-      <div className="px-4 py-6 sm:px-0">
+      <div className="flex items-center justify-center h-64">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
-          <p className="mt-2 text-sm text-gray-500">Carregando experiências...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto mb-4"></div>
+          <div className="text-lg text-tertiary">Carregando experiências...</div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="px-4 py-6 sm:px-0">
-      <div className="md:flex md:items-center md:justify-between">
-        <div className="flex-1 min-w-0">
-          <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
-            Experiências Profissionais
-          </h2>
-        </div>
-        <div className="mt-4 flex md:mt-0 md:ml-4">
-          <Link
-            href="/admin/experiences/new"
-            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Nova Experiência
-          </Link>
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="bg-secondary/30 backdrop-blur-sm border border-accent/10 rounded-xl p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="flex-1">
+            <h1 className="text-3xl font-bold text-tertiary mb-2">Experiências</h1>
+            <p className="text-tertiary/70 text-lg">
+              Gerencie suas experiências profissionais aqui.
+            </p>
+          </div>
+          <div className="flex-shrink-0">
+            <Link
+              href="/admin/experiences/new"
+              className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-primary bg-accent hover:bg-accent/90 rounded-xl shadow-sm hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+            >
+              <span className="mr-2">+</span>
+              Nova Experiência
+            </Link>
+          </div>
         </div>
       </div>
 
+      {/* Error Message */}
       {error && (
-        <div className="mt-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+        <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-xl">
           {error}
         </div>
       )}
 
-      <div className="mt-8 flex flex-col">
-        <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-              {experiences.length === 0 ? (
-                <div className="text-center py-12">
-                  <p className="text-sm text-gray-500">Nenhuma experiência encontrada.</p>
-                  <Link
-                    href="/admin/experiences/new"
-                    className="mt-4 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-                  >
-                    Criar primeira experiência
-                  </Link>
-                </div>
-              ) : (
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Empresa / Cargo
-                      </th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Período
-                      </th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Tecnologias
-                      </th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Status
-                      </th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Criado em
-                      </th>
-                      <th scope="col" className="relative px-6 py-3">
-                        <span className="sr-only">Ações</span>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {experiences.map((experience) => (
-                      <tr key={experience.id} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div>
-                            <div className="text-sm font-medium text-gray-900">
-                              {experience.company}
-                            </div>
-                            <div className="text-sm text-gray-500">
-                              {experience.position}
-                            </div>
-                            {experience.companyEn && (
-                              <div className="text-xs text-gray-400 mt-1">
-                                EN: {experience.companyEn} - {experience.positionEn}
-                              </div>
-                            )}
+      {/* Experiences Table */}
+      <div className="bg-secondary/30 backdrop-blur-sm border border-accent/10 rounded-xl overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-accent/10">
+            <thead className="bg-accent/5">
+              <tr>
+                <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-tertiary/70 uppercase tracking-wider">
+                  Experiência
+                </th>
+                <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-tertiary/70 uppercase tracking-wider">
+                  Período
+                </th>
+                <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-tertiary/70 uppercase tracking-wider">
+                  Tecnologias
+                </th>
+                <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-tertiary/70 uppercase tracking-wider">
+                  Status
+                </th>
+                <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-tertiary/70 uppercase tracking-wider">
+                  Criado em
+                </th>
+                <th scope="col" className="relative px-6 py-4">
+                  <span className="sr-only">Ações</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-secondary/20 divide-y divide-accent/10">
+              {experiences.map((experience) => (
+                <tr key={experience.id} className="hover:bg-accent/5 transition-colors duration-200">
+                  <td className="px-6 py-4">
+                    <div className="flex items-center space-x-4">
+                      <div className="flex-shrink-0 w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
+                        <span className="text-accent text-lg font-semibold">💼</span>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-semibold text-tertiary truncate">
+                          {experience.company}
+                        </div>
+                        <div className="text-sm text-tertiary/70 truncate">
+                          {experience.position}
+                        </div>
+                        {experience.companyEn && (
+                          <div className="text-xs text-tertiary/50 mt-1 truncate">
+                            EN: {experience.companyEn} - {experience.positionEn}
                           </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {formatPeriod(experience.startDate, experience.endDate, experience.current)}
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="flex flex-wrap gap-1">
-                            {experience.technologies && experience.technologies.slice(0, 3).map((tech) => (
-                              <span
-                                key={tech}
-                                className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800"
-                              >
-                                {tech}
-                              </span>
-                            ))}
-                            {experience.technologies && experience.technologies.length > 3 && (
-                              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
-                                +{experience.technologies.length - 3}
-                              </span>
-                            )}
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          {experience.current ? (
-                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                              Atual
-                            </span>
-                          ) : (
-                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                              Finalizada
-                            </span>
-                          )}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {format(new Date(experience.createdAt), 'dd/MM/yyyy', { locale: ptBR })}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                          <div className="flex justify-end space-x-2">
-                            <Link
-                              href={`/admin/experiences/${experience.id}/edit`}
-                              className="text-indigo-600 hover:text-indigo-900"
-                            >
-                              Editar
-                            </Link>
-                            <button
-                              onClick={() => handleDelete(experience.id)}
-                              className="text-red-600 hover:text-red-900"
-                            >
-                              Excluir
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
+                        )}
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-tertiary/70">
+                    {formatPeriod(experience.startDate, experience.endDate, experience.current)}
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="flex flex-wrap gap-1">
+                      {experience.technologies && experience.technologies.slice(0, 2).map((tech) => (
+                        <span
+                          key={tech}
+                          className="inline-flex px-2 py-1 text-xs font-medium bg-accent/10 text-accent rounded-md border border-accent/20"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                      {experience.technologies && experience.technologies.length > 2 && (
+                        <span className="text-xs text-tertiary/60 px-2 py-1">
+                          +{experience.technologies.length - 2}
+                        </span>
+                      )}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span className={`inline-flex px-3 py-1 text-xs font-semibold rounded-full transition-colors duration-200 ${
+                      experience.current
+                        ? 'bg-accent/20 text-accent border border-accent/30'
+                        : 'bg-tertiary/10 text-tertiary/70 border border-tertiary/20'
+                    }`}>
+                      {experience.current ? '⭐ Atual' : 'Finalizada'}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-tertiary/70">
+                    {formatDistanceToNow(new Date(experience.createdAt), {
+                      addSuffix: true,
+                      locale: ptBR,
+                    })}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <div className="flex items-center space-x-3">
+                      <Link
+                        href={`/admin/experiences/${experience.id}/edit`}
+                        className="text-accent hover:text-accent/80 transition-colors font-medium"
+                      >
+                        Editar
+                      </Link>
+                      <button
+                        onClick={() => handleDelete(experience.id)}
+                        className="text-red-400 hover:text-red-300 transition-colors font-medium"
+                      >
+                        Excluir
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          
+          {experiences.length === 0 && (
+            <div className="text-center py-16">
+              <div className="text-6xl mb-4">💼</div>
+              <p className="text-tertiary/70 text-lg mb-4">Nenhuma experiência encontrada</p>
+              <Link
+                href="/admin/experiences/new"
+                className="inline-flex items-center px-6 py-3 text-sm font-medium text-primary bg-accent hover:bg-accent/90 rounded-xl transition-colors duration-200"
+              >
+                <span className="mr-2">+</span>
+                Criar sua primeira experiência
+              </Link>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

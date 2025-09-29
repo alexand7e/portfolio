@@ -86,143 +86,159 @@ export default function BlogListPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="text-lg">Carregando posts...</div>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto mb-4"></div>
+          <div className="text-lg text-tertiary">Carregando posts...</div>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="px-4 py-6 sm:px-0">
-      <div className="sm:flex sm:items-center">
-        <div className="sm:flex-auto">
-          <h1 className="text-xl font-semibold text-gray-900">Posts do Blog</h1>
-          <p className="mt-2 text-sm text-gray-700">
-            Gerencie todos os posts do seu blog aqui.
-          </p>
-        </div>
-        <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-          <Link
-            href="/admin/blog/new"
-            className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
-          >
-            Novo Post
-          </Link>
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="bg-secondary/30 backdrop-blur-sm border border-accent/10 rounded-xl p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="flex-1">
+            <h1 className="text-3xl font-bold text-tertiary mb-2">Blog</h1>
+            <p className="text-tertiary/70 text-lg">
+              Gerencie todos os posts do seu blog aqui.
+            </p>
+          </div>
+          <div className="flex-shrink-0">
+            <Link
+              href="/admin/blog/new"
+              className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-primary bg-accent hover:bg-accent/90 rounded-xl shadow-sm hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+            >
+              <span className="mr-2">+</span>
+              Novo Post
+            </Link>
+          </div>
         </div>
       </div>
 
+      {/* Error Message */}
       {error && (
-        <div className="mt-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+        <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-xl">
           {error}
         </div>
       )}
 
-      <div className="mt-8 flex flex-col">
-        <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-            <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-300">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Título
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Status
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Criado
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Tags
-                    </th>
-                    <th className="relative px-6 py-3">
-                      <span className="sr-only">Ações</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {posts.map((post) => (
-                    <tr key={post.id}>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <div>
-                            <div className="text-sm font-medium text-gray-900">
-                              {post.title}
-                            </div>
-                            <div className="text-sm text-gray-500">
-                              {post.description ? post.description.substring(0, 100) + '...' : 'Sem descrição'}
-                            </div>
+      {/* Blog Posts Table */}
+      <div className="bg-secondary/30 backdrop-blur-sm border border-accent/10 rounded-xl overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-accent/10">
+            <thead className="bg-accent/5">
+              <tr>
+                <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-tertiary/70 uppercase tracking-wider">
+                  Post
+                </th>
+                <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-tertiary/70 uppercase tracking-wider">
+                  Status
+                </th>
+                <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-tertiary/70 uppercase tracking-wider">
+                  Tags
+                </th>
+                <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-tertiary/70 uppercase tracking-wider">
+                  Criado em
+                </th>
+                <th scope="col" className="relative px-6 py-4">
+                  <span className="sr-only">Ações</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-secondary/20 divide-y divide-accent/10">
+              {posts.map((post) => (
+                <tr key={post.id} className="hover:bg-accent/5 transition-colors duration-200">
+                  <td className="px-6 py-4">
+                    <div className="flex items-center space-x-4">
+                      <div className="flex-shrink-0 w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
+                        <span className="text-accent text-lg font-semibold">📝</span>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-semibold text-tertiary truncate">
+                          {post.title}
+                        </div>
+                        <div className="text-sm text-tertiary/70 truncate">
+                          {post.description ? post.description.substring(0, 80) + '...' : 'Sem descrição'}
+                        </div>
+                        {post.readTime && (
+                          <div className="text-xs text-tertiary/50 mt-1">
+                            {post.readTime} min de leitura
                           </div>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <button
-                          onClick={() => togglePublished(post.id, post.published)}
-                          className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                            post.published
-                              ? 'bg-green-100 text-green-800'
-                              : 'bg-yellow-100 text-yellow-800'
-                          }`}
+                        )}
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <button
+                      onClick={() => togglePublished(post.id, post.published)}
+                      className={`inline-flex px-3 py-1 text-xs font-semibold rounded-full transition-colors duration-200 ${
+                        post.published
+                          ? 'bg-accent/20 text-accent border border-accent/30'
+                          : 'bg-tertiary/10 text-tertiary/70 border border-tertiary/20'
+                      }`}
+                    >
+                      {post.published ? '✅ Publicado' : '📝 Rascunho'}
+                    </button>
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="flex flex-wrap gap-1">
+                      {post.tags && post.tags.slice(0, 2).map((tag) => (
+                        <span
+                          key={tag}
+                          className="inline-flex px-2 py-1 text-xs font-medium bg-accent/10 text-accent rounded-md border border-accent/20"
                         >
-                          {post.published ? 'Publicado' : 'Rascunho'}
-                        </button>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {formatDistanceToNow(new Date(post.createdAt), {
-                          addSuffix: true,
-                          locale: ptBR,
-                        })}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <div className="flex flex-wrap gap-1">
-                          {post.tags.slice(0, 3).map((tag) => (
-                            <span
-                              key={tag}
-                              className="inline-flex px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 rounded"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                          {post.tags.length > 3 && (
-                            <span className="text-xs text-gray-500">
-                              +{post.tags.length - 3}
-                            </span>
-                          )}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <div className="flex space-x-2">
-                          <Link
-                            href={`/admin/blog/${post.id}/edit`}
-                            className="text-indigo-600 hover:text-indigo-900"
-                          >
-                            Editar
-                          </Link>
-                          <button
-                            onClick={() => deletePost(post.id)}
-                            className="text-red-600 hover:text-red-900"
-                          >
-                            Excluir
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              {posts.length === 0 && (
-                <div className="text-center py-12">
-                  <p className="text-gray-500">Nenhum post encontrado.</p>
-                  <Link
-                    href="/admin/blog/new"
-                    className="mt-2 inline-flex items-center text-indigo-600 hover:text-indigo-900"
-                  >
-                    Criar seu primeiro post
-                  </Link>
-                </div>
-              )}
+                          {tag}
+                        </span>
+                      ))}
+                      {post.tags && post.tags.length > 2 && (
+                        <span className="text-xs text-tertiary/60 px-2 py-1">
+                          +{post.tags.length - 2}
+                        </span>
+                      )}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-tertiary/70">
+                    {formatDistanceToNow(new Date(post.createdAt), {
+                      addSuffix: true,
+                      locale: ptBR,
+                    })}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <div className="flex items-center space-x-3">
+                      <Link
+                        href={`/admin/blog/${post.id}/edit`}
+                        className="text-accent hover:text-accent/80 transition-colors font-medium"
+                      >
+                        Editar
+                      </Link>
+                      <button
+                        onClick={() => deletePost(post.id)}
+                        className="text-red-400 hover:text-red-300 transition-colors font-medium"
+                      >
+                        Excluir
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          
+          {posts.length === 0 && (
+            <div className="text-center py-16">
+              <div className="text-6xl mb-4">📝</div>
+              <p className="text-tertiary/70 text-lg mb-4">Nenhum post encontrado</p>
+              <Link
+                href="/admin/blog/new"
+                className="inline-flex items-center px-6 py-3 text-sm font-medium text-primary bg-accent hover:bg-accent/90 rounded-xl transition-colors duration-200"
+              >
+                <span className="mr-2">+</span>
+                Criar seu primeiro post
+              </Link>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
