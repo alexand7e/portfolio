@@ -1,4 +1,4 @@
-import { getSortedPostsData, BlogPostMeta } from '@/lib/markdown';
+import { getSortedPostsData } from '@/lib/markdown';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import Link from 'next/link';
@@ -13,14 +13,8 @@ export const metadata: Metadata = {
 // Forçar revalidação a cada 60 segundos
 export const revalidate = 60;
 
-export default async function BlogPage() {
-  let posts: BlogPostMeta[] = [];
-  try {
-    posts = getSortedPostsData();
-  } catch (error) {
-    console.error('Error loading posts:', error);
-    posts = [];
-  }
+export default function BlogPage() {
+  const posts = getSortedPostsData();
 
   return (
     <main className="min-h-screen bg-primary">
@@ -70,11 +64,11 @@ export default async function BlogPage() {
                   </div>
                   
                   <h3 className="text-2xl lg:text-3xl font-bold text-tertiary mb-3">
-                    {posts[0].title}
+                    {posts[0]?.title || 'Título não disponível'}
                   </h3>
                   
                   <p className="text-tertiary/80 mb-4 line-clamp-3">
-                    {posts[0].description}
+                    {posts[0]?.description || 'Descrição não disponível'}
                   </p>
                   
                   <div className="flex flex-wrap gap-2 mb-4">
@@ -126,15 +120,15 @@ export default async function BlogPage() {
               </div>
               
               <h3 className="text-xl font-bold text-tertiary mb-3 line-clamp-2">
-                {post.title}
+                {post.title || 'Título não disponível'}
               </h3>
               
               <p className="text-tertiary/80 mb-4 line-clamp-3">
-                {post.description}
+                {post.description || 'Descrição não disponível'}
               </p>
               
               <div className="flex flex-wrap gap-2 mb-4">
-                {post.tags.slice(0, 2).map((tag, index) => (
+                {post.tags && post.tags.slice(0, 2).map((tag, index) => (
                   <span
                     key={index}
                     className="px-2 py-1 bg-accent/20 text-accent text-xs rounded-full"

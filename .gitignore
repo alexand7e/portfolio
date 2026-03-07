@@ -72,3 +72,4 @@ desktop.ini
 backup-*/
 
 /.github/workflows/
+/lib/generated/prisma
