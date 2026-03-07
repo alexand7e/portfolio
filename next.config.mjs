@@ -1,20 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
+  reactStrictMode: true,
+  // Removendo i18n para usar implementação customizada
+  // i18n: {
+  //   locales: ['pt', 'en'],
+  //   defaultLocale: 'pt',
+  //   localeDetection: false, // Corrigido para false
+  // },
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'github.com',
-        port: '',
-        pathname: '/**',
-      },
-    ],
+    domains: ['github.com', 'api.github.com'],
   },
-  i18n: {
-    locales: ['pt', 'en'],
-    defaultLocale: 'pt',
-    localeDetection: false,
+  // Permitir requisições para api.github.com
+  async rewrites() {
+    return [
+      {
+        source: '/api/github/:path*',
+        destination: 'https://api.github.com/:path*',
+      },
+    ];
   },
 };
 
