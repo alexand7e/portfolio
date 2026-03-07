@@ -6,7 +6,8 @@
     "dev": "next dev -p 7000",
     "build": "next build",
     "start": "next start -p 7000",
-    "lint": "next lint"
+    "lint": "next lint",
+    "import:projects": "node scripts/import-projects-from-json.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
