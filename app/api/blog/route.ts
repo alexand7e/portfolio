@@ -1,9 +1,16 @@
 import { NextResponse } from 'next/server';
-import { getSortedPostsData } from '@/lib/markdown';
+import { prisma } from '@/lib/prisma';
 
 export async function GET() {
   try {
-    const posts = getSortedPostsData();
+    const posts = await prisma.blog.findMany({
+      where: {
+        published: true
+      },
+      orderBy: {
+        createdAt: 'desc'
+      }
+    });
     return NextResponse.json(posts);
   } catch (error) {
     console.error('Erro ao buscar posts:', error);
