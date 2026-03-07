@@ -1,0 +1,75 @@
+version: "3.9"
+
+services:
+  # Portfolio - Alexand7e Personal Portfolio (Local Test)
+  portfolio:
+    image: ghcr.io/alexand7e/portfolio:latest
+    environment:
+      # Configurações da aplicação
+      NODE_ENV: production
+      PORT: 3000
+      HOST: 0.0.0.0
+
+      # Configurações de cache e performance
+      CACHE_TTL: 3600
+      STATIC_CACHE_MAX_AGE: 31536000
+      COMPRESSION_ENABLED: "true"
+
+      # Configurações de segurança
+      HELMET_ENABLED: "true"
+      CORS_ENABLED: "true"
+      RATE_LIMIT_ENABLED: "true"
+      RATE_LIMIT_WINDOW_MS: 900000
+      RATE_LIMIT_MAX_REQUESTS: 100
+
+      # Configurações de monitoramento
+      METRICS_ENABLED: "true"
+      HEALTH_CHECK_ENABLED: "true"
+      LOG_LEVEL: info
+      LOG_FORMAT: json
+
+      # Configurações de SEO e analytics
+      GOOGLE_ANALYTICS_ID: ${GOOGLE_ANALYTICS_ID:-}
+      GOOGLE_TAG_MANAGER_ID: ${GOOGLE_TAG_MANAGER_ID:-}
+      FACEBOOK_PIXEL_ID: ${FACEBOOK_PIXEL_ID:-}
+
+      # Configurações de CDN e assets
+      CDN_URL: ${CDN_URL:-}
+      ASSETS_VERSION: ${ASSETS_VERSION:-v1}
+
+      # Configurações de email e contato
+      CONTACT_EMAIL: ${CONTACT_EMAIL:-alexand7e@gmail.com}
+      SUPPORT_EMAIL: ${SUPPORT_EMAIL:-alexand7e@gmail.com}
+
+      # Configurações de timezone
+      TZ: America/Sao_Paulo
+
+      # Configurações específicas do portfolio
+      PORTFOLIO_TITLE: "Alexand7e - Portfolio"
+      PORTFOLIO_DESCRIPTION: "Personal portfolio showcasing my projects and skills"
+      PORTFOLIO_AUTHOR: "Alexand7e"
+      PORTFOLIO_URL: "https://alexand7e.dev.br"
+
+    ports:
+      - "3000:3000"
+
+    volumes:
+      - portfolio_logs:/app/logs
+      - portfolio_cache:/app/cache
+      - portfolio_uploads:/app/uploads
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+# Volumes para persistência de dados
+volumes:
+  portfolio_logs:
+  portfolio_cache:
+  portfolio_uploads:
+
