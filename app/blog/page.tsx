@@ -10,6 +10,15 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Blog - Alexandre Barros',
   description: 'Artigos sobre tecnologia, ciência de dados e desenvolvimento web',
+  alternates: {
+    canonical: 'https://alexand7e.dev.br/blog',
+  },
+  openGraph: {
+    title: 'Blog - Alexandre Barros',
+    description: 'Artigos sobre tecnologia, ciência de dados e desenvolvimento web',
+    type: 'website',
+    url: 'https://alexand7e.dev.br/blog',
+  },
 };
 
 export const dynamic = 'force-dynamic';
@@ -159,6 +168,7 @@ export default async function BlogPage() {
                           <img
                             src={cover}
                             alt={post.title}
+                            loading="lazy"
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                           />
                         ) : (
