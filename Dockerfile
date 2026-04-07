@@ -18,6 +18,10 @@ COPY . .
 # Gerar Prisma Client a partir do schema
 RUN npx prisma generate
 
+# Variáveis públicas que precisam estar no build do Next.js
+ARG NEXT_PUBLIC_GA_ID
+ENV NEXT_PUBLIC_GA_ID=$NEXT_PUBLIC_GA_ID
+
 # Gerar build de produção (output: standalone)
 RUN npm run build
 

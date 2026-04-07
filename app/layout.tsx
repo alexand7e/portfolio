@@ -6,6 +6,7 @@ import "./globals.css";
 import StairTransition from "@/components/animations/EnterAnimation";
 import LanguageProvider from "@/components/providers/LanguageProvider";
 import StructuredData from "@/components/seo/StructuredData";
+import GoogleAnalytics from "@/components/seo/GoogleAnalytics";
 
 const jMono = JetBrains_Mono({
     subsets: ["latin"],
@@ -14,13 +15,23 @@ const jMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "Alexandre Barros - Engenheiro e Cientista de Dados | Portfolio",
+    title: {
+        default: "Alexandre Barros - Engenheiro e Cientista de Dados | Portfolio",
+        template: "%s | Alexandre Barros",
+    },
     description: "Portfolio profissional de Alexandre Barros dos Santos - Engenheiro e Cientista de Dados especialista em IA, Python, R e transformação digital. Gerente de Programas em IA na Secretaria de Inteligência Artificial do Piauí.",
-    keywords: ["Alexandre Barros", "Cientista de Dados", "Engenheiro de Dados", "Inteligência Artificial", "Python", "R", "Data Science", "Machine Learning", "Portfolio", "Piauí"],
+    keywords: [
+        "Alexandre Barros", "Cientista de Dados", "Engenheiro de Dados",
+        "Inteligência Artificial", "Python", "R", "Data Science", "Machine Learning",
+        "Portfolio", "Piauí", "Blog tecnologia", "Artigos sobre dados",
+        "Desenvolvimento web", "Next.js", "React", "TypeScript",
+        "Transformação digital", "IA no setor público", "Big Data",
+        "Análise de dados", "Visualização de dados", "Deep Learning",
+    ],
     authors: [{ name: "Alexandre Barros dos Santos" }],
     creator: "Alexandre Barros dos Santos",
     publisher: "Alexandre Barros dos Santos",
-    metadataBase: new URL('https://alexandre-barros.dev'),
+    metadataBase: new URL('https://alexand7e.dev.br'),
     alternates: {
         canonical: '/',
         languages: {
@@ -31,7 +42,7 @@ export const metadata: Metadata = {
     openGraph: {
         type: 'website',
         locale: 'pt_BR',
-        url: 'https://alexandre-barros.dev',
+        url: 'https://alexand7e.dev.br',
         title: 'Alexandre Barros - Engenheiro e Cientista de Dados',
         description: 'Portfolio profissional de Alexandre Barros dos Santos - Especialista em IA, Data Science e transformação digital.',
         siteName: 'Alexandre Barros Portfolio',
@@ -62,9 +73,6 @@ export const metadata: Metadata = {
             'max-snippet': -1,
         },
     },
-    verification: {
-        google: 'your-google-verification-code',
-    },
 };
 
 export default function RootLayout({
@@ -75,6 +83,7 @@ export default function RootLayout({
     return (
         <html lang="pt-BR">
             <head>
+                <GoogleAnalytics />
                 <StructuredData />
             </head>
             <body className={jMono.className}>

@@ -41,24 +41,38 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const post = await prisma.blog.findUnique({
     where: { slug: params.slug },
-    select: { title: true, description: true, tags: true, publishedAt: true, coverImage: true, coverUrl: true },
+    select: { title: true, description: true, tags: true, publishedAt: true, updatedAt: true, coverImage: true, coverUrl: true },
   });
 
   if (!post) return { title: 'Post não encontrado' };
 
   const cover = post.coverImage || post.coverUrl || undefined;
+  const baseUrl = 'https://alexand7e.dev.br';
 
   return {
-    title: `${post.title} - Alexandre Barros`,
+    title: post.title,
     description: post.description,
+    keywords: post.tags,
+    alternates: {
+      canonical: `${baseUrl}/blog/${params.slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.description,
       type: 'article',
+      url: `${baseUrl}/blog/${params.slug}`,
       authors: ['Alexandre Barros'],
       publishedTime: post.publishedAt?.toISOString(),
+      modifiedTime: post.updatedAt?.toISOString(),
       tags: post.tags,
-      images: cover ? [{ url: cover }] : undefined,
+      images: cover ? [{ url: cover, width: 1200, height: 630, alt: post.title }] : undefined,
+      siteName: 'Alexandre Barros Portfolio',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+      images: cover ? [cover] : undefined,
     },
   };
 }
@@ -72,8 +86,38 @@ export default async function PostPage({ params }: PostPageProps) {
   const readTimeLabel = post.readTime ? `${post.readTime} min de leitura` : 'Leitura rápida';
   const cover = post.coverImage || post.coverUrl || null;
 
+  const articleStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.description,
+    image: cover || 'https://github.com/alexand7e.png',
+    author: {
+      '@type': 'Person',
+      name: 'Alexandre Barros dos Santos',
+      url: 'https://alexand7e.dev.br',
+    },
+    publisher: {
+      '@type': 'Person',
+      name: 'Alexandre Barros dos Santos',
+      url: 'https://alexand7e.dev.br',
+    },
+    datePublished: new Date(date).toISOString(),
+    dateModified: post.updatedAt.toISOString(),
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://alexand7e.dev.br/blog/${post.slug}`,
+    },
+    keywords: post.tags.join(', '),
+  };
+
   return (
-    <main className="min-h-screen bg-primary">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleStructuredData) }}
+      />
+      <main className="min-h-screen bg-primary">
 
       {/* Top nav */}
       <div className="bg-secondary/80 backdrop-blur border-b border-accent/20 sticky top-0 z-10">
@@ -180,5 +224,6 @@ export default async function PostPage({ params }: PostPageProps) {
         </div>
       </div>
     </main>
+    </>
   );
 }
