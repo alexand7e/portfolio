@@ -7,7 +7,7 @@ export default function StructuredData() {
     "name": "Alexandre Barros dos Santos",
     "alternateName": "Alexandre Barros",
     "description": "Engenheiro e Cientista de Dados especialista em Inteligência Artificial, Python, R e transformação digital",
-    "url": "https://alexandre-barros.dev",
+    "url": "https://alexand7e.dev.br",
     "image": "https://github.com/alexand7e.png",
     "sameAs": [
       "https://github.com/alexand7e",
@@ -58,7 +58,7 @@ export default function StructuredData() {
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://alexandre-barros.dev"
+      "@id": "https://alexand7e.dev.br"
     }
   }
 
@@ -67,7 +67,7 @@ export default function StructuredData() {
     "@type": "WebSite",
     "name": "Alexandre Barros Portfolio",
     "alternateName": "Alexandre Barros - Data Scientist Portfolio",
-    "url": "https://alexandre-barros.dev",
+    "url": "https://alexand7e.dev.br",
     "description": "Portfolio profissional de Alexandre Barros dos Santos - Engenheiro e Cientista de Dados especialista em IA e transformação digital",
     "author": {
       "@type": "Person",
