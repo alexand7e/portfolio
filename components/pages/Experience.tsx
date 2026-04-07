@@ -33,6 +33,7 @@ export default function Experience({
   className = "",
 }: {
   className?: string;
+  id?: string;
 }) {
   const { language, t } = useLanguage();
   const [experiences, setExperiences] = useState<ExperienceCardData[]>([]);

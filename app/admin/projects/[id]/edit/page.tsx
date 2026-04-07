@@ -427,7 +427,6 @@ export default function ProjectEditPage({ params }: ProjectEditPageProps) {
           </div>
         </form>
       </div>
-      </div>
     </div>
   )
 }
