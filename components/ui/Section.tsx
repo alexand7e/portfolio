@@ -8,7 +8,7 @@ const DefaultSection = ({
 }: {
     children?: React.ReactNode
     className?: string
-    id: string
+    id?: string
     ref?: React.Ref<any>
 }) => {
     return (

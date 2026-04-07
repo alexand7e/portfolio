@@ -37,6 +37,7 @@ export default function Projects({
   className = "",
 }: {
   className?: string;
+  id?: string;
 }) {
   const { language, t } = useLanguage();
   const [projects, setProjects] = useState<ProjectCardData[]>([]);
