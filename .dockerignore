@@ -32,6 +32,7 @@ yarn-error.log*
 # Git
 .git
 .gitignore
+.github
 
 # Docker
 Dockerfile
