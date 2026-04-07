@@ -88,7 +88,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
   const articleStructuredData = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     headline: post.title,
     description: post.description,
     image: cover || 'https://github.com/alexand7e.png',
