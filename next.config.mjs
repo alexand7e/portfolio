@@ -12,6 +12,11 @@ const nextConfig = {
     domains: ['github.com', 'api.github.com'],
   },
   // Permitir requisições para api.github.com
+  async redirects() {
+    return [
+      { source: '/now', destination: '/agora', permanent: true },
+    ];
+  },
   async rewrites() {
     return [
       {

@@ -32,8 +32,13 @@ export default function AdminNav() {
   const navItems = [
     { href: '/admin', label: 'Dashboard' },
     { href: '/admin/blog', label: 'Blog' },
+    { href: '/admin/tutorials', label: 'Tutoriais' },
+    { href: '/admin/talks', label: 'Talks' },
+    { href: '/admin/newsletter', label: 'Newsletter' },
+    { href: '/admin/testimonials', label: 'Depoimentos' },
     { href: '/admin/projects', label: 'Projetos' },
-    { href: '/admin/experiences', label: 'Experiências' }
+    { href: '/admin/experiences', label: 'Experiências' },
+    { href: '/admin/settings', label: 'Configurações' },
   ]
 
   return (

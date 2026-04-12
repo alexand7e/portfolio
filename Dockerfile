@@ -1,5 +1,5 @@
 # Dockerfile para Portfolio Alexandre Barros
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 
 # Instalar dependências do sistema
 RUN apk add --no-cache libc6-compat
@@ -9,8 +9,8 @@ WORKDIR /app
 # Copiar arquivos de dependências
 COPY package*.json ./
 
-# Instalar dependências (inclui sharp para standalone)
-RUN npm ci && npm install sharp
+# Instalar dependências (sharp já incluso no package.json)
+RUN npm ci
 
 # Copiar código fonte
 COPY . .
@@ -26,7 +26,7 @@ ENV NEXT_PUBLIC_GA_ID=$NEXT_PUBLIC_GA_ID
 RUN npm run build
 
 # ---- Runner ----
-FROM node:18-alpine AS runner
+FROM node:20-alpine AS runner
 
 RUN apk add --no-cache libc6-compat
 

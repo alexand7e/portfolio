@@ -5,19 +5,21 @@ import Experience from "@/components/pages/Experience";
 import Projects from "@/components/pages/Projects";
 import Skills from "@/components/pages/Skills";
 import Contact from "@/components/pages/Contact";
+import Testimonials from "@/components/pages/Testimonials";
 import {Header} from "@/components/ui/Header";
 import FadeInAnimation from "@/components/animations/FadeIn";
 import LanguageTest from "@/components/ui/LanguageTest";
 
 function Home () {
     return (
-        <main className={"w-full h-full"}>
+        <main className={"w-full h-full snap-home"}>
             <FadeInAnimation>
                 <Header/>
                 <HomePage id={"home"}/>
                 <Skills id={"skills"}/>
                 <Experience id={"experience"}/>
                 <Projects id={"projects"}/>
+                <Testimonials />
                 <Contact id={"contact"}/>
             </FadeInAnimation>
             <LanguageTest />
