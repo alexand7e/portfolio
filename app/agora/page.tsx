@@ -37,10 +37,10 @@ export default async function AgoraPage() {
   }
 
   return (
-    <main className="min-h-screen bg-primary">
+    <main className="min-h-screen bg-primary lg:pl-40">
       <SubpageSideNav />
       <div className="bg-secondary border-b border-accent/20">
-        <div className="max-w-4xl mx-auto px-6 py-10">
+        <div className="max-w-5xl mx-auto px-6 py-10">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-accent hover:text-accent/70 transition-colors mb-8 text-sm"
@@ -65,7 +65,7 @@ export default async function AgoraPage() {
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-6 py-12">
+      <div className="max-w-5xl mx-auto px-6 py-12">
         {!contentHtml ? (
           <div className="text-center py-16 text-tertiary/40">
             <p>Conteúdo sendo preparado. Volte em breve!</p>
