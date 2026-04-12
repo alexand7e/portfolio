@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import GiscusComments from '@/components/ui/GiscusComments';
-import { SubpageSideNav } from '@/components/ui/SubpageSideNav';
+import { SubpageLayout } from '@/components/ui/SubpageLayout';
 
 interface PostPageProps {
   params: {
@@ -119,11 +119,10 @@ export default async function PostPage({ params }: PostPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleStructuredData) }}
       />
-      <main className="min-h-screen bg-primary lg:pl-40">
+      <SubpageLayout>
 
-      <SubpageSideNav />
       <div className="bg-secondary border-b border-accent/20">
-        <div className="max-w-5xl mx-auto px-6 py-6">
+        <div className="px-6 lg:px-10 py-6">
           <Link
             href="/blog"
             className="inline-flex items-center gap-2 text-accent hover:text-accent/70 transition-colors text-sm"
@@ -148,7 +147,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
       {/* Article header */}
       <div className={`bg-secondary border-b border-accent/20 ${!cover ? 'pt-10' : ''}`}>
-        <div className="max-w-5xl mx-auto px-6 py-10">
+        <div className="px-6 lg:px-10 py-10">
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-5">
             {post.tags.map((tag: string) => (
@@ -191,7 +190,7 @@ export default async function PostPage({ params }: PostPageProps) {
       </div>
 
       {/* Article content */}
-      <div className="max-w-5xl mx-auto px-6 py-12">
+      <div className="px-6 lg:px-10 py-12">
         <article
           className="
             prose prose-lg max-w-none
@@ -231,7 +230,7 @@ export default async function PostPage({ params }: PostPageProps) {
           <GiscusComments />
         </div>
       </div>
-    </main>
+    </SubpageLayout>
     </>
   );
 }
