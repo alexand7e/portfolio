@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import ProjectsPage from '@/components/pages/ProjectsPage'
 
 export const metadata: Metadata = {
-  title: 'Projetos | Alexandre Barros',
+  title: 'Projetos',
   description: 'Explore todos os meus projetos em desenvolvimento full-stack, data engineering e soluções de IA.',
   alternates: {
     canonical: 'https://alexand7e.dev.br/projects',
