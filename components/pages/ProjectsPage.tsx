@@ -1,7 +1,7 @@
 'use client'
 
 import { useLanguage } from "@/lib/useLanguage";
-import { SubpageSideNav } from "@/components/ui/SubpageSideNav";
+import { SubpageLayout } from "@/components/ui/SubpageLayout";
 import ProjectCard from "@/components/ui/ProjectCard";
 import Button from "@/components/ui/Button";
 import { useState, useEffect } from "react";
@@ -163,9 +163,8 @@ export default function ProjectsPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-primary lg:pl-40">
-        <SubpageSideNav />
-        <div className="max-w-5xl mx-auto px-6 py-16">
+      <SubpageLayout>
+        <div className="px-6 lg:px-10 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(9)].map((_, index) => (
               <div key={index} className="animate-pulse">
@@ -177,15 +176,14 @@ export default function ProjectsPage() {
             ))}
           </div>
         </div>
-      </main>
+      </SubpageLayout>
     );
   }
 
   return (
-    <main className="min-h-screen bg-primary lg:pl-40">
-      <SubpageSideNav />
+    <SubpageLayout>
       <div className="bg-secondary border-b border-accent/20">
-        <div className="max-w-5xl mx-auto px-6 py-10">
+        <div className="px-6 lg:px-10 py-10">
           <h1 className="text-4xl md:text-5xl font-bold text-tertiary mb-3 tracking-tight">
             {t("projects.title")}
           </h1>
@@ -194,7 +192,7 @@ export default function ProjectsPage() {
           </p>
         </div>
       </div>
-      <div className="max-w-5xl mx-auto px-6 py-12">
+      <div className="px-6 lg:px-10 py-12">
         <div>
           {/* Search and Filters */}
           <div className="mb-8 space-y-4">
@@ -295,6 +293,6 @@ export default function ProjectsPage() {
           )}
         </div>
       </div>
-    </main>
+    </SubpageLayout>
   );
 }
