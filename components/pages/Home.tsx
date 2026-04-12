@@ -51,67 +51,63 @@ export default function HomePage ({
     }, []);
     
     return (
-        <DefaultSection 
-            ref={ref}
+        <section
             id={`${id}`}
-            className={"relative"}
+            className="relative w-full bg-primary flex flex-col justify-between
+                       min-h-screen lg:min-h-0 lg:aspect-video overflow-hidden py-12 lg:py-0"
         >
-            <SectionBody className={"flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8"}>
-                <div className={"flex flex-col gap-4 items-center lg:items-start text-center lg:text-left"}>
-                    <span className={"text-xl"}>
+            {/* Conteúdo principal — ocupa toda a largura */}
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-8
+                            flex-1 w-full px-8 md:px-14 lg:px-20 xl:px-28 lg:py-16">
+
+                <div className="flex flex-col gap-5 items-center lg:items-start text-center lg:text-left flex-1">
+                    <span className="text-xl">
                         {t("home.title")}
                     </span>
-                    
-                    <div className={"text-4xl md:text-5xl xl:text-6xl"}>
-                        <h1>
-                            {t("home.subtitle")}
-                        </h1>
-                        <h2 className={"text-accent"}>
-                            Alexandre Barros<span className={"text-tertiary"}>.</span>
+
+                    <div className="text-4xl md:text-5xl xl:text-6xl 2xl:text-7xl leading-tight">
+                        <h1>{t("home.subtitle")}</h1>
+                        <h2 className="text-accent">
+                            Alexandre Barros<span className="text-tertiary">.</span>
                         </h2>
                     </div>
-                    
-                    <p
-                        className={"w-full max-w-xl break-words whitespace-pre-line hyphens-auto"}
-                    >
+
+                    <p className="max-w-2xl break-words whitespace-pre-line hyphens-auto text-base lg:text-lg text-tertiary/70">
                         {t("home.description")}
                     </p>
-                    
+
                     <Link
-                        href={"#contact"}
-                        className={"mt-4 border-2 border-accent p-4 w-fit text-accent rounded-full font-bold hover:bg-accent hover:text-primary transition-all"}
+                        href="#contact"
+                        className="mt-2 border-2 border-accent px-6 py-3 w-fit text-accent rounded-full font-bold hover:bg-accent hover:text-primary transition-all"
                     >
                         {t("home.contactButton")}
                     </Link>
                 </div>
-                
-                <div className={"relative w-full max-w-[20rem] md:max-w-[25rem] aspect-square"}>
-                    <Image 
-                        className={"rounded-full border-accent border-4 p-4"}
-                        src={"https://github.com/alexand7e.png"}
-                        alt={"Alexandre Barros - Profile Picture"}
-                        width={400}
-                        height={400}
-                        style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'contain'
-                        }}
+
+                <div className="relative shrink-0 w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96">
+                    <Image
+                        className="rounded-full border-accent border-4 p-4"
+                        src="https://github.com/alexand7e.png"
+                        alt="Alexandre Barros - Profile Picture"
+                        fill
+                        style={{ objectFit: 'contain' }}
                         priority
                     />
                 </div>
-            </SectionBody>
-            
-            <SectionBody className={"lg:absolute lg:bottom-11 lg:left-1/2 lg:-translate-x-1/2 w-full"}>
-                <div className={"mt-10 mb-10 lg:mb-0 lg:mt-0 grid grid-cols-2 md:grid-cols-4 gap-4 text-center"}>
+            </div>
+
+            {/* Stats — rodapé da seção hero */}
+            <div className="w-full px-8 md:px-14 lg:px-20 xl:px-28 pb-8 lg:pb-12">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center border-t border-accent/10 pt-8">
                     {stats.map((stat, index) => (
                         <div key={index} className="px-2">
-                            <span className={"text-accent text-3xl md:text-4xl font-bold"}>{stat.value}</span> <br/>
-                            <span className={"whitespace-pre-wrap text-sm"}>{stat.label}</span>
+                            <span className="text-accent text-3xl md:text-4xl font-bold">{stat.value}</span>
+                            <br />
+                            <span className="whitespace-pre-wrap text-sm text-tertiary/60">{stat.label}</span>
                         </div>
                     ))}
                 </div>
-            </SectionBody>
-        </DefaultSection>
+            </div>
+        </section>
     )
 }
