@@ -4,7 +4,7 @@ import { FiArrowLeft, FiCalendar, FiMapPin, FiVideo, FiFileText } from 'react-ic
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { Metadata } from 'next'
-import { SubpageSideNav } from '@/components/ui/SubpageSideNav'
+import { SubpageLayout } from '@/components/ui/SubpageLayout'
 
 export const metadata: Metadata = {
   title: 'Talks',
@@ -36,10 +36,9 @@ export default async function TalksPage() {
   const past = talks.filter((t) => new Date(t.date) < new Date())
 
   return (
-    <main className="min-h-screen bg-primary lg:pl-40">
-      <SubpageSideNav />
+    <SubpageLayout>
       <div className="bg-secondary border-b border-accent/20">
-        <div className="max-w-5xl mx-auto px-6 py-10">
+        <div className="px-6 lg:px-10 py-10">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-accent hover:text-accent/70 transition-colors mb-8 text-sm"
@@ -56,7 +55,7 @@ export default async function TalksPage() {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 py-12 space-y-14">
+      <div className="px-6 lg:px-10 py-12 space-y-14">
         {talks.length === 0 && (
           <div className="text-center py-16 text-tertiary/40">
             <p>Nenhuma palestra registrada ainda.</p>
@@ -83,7 +82,7 @@ export default async function TalksPage() {
           </section>
         )}
       </div>
-    </main>
+    </SubpageLayout>
   )
 }
 
