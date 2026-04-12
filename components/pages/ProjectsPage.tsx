@@ -1,9 +1,7 @@
 'use client'
 
 import { useLanguage } from "@/lib/useLanguage";
-import DefaultSection from "@/components/ui/Section";
-import SectionTitle from "@/components/ui/SectionTitle";
-import SectionBody from "@/components/ui/SectionBody";
+import { SubpageSideNav } from "@/components/ui/SubpageSideNav";
 import ProjectCard from "@/components/ui/ProjectCard";
 import Button from "@/components/ui/Button";
 import { useState, useEffect } from "react";
@@ -165,38 +163,39 @@ export default function ProjectsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-primary pt-20">
-        <DefaultSection className="py-20">
-          <SectionTitle
-            title={t("projects.title")}
-            subtitle={language === 'en' ? 'Explore all my projects' : 'Explore todos os meus projetos'}
-          />
-          <SectionBody>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[...Array(9)].map((_, index) => (
-                <div key={index} className="animate-pulse">
-                  <div className="h-48 bg-secondary rounded-lg mb-4"></div>
-                  <div className="h-4 bg-secondary rounded mb-2"></div>
-                  <div className="h-3 bg-secondary rounded mb-2"></div>
-                  <div className="h-3 bg-secondary rounded w-3/4"></div>
-                </div>
-              ))}
-            </div>
-          </SectionBody>
-        </DefaultSection>
-      </div>
+      <main className="min-h-screen bg-primary">
+        <SubpageSideNav />
+        <div className="max-w-4xl mx-auto px-6 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...Array(9)].map((_, index) => (
+              <div key={index} className="animate-pulse">
+                <div className="h-48 bg-secondary rounded-lg mb-4"></div>
+                <div className="h-4 bg-secondary rounded mb-2"></div>
+                <div className="h-3 bg-secondary rounded mb-2"></div>
+                <div className="h-3 bg-secondary rounded w-3/4"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </main>
     );
   }
 
   return (
-    <div className="min-h-screen bg-primary pt-20">
-      <DefaultSection className="py-20">
-        <SectionTitle
-          title={t("projects.title")}
-          subtitle={language === 'en' ? 'Explore all my projects with advanced filtering and search' : 'Explore todos os meus projetos com filtros avançados e busca'}
-        />
-        
-        <SectionBody>
+    <main className="min-h-screen bg-primary">
+      <SubpageSideNav />
+      <div className="bg-secondary border-b border-accent/20">
+        <div className="max-w-4xl mx-auto px-6 py-10">
+          <h1 className="text-4xl md:text-5xl font-bold text-tertiary mb-3 tracking-tight">
+            {t("projects.title")}
+          </h1>
+          <p className="text-tertiary/60 text-lg">
+            {language === 'en' ? 'Explore all my projects with advanced filtering and search' : 'Explore todos os meus projetos com filtros avançados e busca'}
+          </p>
+        </div>
+      </div>
+      <div className="max-w-4xl mx-auto px-6 py-12">
+        <div>
           {/* Search and Filters */}
           <div className="mb-8 space-y-4">
             {/* Search Bar */}
@@ -294,8 +293,8 @@ export default function ProjectsPage() {
               </Button>
             </div>
           )}
-        </SectionBody>
-      </DefaultSection>
-    </div>
+        </div>
+      </div>
+    </main>
   );
 }

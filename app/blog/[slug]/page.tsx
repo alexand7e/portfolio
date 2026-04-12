@@ -7,6 +7,8 @@ import { FiCalendar, FiClock, FiUser, FiArrowLeft } from 'react-icons/fi';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import GiscusComments from '@/components/ui/GiscusComments';
+import { SubpageSideNav } from '@/components/ui/SubpageSideNav';
 
 interface PostPageProps {
   params: {
@@ -119,9 +121,9 @@ export default async function PostPage({ params }: PostPageProps) {
       />
       <main className="min-h-screen bg-primary">
 
-      {/* Top nav */}
-      <div className="bg-secondary/80 backdrop-blur border-b border-accent/20 sticky top-0 z-10">
-        <div className="max-w-4xl mx-auto px-6 py-3">
+      <SubpageSideNav />
+      <div className="bg-secondary border-b border-accent/20">
+        <div className="max-w-4xl mx-auto px-6 py-6">
           <Link
             href="/blog"
             className="inline-flex items-center gap-2 text-accent hover:text-accent/70 transition-colors text-sm"
@@ -150,12 +152,13 @@ export default async function PostPage({ params }: PostPageProps) {
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-5">
             {post.tags.map((tag: string) => (
-              <span
+              <Link
                 key={tag}
-                className="px-3 py-1 bg-accent/15 text-accent text-xs rounded-full font-medium"
+                href={`/tags/${encodeURIComponent(tag)}`}
+                className="px-3 py-1 bg-accent/15 text-accent text-xs rounded-full font-medium hover:bg-accent/25 transition-colors"
               >
                 {tag}
-              </span>
+              </Link>
             ))}
           </div>
 
@@ -221,6 +224,11 @@ export default async function PostPage({ params }: PostPageProps) {
             <FiArrowLeft size={14} />
             Ver todos os artigos
           </Link>
+        </div>
+
+        {/* Comments */}
+        <div className="mt-12">
+          <GiscusComments />
         </div>
       </div>
     </main>
