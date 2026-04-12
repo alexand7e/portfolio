@@ -53,12 +53,11 @@ export default function HomePage ({
     return (
         <section
             id={`${id}`}
-            className="relative w-full bg-primary flex flex-col justify-between
-                       min-h-screen lg:min-h-0 lg:aspect-video overflow-hidden py-12 lg:py-0"
+            className="relative w-full bg-primary flex flex-col justify-between h-screen py-10 lg:py-8"
         >
             {/* Conteúdo principal — ocupa toda a largura */}
             <div className="flex flex-col lg:flex-row items-center justify-between gap-8
-                            flex-1 w-full px-8 md:px-14 lg:px-20 xl:px-28 lg:py-16">
+                            flex-1 w-full px-8 md:px-16 lg:px-24 xl:px-32 py-6 lg:py-0">
 
                 <div className="flex flex-col gap-5 items-center lg:items-start text-center lg:text-left flex-1">
                     <span className="text-xl">
@@ -97,7 +96,7 @@ export default function HomePage ({
             </div>
 
             {/* Stats — rodapé da seção hero */}
-            <div className="w-full px-8 md:px-14 lg:px-20 xl:px-28 pb-8 lg:pb-12">
+            <div className="w-full px-8 md:px-16 lg:px-24 xl:px-32 pb-6 lg:pb-8">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center border-t border-accent/10 pt-8">
                     {stats.map((stat, index) => (
                         <div key={index} className="px-2">
