@@ -98,10 +98,10 @@ export default async function TutorialPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <main className="min-h-screen bg-primary">
+      <main className="min-h-screen bg-primary lg:pl-40">
         <SubpageSideNav />
         <div className="bg-secondary border-b border-accent/20">
-          <div className="max-w-4xl mx-auto px-6 py-6 flex items-center justify-between">
+          <div className="max-w-5xl mx-auto px-6 py-6 flex items-center justify-between">
             <Link
               href="/tutoriais"
               className="inline-flex items-center gap-2 text-accent hover:text-accent/70 transition-colors text-sm"
@@ -121,7 +121,7 @@ export default async function TutorialPage({ params }: Props) {
 
         {/* Header */}
         <div className={`bg-secondary border-b border-accent/20 ${!cover ? 'pt-10' : ''}`}>
-          <div className="max-w-4xl mx-auto px-6 py-10">
+          <div className="max-w-5xl mx-auto px-6 py-10">
             <div className="flex flex-wrap gap-2 mb-5">
               <span className={`px-3 py-1 rounded-full text-xs font-semibold ${difficultyColor[tutorial.difficulty]}`}>
                 {difficultyLabel[tutorial.difficulty]}
@@ -159,7 +159,7 @@ export default async function TutorialPage({ params }: Props) {
 
         {/* Series nav (top) */}
         {tutorial.series && (
-          <div className="max-w-4xl mx-auto px-6 pt-8">
+          <div className="max-w-5xl mx-auto px-6 pt-8">
             <SeriesNav
               series={tutorial.series}
               currentSlug={tutorial.slug}
@@ -169,7 +169,7 @@ export default async function TutorialPage({ params }: Props) {
         )}
 
         {/* Content */}
-        <div className="max-w-4xl mx-auto px-6 py-12">
+        <div className="max-w-5xl mx-auto px-6 py-12">
           <article
             className="
               prose prose-lg max-w-none

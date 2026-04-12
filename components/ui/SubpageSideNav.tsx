@@ -5,11 +5,11 @@ import { usePathname } from 'next/navigation'
 import { MobileNav } from '@/components/ui/NavComponents'
 
 const links = [
-  { href: '/',         label: 'home' },
-  { href: '/blog',     label: 'blog' },
-  { href: '/tutoriais',label: 'tutoriais' },
-  { href: '/projects', label: 'projects' },
-  { href: '/#contact', label: 'contact' },
+  { href: '/',          label: 'home' },
+  { href: '/blog',      label: 'blog' },
+  { href: '/tutoriais', label: 'tutoriais' },
+  { href: '/projects',  label: 'projects' },
+  { href: '/#contact',  label: 'contact' },
 ]
 
 export function SubpageSideNav() {
@@ -17,19 +17,15 @@ export function SubpageSideNav() {
 
   return (
     <>
-      {/* ── Desktop: barra fixa à esquerda ── */}
-      <nav className="hidden lg:flex fixed left-0 top-0 h-screen w-12 flex-col items-center justify-between py-8 z-20 border-r border-accent/10 bg-primary/95 backdrop-blur-sm">
+      {/* ── Desktop: painel retangular fixo à esquerda ── */}
+      <nav className="hidden lg:flex fixed left-0 top-0 h-screen w-40 flex-col justify-between py-8 px-5 z-20 border-r border-accent/10 bg-primary">
         {/* Logo */}
-        <Link
-          href="/"
-          className="text-accent font-bold text-xs tracking-widest select-none"
-          title="Início"
-        >
-          .AB
+        <Link href="/" className="text-accent font-bold text-sm tracking-widest">
+          .Alexandre
         </Link>
 
-        {/* Nav links — texto vertical */}
-        <ul className="flex flex-col items-center gap-6">
+        {/* Nav links — texto horizontal */}
+        <ul className="flex flex-col gap-3">
           {links.map(({ href, label }) => {
             const isActive =
               href === '/' ? pathname === '/' : pathname.startsWith(href)
@@ -37,9 +33,11 @@ export function SubpageSideNav() {
               <li key={href}>
                 <Link
                   href={href}
-                  className={`text-[10px] uppercase tracking-[0.18em] transition-colors
-                    [writing-mode:vertical-rl] rotate-180
-                    ${isActive ? 'text-accent' : 'text-tertiary/30 hover:text-tertiary/70'}`}
+                  className={`block text-sm capitalize transition-colors py-1 ${
+                    isActive
+                      ? 'text-accent font-medium'
+                      : 'text-tertiary/40 hover:text-tertiary/80'
+                  }`}
                 >
                   {label}
                 </Link>
@@ -48,14 +46,16 @@ export function SubpageSideNav() {
           })}
         </ul>
 
-        {/* Espaçador de rodapé */}
-        <div className="w-px h-8 bg-accent/10" />
+        {/* Rodapé discreto */}
+        <span className="text-tertiary/20 text-[10px] tracking-widest uppercase">
+          {new Date().getFullYear()}
+        </span>
       </nav>
 
       {/* ── Mobile: top bar compacto ── */}
       <header className="lg:hidden sticky top-0 z-20 flex items-center justify-between px-5 py-3 bg-primary/95 backdrop-blur-sm border-b border-accent/10">
         <Link href="/" className="text-accent font-bold text-sm tracking-widest">
-          .AB
+          .Alexandre
         </Link>
         <MobileNav />
       </header>
