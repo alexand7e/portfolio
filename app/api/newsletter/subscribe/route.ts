@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import crypto from 'crypto'
 import nodemailer from 'nodemailer'
+import { welcomeEmail, reactivationEmail } from '@/lib/email-template'
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -32,11 +33,14 @@ export async function POST(req: NextRequest) {
           data: { status: 'ACTIVE', token: null, name: name || existing.name, locale },
         })
         if (process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) {
+          const unsubUrl = existing.token
+            ? `${process.env.NEXTAUTH_URL}/api/newsletter/unsubscribe?token=${existing.token}`
+            : undefined
           await transporter.sendMail({
             from: `"Alexandre Barros" <${process.env.GMAIL_USER}>`,
             to: email,
             subject: 'Bem-vindo de volta à newsletter!',
-            html: `<p>Olá${name || existing.name ? ` ${name || existing.name}` : ''}! Sua inscrição foi reativada.</p><p>Você voltará a receber artigos sobre IA, dados e tecnologia pública.</p>`,
+            html: reactivationEmail(name || existing.name, unsubUrl),
           })
         }
         return NextResponse.json({ message: 'Inscrição reativada com sucesso!' }, { status: 200 })
@@ -50,11 +54,12 @@ export async function POST(req: NextRequest) {
 
     // Enviar e-mail de confirmação
     if (process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) {
+      const unsubUrl = `${process.env.NEXTAUTH_URL}/api/newsletter/unsubscribe?token=${token}`
       await transporter.sendMail({
         from: `"Alexandre Barros" <${process.env.GMAIL_USER}>`,
         to: email,
         subject: 'Bem-vindo à newsletter!',
-        html: `<p>Olá${name ? ` ${name}` : ''}! Sua inscrição foi confirmada.</p><p>Você receberá artigos sobre IA, dados e tecnologia pública diretamente no seu e-mail.</p>`,
+        html: welcomeEmail(name, unsubUrl),
       })
     }
 
