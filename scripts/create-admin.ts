@@ -8,11 +8,12 @@ config({ path: resolve(process.cwd(), '.env') })
 import { prisma } from '../lib/prisma'
 
 async function createAdmin() {
-  const email = process.env.ADMIN_EMAIL || 'admin@portfolio.com'
-  const password = process.env.ADMIN_PASSWORD || 'admin123'
+  const email = process.env.ADMIN_EMAIL
+  const password = process.env.ADMIN_PASSWORD
 
-  if (!process.env.ADMIN_EMAIL || !process.env.ADMIN_PASSWORD) {
-    console.warn('Warning: ADMIN_EMAIL or ADMIN_PASSWORD not found in .env — using fallback defaults.')
+  if (!email || !password) {
+    console.error('Error: ADMIN_EMAIL and ADMIN_PASSWORD must be defined in environment variables.')
+    process.exit(1)
   }
 
   try {
