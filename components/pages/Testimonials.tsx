@@ -27,7 +27,7 @@ export default function Testimonials() {
   if (testimonials.length === 0) return null
 
   return (
-    <section className="py-20 bg-secondary">
+    <section className="py-20">
       <div className="max-w-6xl mx-auto px-6">
         <div className="mb-12">
           <span className="text-xs font-bold tracking-widest text-accent uppercase">Depoimentos</span>

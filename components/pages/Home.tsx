@@ -51,7 +51,7 @@ export default function HomePage ({
     return (
         <section
             id={`${id}`}
-            className="relative w-full bg-primary overflow-hidden flex flex-col min-h-[calc(100vh-4.5rem)]"
+            className="relative w-full overflow-hidden flex flex-col min-h-[calc(100vh-4.5rem)]"
         >
             {/* Blob de brilho atrás da imagem */}
             <div className="pointer-events-none absolute right-0 top-0 w-[600px] h-[600px] -translate-y-1/4 translate-x-1/4 rounded-full bg-accent/5 blur-3xl" />
