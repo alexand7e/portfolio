@@ -122,7 +122,7 @@ export default async function PostPage({ params }: PostPageProps) {
       <SubpageLayout>
 
       <div className="bg-secondary border-b border-accent/20">
-        <div className="px-6 lg:px-10 py-6">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8 py-6">
           <Link
             href="/blog"
             className="inline-flex items-center gap-2 text-accent hover:text-accent/70 transition-colors text-sm"
@@ -147,7 +147,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
       {/* Article header */}
       <div className={`bg-secondary border-b border-accent/20 ${!cover ? 'pt-10' : ''}`}>
-        <div className="px-6 lg:px-10 py-10">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8 py-10">
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-5">
             {post.tags.map((tag: string) => (
@@ -190,7 +190,7 @@ export default async function PostPage({ params }: PostPageProps) {
       </div>
 
       {/* Article content */}
-      <div className="px-6 lg:px-10 py-12">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 py-12">
         <article
           className="
             prose prose-lg max-w-none
