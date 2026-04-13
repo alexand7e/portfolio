@@ -49,7 +49,7 @@ export default async function TutoriaisPage() {
   return (
     <SubpageLayout>
       <div className="bg-secondary border-b border-accent/20">
-        <div className="px-6 lg:px-10 py-10">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8 py-10">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-accent hover:text-accent/70 transition-colors mb-8 text-sm"
@@ -66,7 +66,7 @@ export default async function TutoriaisPage() {
         </div>
       </div>
 
-      <div className="px-6 lg:px-10 py-12">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 py-12">
         {tutorials.length === 0 && (
           <div className="text-center py-24">
             <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">

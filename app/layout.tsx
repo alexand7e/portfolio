@@ -7,7 +7,7 @@ import StairTransition from "@/components/animations/EnterAnimation";
 import LanguageProvider from "@/components/providers/LanguageProvider";
 import StructuredData from "@/components/seo/StructuredData";
 import GoogleAnalytics from "@/components/seo/GoogleAnalytics";
-import Footer from "@/components/ui/Footer";
+import { NeuralGrid } from "@/components/ui/NeuralGrid";
 
 const jMono = JetBrains_Mono({
     subsets: ["latin"],
@@ -94,11 +94,11 @@ export default function RootLayout({
                 <StructuredData />
             </head>
             <body className={jMono.className}>
+                <NeuralGrid />
                 <StairTransition />
                 <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Carregando...</div>}>
                     <LanguageProvider>
                         {children}
-                        <Footer />
                     </LanguageProvider>
                 </Suspense>
             </body>
