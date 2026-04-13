@@ -95,12 +95,14 @@ export default function RootLayout({
             </head>
             <body className={jMono.className}>
                 <NeuralGrid />
-                <StairTransition />
-                <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Carregando...</div>}>
-                    <LanguageProvider>
-                        {children}
-                    </LanguageProvider>
-                </Suspense>
+                <div className="relative" style={{ zIndex: 2 }}>
+                    <StairTransition />
+                    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Carregando...</div>}>
+                        <LanguageProvider>
+                            {children}
+                        </LanguageProvider>
+                    </Suspense>
+                </div>
             </body>
         </html>
     );
