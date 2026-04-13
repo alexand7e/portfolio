@@ -1,16 +1,20 @@
 services:
   portfolio:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: node:20-alpine
     container_name: portfolio-local
+    working_dir: /app
+    command: sh -c "apk add --no-cache libc6-compat && npm install && npx prisma generate && npm run dev"
     restart: unless-stopped
     ports:
       - "7000:7000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
     environment:
-      NODE_ENV: production
+      NODE_ENV: development
       NEXT_TELEMETRY_DISABLED: "1"
-      PORT: "7000"
+      WATCHPACK_POLLING: "true"
       DATABASE_URL: "postgresql://neondb_owner:npg_8GWsfJ5pjqoF@ep-withered-pond-adx1vxtq-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&pgbouncer=true&connect_timeout=15"
       NEXTAUTH_SECRET: "4STsBbS9n9KAZVE7fX4EHVCuGaoVry8Y8Nnf5vMQfw97qWSAX4qK3Zi8sR5uRmwF"
       NEXTAUTH_URL: "http://localhost:7000"
@@ -22,4 +26,4 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 60s

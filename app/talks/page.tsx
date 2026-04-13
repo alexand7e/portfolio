@@ -38,7 +38,7 @@ export default async function TalksPage() {
   return (
     <SubpageLayout>
       <div className="bg-secondary border-b border-accent/20">
-        <div className="px-6 lg:px-10 py-10">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8 py-10">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-accent hover:text-accent/70 transition-colors mb-8 text-sm"
@@ -55,7 +55,7 @@ export default async function TalksPage() {
         </div>
       </div>
 
-      <div className="px-6 lg:px-10 py-12 space-y-14">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 py-12 space-y-14">
         {talks.length === 0 && (
           <div className="text-center py-16 text-tertiary/40">
             <p>Nenhuma palestra registrada ainda.</p>

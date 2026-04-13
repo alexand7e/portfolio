@@ -9,20 +9,24 @@ import Testimonials from "@/components/pages/Testimonials";
 import {Header} from "@/components/ui/Header";
 import FadeInAnimation from "@/components/animations/FadeIn";
 import LanguageTest from "@/components/ui/LanguageTest";
+import Footer from "@/components/ui/Footer";
 
 function Home () {
     return (
-        <main className={"w-full h-full snap-home"}>
-            <FadeInAnimation>
-                <Header/>
-                <HomePage id={"home"}/>
-                <Skills id={"skills"}/>
-                <Experience id={"experience"}/>
-                <Projects id={"projects"}/>
-                <Testimonials />
-                <Contact id={"contact"}/>
-            </FadeInAnimation>
-            <LanguageTest />
+        <main className={"w-full h-full snap-home relative overflow-x-hidden"} style={{ isolation: 'isolate' }}>
+            <div style={{ position: 'relative', zIndex: 10 }}>
+                <FadeInAnimation>
+                    <Header/>
+                    <HomePage id={"home"}/>
+                    <Skills id={"skills"}/>
+                    <Experience id={"experience"}/>
+                    <Projects id={"projects"}/>
+                    <Testimonials />
+                    <Contact id={"contact"}/>
+                </FadeInAnimation>
+                <LanguageTest />
+                <Footer />
+            </div>
         </main>
     );
 }

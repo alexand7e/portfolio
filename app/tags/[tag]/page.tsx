@@ -52,7 +52,7 @@ export default async function TagPage({ params }: Props) {
   return (
     <main className="min-h-screen bg-primary">
       <div className="bg-secondary border-b border-accent/20">
-        <div className="max-w-4xl mx-auto px-6 py-10">
+        <div className="max-w-5xl mx-auto px-6 py-10">
           <Link href="/blog" className="inline-flex items-center gap-2 text-accent hover:text-accent/70 transition-colors mb-8 text-sm">
             <FiArrowLeft size={14} />
             Blog
@@ -68,7 +68,7 @@ export default async function TagPage({ params }: Props) {
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-6 py-12 space-y-12">
+      <div className="max-w-5xl mx-auto px-6 py-12 space-y-12">
         {posts.length > 0 && (
           <section>
             <h2 className="text-xs font-bold uppercase tracking-widest text-accent/70 mb-6 flex items-center gap-2">

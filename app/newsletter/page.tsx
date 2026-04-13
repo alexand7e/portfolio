@@ -26,7 +26,7 @@ export default function NewsletterPage() {
   return (
     <SubpageLayout>
       <div className="bg-secondary border-b border-accent/20">
-        <div className="px-6 lg:px-10 py-10">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8 py-10">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-accent hover:text-accent/70 transition-colors mb-8 text-sm"
@@ -56,7 +56,7 @@ export default function NewsletterPage() {
         </div>
       </div>
 
-      <div className="px-6 lg:px-10 py-14">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
           {[
             {
