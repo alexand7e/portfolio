@@ -1,9 +1,10 @@
 services:
   # Aplicação Next.js
   portfolio:
-    build:
-      context: .
-      dockerfile: Dockerfile
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+    image: ghcr.io/alexand7e/portfolio:test-1.0
     container_name: ${CONTAINER_NAME:-portfolio}
     restart: unless-stopped
     ports:
@@ -24,6 +25,12 @@ services:
       - NEXT_PUBLIC_EMAILJS_SERVICE_ID=${NEXT_PUBLIC_EMAILJS_SERVICE_ID:-}
       - NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=${NEXT_PUBLIC_EMAILJS_TEMPLATE_ID:-}
       - NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=${NEXT_PUBLIC_EMAILJS_PUBLIC_KEY:-}
+
+      - GMAIL_USER=${GMAIL_USER:-}
+      - GMAIL_APP_PASSWORD=${GMAIL_APP_PASSWORD:-}
+      - GOOGLE_ANALYTICS_ID=${GOOGLE_ANALYTICS_ID:-}
+
+      
     volumes:
       - ./content:/app/content:ro
       - ./public:/app/public:ro

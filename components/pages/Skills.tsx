@@ -53,7 +53,7 @@ export default function Skills({
     <DefaultSection
       ref={ref}
       id={`${id}`}
-      className={"!bg-secondary"}
+      className={""}
     >
       <SectionBody>
         <SectionTitle

@@ -13,7 +13,7 @@ import Footer from "@/components/ui/Footer";
 
 function Home () {
     return (
-        <main className={"w-full h-full snap-home relative overflow-x-hidden"} style={{ isolation: 'isolate' }}>
+        <main className={"w-full h-full snap-home relative overflow-x-hidden"}>
             <div style={{ position: 'relative', zIndex: 10 }}>
                 <FadeInAnimation>
                     <Header/>

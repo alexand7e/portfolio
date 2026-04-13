@@ -102,7 +102,7 @@ export default function Contact({
     <DefaultSection
       ref={ref}
       id={`${id}`}
-      className={"!bg-primary"}
+      className={"!bg-transparent"}
     >
       <SectionBody>
         <SectionTitle 
