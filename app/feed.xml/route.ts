@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 
 export const dynamic = 'force-dynamic'
 
-const BASE_URL = 'https://alexand7e.dev.br'
+const BASE_URL = 'https://www.alexand7e.dev.br'
 
 export async function GET() {
   const [posts, tutorials] = await Promise.all([

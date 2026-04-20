@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     'Python tutorial', 'engenharia de dados', 'machine learning tutorial',
     'inteligência artificial piauí', 'data science brasil',
   ],
-  alternates: { canonical: 'https://alexand7e.dev.br/tutoriais' },
+  alternates: { canonical: 'https://www.alexand7e.dev.br/tutoriais' },
   openGraph: {
     title: 'Tutoriais | Alexandre Barros',
     description: 'Tutoriais práticos de IA e dados por Alexandre Barros (SIA-PI).',
-    url: 'https://alexand7e.dev.br/tutoriais',
+    url: 'https://www.alexand7e.dev.br/tutoriais',
     type: 'website',
   },
 }

@@ -1,4 +1,4 @@
-const BASE_URL = process.env.NEXTAUTH_URL ?? 'https://alexand7e.dev.br'
+const BASE_URL = process.env.SITE_URL ?? 'https://alexand7e.dev.br'
 
 function layout(content: string, unsubscribeUrl?: string): string {
   return `<!DOCTYPE html>

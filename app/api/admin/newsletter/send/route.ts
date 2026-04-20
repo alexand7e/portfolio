@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
   }
 
   const transporter = createTransporter()
-  const baseUrl = process.env.NEXTAUTH_URL ?? 'https://alexand7e.dev.br'
+  const baseUrl = process.env.SITE_URL ?? 'https://alexand7e.dev.br'
 
   let sent = 0
   let failed = 0

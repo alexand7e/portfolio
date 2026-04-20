@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     'Secretaria de Inteligência Artificial', 'IA', 'dados', 'data science',
     'tecnologia pública',
   ],
-  alternates: { canonical: 'https://alexand7e.dev.br/newsletter' },
+  alternates: { canonical: 'https://www.alexand7e.dev.br/newsletter' },
   openGraph: {
     title: 'Newsletter — Alexandre Barros',
     description: 'Artigos sobre IA, dados e tecnologia pública direto no e-mail.',
-    url: 'https://alexand7e.dev.br/newsletter',
+    url: 'https://www.alexand7e.dev.br/newsletter',
     type: 'website',
   },
 }

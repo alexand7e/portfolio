@@ -1,3 +1,4 @@
+"use client";
 import SectionBody from "@/components/ui/SectionBody";
 import DefaultSection from "@/components/ui/Section";
 import React, { useState, useRef } from "react";

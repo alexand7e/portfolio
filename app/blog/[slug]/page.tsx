@@ -16,7 +16,7 @@ interface PostPageProps {
   };
 }
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 async function getPost(slug: string) {
   const post = await prisma.blog.findFirst({
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   if (!post) return { title: 'Post não encontrado' };
 
   const cover = post.coverImage || post.coverUrl || undefined;
-  const baseUrl = 'https://alexand7e.dev.br';
+  const baseUrl = 'https://www.alexand7e.dev.br';
 
   return {
     title: post.title,
@@ -97,18 +97,18 @@ export default async function PostPage({ params }: PostPageProps) {
     author: {
       '@type': 'Person',
       name: 'Alexandre Barros dos Santos',
-      url: 'https://alexand7e.dev.br',
+      url: 'https://www.alexand7e.dev.br',
     },
     publisher: {
       '@type': 'Person',
       name: 'Alexandre Barros dos Santos',
-      url: 'https://alexand7e.dev.br',
+      url: 'https://www.alexand7e.dev.br',
     },
     datePublished: new Date(date).toISOString(),
     dateModified: post.updatedAt.toISOString(),
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://alexand7e.dev.br/blog/${post.slug}`,
+      '@id': `https://www.alexand7e.dev.br/blog/${post.slug}`,
     },
     keywords: post.tags.join(', '),
   };

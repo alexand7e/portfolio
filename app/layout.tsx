@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     authors: [{ name: "Alexandre Barros dos Santos" }],
     creator: "Alexandre Barros dos Santos",
     publisher: "Alexandre Barros dos Santos",
-    metadataBase: new URL('https://alexand7e.dev.br'),
+    metadataBase: new URL('https://www.alexand7e.dev.br'),
     alternates: {
         canonical: '/',
         languages: {
@@ -43,13 +43,13 @@ export const metadata: Metadata = {
             'en': '/en',
         },
         types: {
-            'application/rss+xml': 'https://alexand7e.dev.br/feed.xml',
+            'application/rss+xml': 'https://www.alexand7e.dev.br/feed.xml',
         },
     },
     openGraph: {
         type: 'website',
         locale: 'pt_BR',
-        url: 'https://alexand7e.dev.br',
+        url: 'https://www.alexand7e.dev.br',
         title: 'Alexandre Barros — Dados, IA e Tecnologia | SIA-PI',
         description: 'Alexandre Barros — Gerente de IA na SIA-PI (Piauí), formado pela UFPI. Artigos, tutoriais e projetos sobre IA e dados.',
         siteName: 'Alexandre Barros',
@@ -97,7 +97,7 @@ export default function RootLayout({
                 <NeuralGrid />
                 <div className="relative" style={{ zIndex: 2 }}>
                     <StairTransition />
-                    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Carregando...</div>}>
+                    <Suspense fallback={null}>
                         <LanguageProvider>
                             {children}
                         </LanguageProvider>

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { sendNewsletterForTutorial } from '@/lib/newsletter'
 
 export async function GET() {
   const session = await getServerSession(authOptions)
@@ -42,5 +43,11 @@ export async function POST(req: NextRequest) {
       seriesOrder: body.seriesOrder ? parseInt(body.seriesOrder) : null,
     },
   })
+  if (tutorial.published) {
+    sendNewsletterForTutorial(tutorial).catch((err) =>
+      console.error('Newsletter dispatch error:', err)
+    )
+  }
+
   return NextResponse.json(tutorial, { status: 201 })
 }

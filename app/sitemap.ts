@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { prisma } from '@/lib/prisma'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://alexand7e.dev.br'
+  const baseUrl = 'https://www.alexand7e.dev.br'
   
   // URLs estáticas principais
   const staticRoutes: MetadataRoute.Sitemap = [

@@ -12,11 +12,11 @@ export const metadata: Metadata = {
     'uses', 'ferramentas', 'setup', 'Alexandre Barros', 'alexandre barros sia',
     'data science tools', 'desenvolvimento', 'produtividade',
   ],
-  alternates: { canonical: 'https://alexand7e.dev.br/uses' },
+  alternates: { canonical: 'https://www.alexand7e.dev.br/uses' },
   openGraph: {
     title: '/uses — Alexandre Barros',
     description: 'Ferramentas e recursos que uso no dia a dia.',
-    url: 'https://alexand7e.dev.br/uses',
+    url: 'https://www.alexand7e.dev.br/uses',
     type: 'website',
   },
 }

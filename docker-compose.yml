@@ -18,6 +18,7 @@ services:
       # Autenticação (NextAuth)
       - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
       - NEXTAUTH_URL=${NEXTAUTH_URL}
+      - SITE_URL=${SITE_URL:-https://alexand7e.dev.br}
       # Admin (usado pelo script create-admin)
       - ADMIN_EMAIL=${ADMIN_EMAIL:-}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-}
