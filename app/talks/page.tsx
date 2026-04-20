@@ -15,11 +15,11 @@ export const metadata: Metadata = {
     'alexandre barros ufpi', 'inteligência artificial piauí', 'SIA',
     'apresentações IA', 'eventos data science',
   ],
-  alternates: { canonical: 'https://alexand7e.dev.br/talks' },
+  alternates: { canonical: 'https://www.alexand7e.dev.br/talks' },
   openGraph: {
     title: 'Palestras — Alexandre Barros',
     description: 'Palestras e apresentações sobre IA e dados.',
-    url: 'https://alexand7e.dev.br/talks',
+    url: 'https://www.alexand7e.dev.br/talks',
     type: 'website',
   },
 }

@@ -7,7 +7,7 @@ export default function StructuredData() {
     "name": "Alexandre Barros dos Santos",
     "alternateName": ["Alexandre Barros", "Alexandre Barros SIA", "Alexandre Barros UFPI"],
     "description": "Gerente de IA na Secretaria de Inteligência Artificial do Piauí (SIA), formado pela UFPI. Engenheiro e Cientista de Dados especialista em IA, Python, R e transformação digital no setor público.",
-    "url": "https://alexand7e.dev.br",
+    "url": "https://www.alexand7e.dev.br",
     "image": "https://github.com/alexand7e.png",
     "sameAs": [
       "https://github.com/alexand7e",
@@ -58,7 +58,7 @@ export default function StructuredData() {
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://alexand7e.dev.br"
+      "@id": "https://www.alexand7e.dev.br"
     }
   }
 
@@ -67,7 +67,7 @@ export default function StructuredData() {
     "@type": "WebSite",
     "name": "Alexandre Barros",
     "alternateName": "Alexandre Barros — Dados, IA e Tecnologia",
-    "url": "https://alexand7e.dev.br",
+    "url": "https://www.alexand7e.dev.br",
     "description": "Site pessoal de Alexandre Barros dos Santos — Gerente de IA na SIA-PI, formado pela UFPI. Artigos, tutoriais, newsletter e projetos sobre IA e dados.",
     "author": {
       "@type": "Person",
@@ -80,7 +80,7 @@ export default function StructuredData() {
       "@type": "SearchAction",
       "target": {
         "@type": "EntryPoint",
-        "urlTemplate": "https://alexand7e.dev.br/tags/{search_term_string}"
+        "urlTemplate": "https://www.alexand7e.dev.br/tags/{search_term_string}"
       },
       "query-input": "required name=search_term_string"
     }

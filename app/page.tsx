@@ -1,5 +1,4 @@
-"use client";
-import React from "react";
+import { Suspense } from "react";
 import HomePage from "@/components/pages/Home";
 import Experience from "@/components/pages/Experience";
 import Projects from "@/components/pages/Projects";
@@ -16,15 +15,15 @@ function Home () {
         <main className={"w-full h-full snap-home relative overflow-x-hidden"}>
             <div style={{ position: 'relative', zIndex: 10 }}>
                 <FadeInAnimation>
-                    <Header/>
-                    <HomePage id={"home"}/>
-                    <Skills id={"skills"}/>
-                    <Experience id={"experience"}/>
-                    <Projects id={"projects"}/>
-                    <Testimonials />
-                    <Contact id={"contact"}/>
+                    <Suspense fallback={null}><Header/></Suspense>
+                    <Suspense fallback={null}><HomePage id={"home"}/></Suspense>
+                    <Suspense fallback={null}><Skills id={"skills"}/></Suspense>
+                    <Suspense fallback={null}><Experience id={"experience"}/></Suspense>
+                    <Suspense fallback={null}><Projects id={"projects"}/></Suspense>
+                    <Suspense fallback={null}><Testimonials /></Suspense>
+                    <Suspense fallback={null}><Contact id={"contact"}/></Suspense>
                 </FadeInAnimation>
-                <LanguageTest />
+                <Suspense fallback={null}><LanguageTest /></Suspense>
                 <Footer />
             </div>
         </main>
@@ -32,4 +31,3 @@ function Home () {
 }
 
 export default Home
- 
