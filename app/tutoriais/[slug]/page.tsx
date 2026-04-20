@@ -13,7 +13,7 @@ interface Props {
   params: { slug: string }
 }
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 const difficultyLabel: Record<string, string> = {
   BEGINNER: 'Iniciante',
@@ -47,27 +47,51 @@ async function getTutorial(slug: string) {
   return { ...tutorial, contentHtml: processed.toString() }
 }
 
+export async function generateStaticParams() {
+  try {
+    const tutorials = await prisma.tutorial.findMany({
+      where: { published: true },
+      select: { slug: true },
+    })
+    return tutorials.map((t: { slug: string }) => ({ slug: t.slug }))
+  } catch {
+    return []
+  }
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const tutorial = await prisma.tutorial.findUnique({
     where: { slug: params.slug },
-    select: { title: true, description: true, tags: true, coverImage: true, coverUrl: true },
+    select: { title: true, description: true, tags: true, coverImage: true, coverUrl: true, publishedAt: true, updatedAt: true },
   })
   if (!tutorial) return { title: 'Tutorial não encontrado' }
 
   const cover = tutorial.coverImage || tutorial.coverUrl || undefined
-  const baseUrl = 'https://alexand7e.dev.br'
+  const baseUrl = 'https://www.alexand7e.dev.br'
 
   return {
     title: `${tutorial.title} — Tutoriais`,
     description: tutorial.description,
     keywords: [...tutorial.tags, 'tutorial', 'alexandre barros', 'sia', 'ufpi'],
+    authors: [{ name: 'Alexandre Barros dos Santos' }],
     alternates: { canonical: `${baseUrl}/tutoriais/${params.slug}` },
     openGraph: {
       title: tutorial.title,
       description: tutorial.description,
       type: 'article',
       url: `${baseUrl}/tutoriais/${params.slug}`,
+      authors: ['Alexandre Barros'],
+      publishedTime: tutorial.publishedAt?.toISOString(),
+      modifiedTime: tutorial.updatedAt?.toISOString(),
+      tags: tutorial.tags,
       images: cover ? [{ url: cover, width: 1200, height: 630, alt: tutorial.title }] : undefined,
+      siteName: 'Alexandre Barros Portfolio',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: tutorial.title,
+      description: tutorial.description,
+      images: cover ? [cover] : undefined,
     },
   }
 }
@@ -87,8 +111,15 @@ export default async function TutorialPage({ params }: Props) {
     author: {
       '@type': 'Person',
       name: 'Alexandre Barros dos Santos',
-      url: 'https://alexand7e.dev.br',
+      url: 'https://www.alexand7e.dev.br',
     },
+    datePublished: (tutorial.publishedAt ?? tutorial.createdAt).toISOString(),
+    dateModified: tutorial.updatedAt.toISOString(),
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://www.alexand7e.dev.br/tutoriais/${tutorial.slug}`,
+    },
+    keywords: tutorial.tags.join(', '),
     totalTime: tutorial.estimatedTime ? `PT${tutorial.estimatedTime}M` : undefined,
   }
 

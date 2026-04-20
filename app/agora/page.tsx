@@ -7,18 +7,18 @@ import remarkHtml from 'remark-html'
 import { SubpageLayout } from '@/components/ui/SubpageLayout'
 
 export const metadata: Metadata = {
-  title: '/agora',
+  title: 'O que estou fazendo agora',
   description:
     'O que Alexandre Barros (gerente de IA na SIA-PI, UFPI) está fazendo, lendo e construindo agora mesmo.',
   keywords: [
     'agora', 'now', 'Alexandre Barros', 'alexandre barros sia',
     'gerente de ia sia', 'alexandre barros ufpi', 'SIA Piauí',
   ],
-  alternates: { canonical: 'https://alexand7e.dev.br/agora' },
+  alternates: { canonical: 'https://www.alexand7e.dev.br/agora' },
   openGraph: {
     title: '/agora — Alexandre Barros',
     description: 'O que estou fazendo, lendo e construindo agora.',
-    url: 'https://alexand7e.dev.br/agora',
+    url: 'https://www.alexand7e.dev.br/agora',
     type: 'website',
   },
 }

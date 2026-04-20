@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   title: 'Blog',
   description: 'Artigos sobre tecnologia, ciência de dados e desenvolvimento web',
   alternates: {
-    canonical: 'https://alexand7e.dev.br/blog',
+    canonical: 'https://www.alexand7e.dev.br/blog',
   },
   openGraph: {
     title: 'Blog | Alexandre Barros',
     description: 'Artigos sobre tecnologia, ciência de dados e desenvolvimento web',
     type: 'website',
-    url: 'https://alexand7e.dev.br/blog',
+    url: 'https://www.alexand7e.dev.br/blog',
   },
 };
 

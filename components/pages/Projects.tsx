@@ -1,3 +1,4 @@
+"use client";
 import { useLanguage } from "@/lib/useLanguage";
 import DefaultSection from "@/components/ui/Section";
 import SectionTitle from "@/components/ui/SectionTitle";

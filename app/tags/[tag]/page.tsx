@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `#${tag}`,
     description: `Posts, tutoriais e conteúdo com a tag "${tag}" por Alexandre Barros (SIA-PI, UFPI).`,
-    alternates: { canonical: `https://alexand7e.dev.br/tags/${tag}` },
+    alternates: { canonical: `https://www.alexand7e.dev.br/tags/${tag}` },
   }
 }
 
