@@ -1,10 +1,12 @@
 services:
   # Aplicação Next.js
   portfolio:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
-    image: ghcr.io/alexand7e/portfolio:test-1.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_GA_ID=${NEXT_PUBLIC_GA_ID:-}
+    image: portfolio:local-test
     container_name: ${CONTAINER_NAME:-portfolio}
     restart: unless-stopped
     ports:
@@ -29,9 +31,8 @@ services:
 
       - GMAIL_USER=${GMAIL_USER:-}
       - GMAIL_APP_PASSWORD=${GMAIL_APP_PASSWORD:-}
-      - GOOGLE_ANALYTICS_ID=${GOOGLE_ANALYTICS_ID:-}
 
-      
+
     volumes:
       - ./content:/app/content:ro
       - ./public:/app/public:ro
