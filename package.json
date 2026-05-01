@@ -6,7 +6,12 @@
     "dev": "next dev -p 7000",
     "build": "next build",
     "start": "next start -p 7000",
-    "lint": "next lint"
+    "lint": "next lint",
+    "import:projects": "node scripts/import-projects-from-json.mjs",
+    "create-admin": "npx tsx scripts/create-admin.ts",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -21,22 +26,35 @@
     "gray-matter": "^4.0.3",
     "next": "14.2.4",
     "next-auth": "^4.24.11",
+    "nodemailer": "^6.10.1",
     "pg": "^8.16.3",
     "prisma": "^6.16.2",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.5.0",
     "remark": "^15.0.1",
-    "remark-html": "^16.0.1"
+    "remark-html": "^16.0.1",
+    "sharp": "0.34.5"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20.19.11",
+    "@types/nodemailer": "^8.0.0",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "dotenv": "^16.4.5",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
     "typescript": "^5"
   }
 }

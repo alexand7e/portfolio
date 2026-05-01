@@ -1,3 +1,4 @@
+"use client";
 import { useLanguage } from "@/lib/useLanguage";
 import DefaultSection from "@/components/ui/Section";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -37,6 +38,7 @@ export default function Projects({
   className = "",
 }: {
   className?: string;
+  id?: string;
 }) {
   const { language, t } = useLanguage();
   const [projects, setProjects] = useState<ProjectCardData[]>([]);

@@ -11,20 +11,16 @@ const options = [
         href: "/"
     },
     {
-        title: "skills",
-        href: "/#skills",
+        title: "blog",
+        href: "/blog",
     },
     {
-        title: "experience",
-        href: "/#experience",
+        title: "tutoriais",
+        href: "/tutoriais",
     },
     {
         title: "projects",
         href: "/projects",
-    },
-    {
-        title: "blog",
-        href: "/blog",
     },
     {
         title: "contact",

@@ -1,0 +1,209 @@
+version: "3.9"
+
+services:
+  # Portfolio - Alexand7e Personal Portfolio
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_GA_ID=${NEXT_PUBLIC_GA_ID:-}
+    image: ghcr.io/alexand7e/portfolio:latest
+    environment:
+      # Configurações da aplicação
+      NODE_ENV: production
+      PORT: 3000
+      HOST: 0.0.0.0
+
+      # Configurações de cache e performance
+      CACHE_TTL: 3600
+      STATIC_CACHE_MAX_AGE: 31536000
+      COMPRESSION_ENABLED: "true"
+
+      # Configurações de segurança
+      HELMET_ENABLED: "true"
+      CORS_ENABLED: "true"
+      RATE_LIMIT_ENABLED: "true"
+      RATE_LIMIT_WINDOW_MS: 900000
+      RATE_LIMIT_MAX_REQUESTS: 100
+
+      # Configurações de monitoramento
+      METRICS_ENABLED: "true"
+      HEALTH_CHECK_ENABLED: "true"
+      LOG_LEVEL: info
+      LOG_FORMAT: json
+
+      # Configurações de SEO e analytics (NEXT_PUBLIC_GA_ID é passada no build.args)
+      GOOGLE_TAG_MANAGER_ID: ${GOOGLE_TAG_MANAGER_ID:-}
+      FACEBOOK_PIXEL_ID: ${FACEBOOK_PIXEL_ID:-}
+
+      # Configurações de CDN e assets
+      CDN_URL: ${CDN_URL:-}
+      ASSETS_VERSION: ${ASSETS_VERSION:-v1}
+
+      # Configurações de email e contato
+      CONTACT_EMAIL: ${CONTACT_EMAIL:-alexand7e@gmail.com}
+      SUPPORT_EMAIL: ${SUPPORT_EMAIL:-alexand7e@gmail.com}
+
+      # EmailJS Configuration
+      NEXT_PUBLIC_EMAILJS_SERVICE_ID: "service_rvbv6bd"
+      NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: "template_kys4fze"
+      NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: "1frXxdEDyvDT4YNOl"
+
+      # Database Configuration
+      DATABASE_URL: "postgresql://neondb_owner:npg_8GWsfJ5pjqoF@ep-withered-pond-adx1vxtq-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&pgbouncer=true&connect_timeout=15"
+
+      # NextAuth Configuration  
+      NEXTAUTH_SECRET: "4STsBbS9n9KAZVE7fX4EHVCuGaoVry8Y8Nnf5vMQfw97qWSAX4qK3Zi8sR5uRmwF"
+      NEXTAUTH_URL: "http://localhost:7000"
+
+      # Admin Configuration
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+
+      # Configurações de timezone
+      TZ: America/Sao_Paulo
+
+      # Configurações específicas do portfolio
+      PORTFOLIO_TITLE: "Alexand7e - Portfolio"
+      PORTFOLIO_DESCRIPTION: "Personal portfolio showcasing my projects and skills"
+      PORTFOLIO_AUTHOR: "Alexand7e"
+      PORTFOLIO_URL: "https://alexand7e.dev.br"
+
+    volumes:
+      - portfolio_logs:/app/logs
+      - portfolio_cache:/app/cache
+      - portfolio_uploads:/app/uploads
+
+    networks:
+      - frontend_net
+      - monitoring_net
+
+    # Configuração de secrets para registry privado
+    secrets:
+      - ghcr_registry
+      - ghcr_token
+      - ghcr_username
+
+    deploy:
+      replicas: 2
+      placement:
+        constraints:
+          # Rodar apenas em workers e managers (excluir S1 que é DNS)
+          - node.hostname != dns-server
+          - node.platform.arch == x86_64
+        preferences:
+          - spread: node.hostname
+        
+      labels:
+        # --- Configuração do Traefik ---
+        - "traefik.enable=true"
+        - "traefik.docker.network=frontend_net" # Especifica a rede para o Traefik
+
+        # Roteador HTTP (redirecionamento para HTTPS)
+        - "traefik.http.routers.portfolio-http.rule=Host(`alexand7e.dev.br`) || Host(`www.alexand7e.dev.br`)"
+        - "traefik.http.routers.portfolio-http.entrypoints=web"
+        - "traefik.http.routers.portfolio-http.middlewares=web-to-websecure@internal"
+        
+        # Roteador HTTPS principal (www - padrão)
+        - "traefik.http.routers.portfolio.rule=Host(`www.alexand7e.dev.br`)"
+        - "traefik.http.routers.portfolio.entrypoints=websecure"
+        - "traefik.http.routers.portfolio.tls=true"
+        - "traefik.http.routers.portfolio.tls.certresolver=le"
+        
+        # Roteador HTTPS para não-www (redireciona para www)
+        - "traefik.http.routers.portfolio-nowww.rule=Host(`alexand7e.dev.br`)"
+        - "traefik.http.routers.portfolio-nowww.entrypoints=websecure"
+        - "traefik.http.routers.portfolio-nowww.tls=true"
+        - "traefik.http.routers.portfolio-nowww.tls.certresolver=le"
+        - "traefik.http.routers.portfolio-nowww.middlewares=redirect-to-www-portfolio"
+        
+        # Middleware de redirecionamento não-www -> www
+        - "traefik.http.middlewares.redirect-to-www-portfolio.redirectregex.regex=^https://alexand7e\\.dev\\.br/(.*)"
+        - "traefik.http.middlewares.redirect-to-www-portfolio.redirectregex.replacement=https://www.alexand7e.dev.br/$${1}"
+        - "traefik.http.middlewares.redirect-to-www-portfolio.redirectregex.permanent=true"
+
+        # Configuração do Serviço (backend) no Traefik
+        - "traefik.http.services.portfolio.loadbalancer.server.port=7000"
+        
+        # Health Check na rota básica (simplificado como no landing)
+        - "traefik.http.services.portfolio.loadbalancer.healthcheck.path=/"
+        - "traefik.http.services.portfolio.loadbalancer.healthcheck.interval=30s"
+        - "traefik.http.services.portfolio.loadbalancer.healthcheck.timeout=10s"
+
+        # --- Métricas Prometheus ---
+        - "prometheus.scrape=true"
+        - "prometheus.port=3000"
+        - "prometheus.path=/metrics"
+        - "prometheus.interval=30s"
+        - "prometheus.timeout=10s"
+
+        # --- Labels de Metadados ---
+        - "app.name=portfolio"
+        - "app.version=latest"
+        - "app.environment=production"
+        - "app.tier=frontend"
+        - "app.critical=true"
+        - "app.monitoring=true"
+        - "app.backup=true"
+        - "service.type=web"
+        - "service.category=portfolio"
+        - "team=personal"
+        - "cost-center=personal"
+
+        # --- Labels para Alertas ---
+        - "alert.severity=high"
+        - "alert.notification=slack"
+        - "alert.escalation=personal"
+          
+      resources:
+        limits:
+          memory: 1G
+          cpus: "1.0"
+        reservations:
+          memory: 512M
+          cpus: "0.5"
+
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 300s
+
+      update_config:
+        parallelism: 1
+        delay: 30s
+        failure_action: rollback
+        monitor: 60s
+        max_failure_ratio: 0.2
+        order: start-first
+
+      rollback_config:
+        parallelism: 1
+        delay: 10s
+        monitor: 60s
+        max_failure_ratio: 0.2
+        order: start-first
+
+# Volumes para persistência de dados (gerenciados pelo Swarm)
+volumes:
+  portfolio_logs:
+  portfolio_cache:
+  portfolio_uploads:
+
+# Networks para comunicação entre serviços
+networks:
+  frontend_net:
+    external: true
+  monitoring_net:
+    external: true
+
+# Secrets removidos - imagem pública do GHCR não requer autenticação
+# Se a imagem for privada, descomente e crie os secrets:
+# secrets:
+#   ghcr_registry:
+#     external: true
+#   ghcr_token:
+#     external: true
+#   ghcr_username:
+#     external: true

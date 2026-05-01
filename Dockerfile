@@ -1,26 +1,50 @@
 # Dockerfile para Portfolio Alexandre Barros
-FROM node:18-alpine
+FROM node:20-alpine AS builder
 
 # Instalar dependências do sistema
 RUN apk add --no-cache libc6-compat
 
-# Definir diretório de trabalho
 WORKDIR /app
 
 # Copiar arquivos de dependências
 COPY package*.json ./
 
-# Instalar dependências
+# Instalar dependências (sharp já incluso no package.json)
 RUN npm ci
 
 # Copiar código fonte
 COPY . .
 
-# Gerar build de produção
+# Gerar Prisma Client a partir do schema
+RUN npx prisma generate
+
+# Variáveis públicas que precisam estar no build do Next.js
+ARG NEXT_PUBLIC_GA_ID
+ENV NEXT_PUBLIC_GA_ID=$NEXT_PUBLIC_GA_ID
+
+# Gerar build de produção (output: standalone)
 RUN npm run build
 
-# Expor porta
+# ---- Runner ----
+FROM node:20-alpine AS runner
+
+RUN apk add --no-cache libc6-compat
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+# Copiar output standalone (já inclui node_modules mínimos + sharp)
+COPY --from=builder /app/.next/standalone ./
+# Copiar assets estáticos (CSS, JS, fontes)
+COPY --from=builder /app/.next/static ./.next/static
+# Copiar pasta public (imagens, favicon, etc.)
+COPY --from=builder /app/public ./public
+
 EXPOSE 7000
 
-# Comando para executar
-CMD ["npm", "start"]
+ENV PORT=7000
+ENV HOSTNAME="0.0.0.0"
+
+# standalone mode usa server.js na raiz do diretório
+CMD ["node", "server.js"]

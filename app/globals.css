@@ -3,11 +3,15 @@
 @tailwind utilities;
 
 html {
-    scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
 }
 
-section {
+/* Scroll snap aplicado apenas na home page via classe .snap-home */
+.snap-home {
+    scroll-snap-type: y mandatory;
+}
+
+.snap-home section {
     scroll-snap-align: start;
 }
 

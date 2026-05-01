@@ -466,7 +466,7 @@ async function main() {
     console.log('🚀 Inserindo projetos...')
     for (const project of projects) {
       await prisma.project.create({
-        data: project
+        data: { ...project, status: project.status as 'DRAFT' | 'PUBLISHED' }
       })
     }
     console.log(`✅ ${projects.length} projetos inseridos`)

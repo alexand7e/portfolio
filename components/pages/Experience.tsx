@@ -1,3 +1,4 @@
+"use client";
 import SectionBody from "@/components/ui/SectionBody";
 import DefaultSection from "@/components/ui/Section";
 import React, { useState, useEffect } from "react";
@@ -33,6 +34,7 @@ export default function Experience({
   className = "",
 }: {
   className?: string;
+  id?: string;
 }) {
   const { language, t } = useLanguage();
   const [experiences, setExperiences] = useState<ExperienceCardData[]>([]);
