@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { revalidatePath } from 'next/cache'
 
 // GET - List all blog posts
 export async function GET() {
@@ -82,6 +83,12 @@ export async function POST(request: NextRequest) {
         readTime
       }
     })
+
+    revalidatePath('/blog')
+    revalidatePath('/')
+    if (post.slug) {
+      revalidatePath(`/blog/${post.slug}`)
+    }
 
     return NextResponse.json(post, { status: 201 })
   } catch (error) {

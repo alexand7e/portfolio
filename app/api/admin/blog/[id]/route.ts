@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { revalidatePath } from 'next/cache'
 
 // GET - Get single blog post
 export async function GET(
@@ -126,6 +127,12 @@ export async function PATCH(
       data: updateData
     })
 
+    revalidatePath('/blog')
+    revalidatePath('/')
+    if (post.slug) {
+      revalidatePath(`/blog/${post.slug}`)
+    }
+
     return NextResponse.json(post)
   } catch (error) {
     console.error('Error updating blog post:', error)
@@ -160,11 +167,16 @@ export async function DELETE(
       )
     }
 
+    const deletedSlug = existingPost.slug
     await prisma.blog.delete({
       where: {
         id: params.id
       }
     })
+
+    revalidatePath('/blog')
+    revalidatePath('/')
+    revalidatePath(`/blog/${deletedSlug}`)
 
     return NextResponse.json({ message: 'Post excluído com sucesso' })
   } catch (error) {

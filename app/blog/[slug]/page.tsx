@@ -3,7 +3,7 @@ import { remark } from 'remark';
 import remarkHtml from 'remark-html';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { FiCalendar, FiClock, FiUser, FiArrowLeft } from 'react-icons/fi';
+import { FiCalendar, FiClock, FiUser, FiArrowLeft, FiEdit } from 'react-icons/fi';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
@@ -24,18 +24,6 @@ async function getPost(slug: string) {
 
   const processed = await remark().use(remarkHtml).process(post.content);
   return { ...post, contentHtml: processed.toString() };
-}
-
-export async function generateStaticParams() {
-  try {
-    const posts = await prisma.blog.findMany({
-      where: { published: true },
-      select: { slug: true },
-    });
-    return posts.map((p: { slug: string }) => ({ slug: p.slug }));
-  } catch {
-    return [];
-  }
 }
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
@@ -84,6 +72,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
   const date = post.publishedAt ?? post.createdAt;
   const readTimeLabel = post.readTime ? `${post.readTime} min de leitura` : 'Leitura rápida';
+  const showUpdated = post.updatedAt && post.updatedAt > date;
   const cover = post.coverImage || post.coverUrl || null;
 
   const articleStructuredData = {
@@ -183,6 +172,12 @@ export default async function PostPage({ params }: PostPageProps) {
               <FiClock size={14} />
               {readTimeLabel}
             </span>
+            {showUpdated && (
+              <span className="flex items-center gap-2 text-accent/60">
+                <FiEdit size={14} />
+                Atualizado em {format(new Date(post.updatedAt), 'dd MMM yyyy', { locale: ptBR })}
+              </span>
+            )}
           </div>
         </div>
       </div>
