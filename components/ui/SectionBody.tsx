@@ -8,7 +8,7 @@ const SectionBody = ({
     className?: string
 }) => {
     return (
-        <div className={`w-11/12 lg:w-4/5 mx-auto ${className}`}>
+        <div className={`max-w-6xl mx-auto px-6 ${className}`}>
             {children}
         </div>
     )

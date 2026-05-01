@@ -3,14 +3,16 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
-    // Revalidar a página do blog
+    // Revalidar páginas após publicar novo conteúdo
     revalidatePath('/blog');
+    revalidatePath('/tutoriais');
     revalidatePath('/');
-    
-    return NextResponse.json({ 
-      revalidated: true, 
+    revalidatePath('/sitemap.xml');
+
+    return NextResponse.json({
+      revalidated: true,
       now: Date.now(),
-      message: 'Blog revalidado com sucesso!'
+      message: 'Blog, tutoriais e sitemap revalidados com sucesso!'
     });
   } catch (err) {
     return NextResponse.json({ 

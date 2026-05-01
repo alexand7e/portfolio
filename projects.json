@@ -1,0 +1,1953 @@
+{
+  "generated_at": "2026-03-07T17:33:05Z",
+  "source": {
+    "generated_at": "2026-03-07T17:04:07Z",
+    "active_days": 365
+  },
+  "viewer": {
+    "login": "alexand7e",
+    "id": 32963519
+  },
+  "count": 57,
+  "projects": [
+    {
+      "raw": {
+        "name": "git-projects",
+        "full_name": "alexand7e/git-projects",
+        "description": null,
+        "language": "Python",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2026-03-07T17:01:25Z",
+        "url": "https://github.com/alexand7e/git-projects",
+        "org": null,
+        "my_commits_last_year": 1,
+        "languages": {
+          "Python": 29493
+        },
+        "readme_path": "README.md",
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "automacao",
+      "title": "git-projects CLI",
+      "pitch": "CLI em Python para extrair repositórios do GitHub, enriquecer com métricas, classificar via LLM e gerar um projects.json pronto para alimentar o portfolio. Inclui GitHub Actions para atualização mensal automática.",
+      "relevance": "media",
+      "technologies": [
+        "Python"
+      ],
+      "showcase": true,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "portfolio",
+        "full_name": "alexand7e/portfolio",
+        "description": null,
+        "language": "TypeScript",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2026-03-07T14:51:37Z",
+        "url": "https://github.com/alexand7e/portfolio",
+        "org": null,
+        "my_commits_last_year": 22,
+        "languages": {
+          "TypeScript": 274006,
+          "Shell": 5689,
+          "CSS": 1691,
+          "JavaScript": 736,
+          "Dockerfile": 433
+        },
+        "readme_path": "README.md",
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "frontend",
+      "title": "Portfolio — alexand7e.dev.br",
+      "pitch": "Portfolio pessoal desenvolvido com Next.js e TypeScript, apresentando projetos, trajetória e competências em engenharia e ciência de dados.",
+      "relevance": "media",
+      "technologies": [
+        "TypeScript",
+        "Shell"
+      ],
+      "showcase": true,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "capacitia-app",
+        "full_name": "alexand7e/capacitia-app",
+        "description": null,
+        "language": "Python",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2026-03-06T12:04:51Z",
+        "url": "https://github.com/alexand7e/capacitia-app",
+        "org": null,
+        "my_commits_last_year": 27,
+        "languages": {
+          "Python": 375328,
+          "Jupyter Notebook": 305513,
+          "CSS": 5541
+        },
+        "readme_path": "README.md",
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "data-pipeline",
+      "title": "CapacitIA App",
+      "pitch": "Dashboard em Streamlit e pipeline de processamento (CSV → Parquet) para avaliação e modelagem de certificação de servidores públicos do Piauí. Inclui análises exploratórias e modelos preditivos.",
+      "relevance": "media",
+      "technologies": [
+        "Python",
+        "Jupyter"
+      ],
+      "showcase": true,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "ponto-eletronico-chat",
+        "full_name": "alexand7e/ponto-eletronico-chat",
+        "description": null,
+        "language": "Python",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2026-03-06T11:32:42Z",
+        "url": "https://github.com/alexand7e/ponto-eletronico-chat",
+        "org": null,
+        "my_commits_last_year": 18,
+        "languages": {
+          "Python": 299013
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "automacao",
+      "title": "Ponto Eletrônico com Chat",
+      "pitch": "Sistema de ponto eletrônico com interface conversacional via chat, permitindo registro de presença, consulta de histórico e geração de relatórios por servidores públicos.",
+      "relevance": "baixa",
+      "technologies": [
+        "Python"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "bot-street",
+        "full_name": "Teaser-Solucoes-Empresariais/bot-street",
+        "description": null,
+        "language": "Python",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2026-02-26T13:34:41Z",
+        "url": "https://github.com/Teaser-Solucoes-Empresariais/bot-street",
+        "org": "Teaser-Solucoes-Empresariais",
+        "my_commits_last_year": 5,
+        "languages": {
+          "Python": 13987,
+          "PLpgSQL": 4916,
+          "Shell": 3714,
+          "PowerShell": 3414,
+          "Dockerfile": 955
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "automacao",
+      "title": "Bot Street (Teaser)",
+      "pitch": "Bot de automação integrado ao sistema de CRM da Teaser para atendimento, triagem e roteamento de leads via WhatsApp.",
+      "relevance": "baixa",
+      "technologies": [
+        "Python",
+        "PostgreSQL",
+        "Shell",
+        "PowerShell",
+        "Docker"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "art-pan-project",
+        "full_name": "Teaser-Solucoes-Empresariais/art-pan-project",
+        "description": null,
+        "language": "Python",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2026-02-24T23:42:41Z",
+        "url": "https://github.com/Teaser-Solucoes-Empresariais/art-pan-project",
+        "org": "Teaser-Solucoes-Empresariais",
+        "my_commits_last_year": 82,
+        "languages": {
+          "Python": 727173,
+          "HTML": 31015,
+          "PLpgSQL": 6624,
+          "Shell": 3722,
+          "Dockerfile": 1801
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "infra-devops",
+      "title": "ART-PAN — Sistema de Gestão",
+      "pitch": "Sistema de gestão de contratos e processos ART-PAN, com backend Python, banco PostgreSQL e automações Shell. Um dos projetos com maior volume de commits do histórico.",
+      "relevance": "alta",
+      "technologies": [
+        "Python",
+        "HTML"
+      ],
+      "showcase": false,
+      "is_case_study": true
+    },
+    {
+      "raw": {
+        "name": "sia-agentes-backend",
+        "full_name": "SIA-PI/sia-agentes-backend",
+        "description": "Backend do gerenciador de agentes",
+        "language": "Python",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2026-02-24T16:06:28Z",
+        "url": "https://github.com/SIA-PI/sia-agentes-backend",
+        "org": "SIA-PI",
+        "my_commits_last_year": 34,
+        "languages": {
+          "Python": 236734,
+          "PowerShell": 1054,
+          "Shell": 854,
+          "Dockerfile": 378
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "web-backend",
+      "title": "SIA Agentes — Backend",
+      "pitch": "Backend da plataforma de gerenciamento de agentes de IA do governo do Piauí. Expõe API para criação, configuração e monitoramento de agentes LLM em produção.",
+      "relevance": "media",
+      "technologies": [
+        "Python",
+        "PowerShell"
+      ],
+      "showcase": false,
+      "is_case_study": true
+    },
+    {
+      "raw": {
+        "name": "sia-agentes-frontend",
+        "full_name": "SIA-PI/sia-agentes-frontend",
+        "description": "frontend",
+        "language": "JavaScript",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2026-02-24T16:05:39Z",
+        "url": "https://github.com/SIA-PI/sia-agentes-frontend",
+        "org": "SIA-PI",
+        "my_commits_last_year": 41,
+        "languages": {
+          "JavaScript": 121617,
+          "CSS": 37081,
+          "HTML": 802,
+          "Dockerfile": 424,
+          "Shell": 226
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "frontend",
+      "title": "SIA Agentes — Frontend",
+      "pitch": "Frontend React da plataforma SIA Agentes, com interface para criação de agentes, configuração de prompts, conexão com bases de conhecimento e monitoramento de conversas.",
+      "relevance": "media",
+      "technologies": [
+        "JavaScript",
+        "CSS"
+      ],
+      "showcase": false,
+      "is_case_study": true
+    },
+    {
+      "raw": {
+        "name": "sia-ai-features",
+        "full_name": "SIA-PI/sia-ai-features",
+        "description": null,
+        "language": "Python",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2026-02-24T13:33:33Z",
+        "url": "https://github.com/SIA-PI/sia-ai-features",
+        "org": "SIA-PI",
+        "my_commits_last_year": 4,
+        "languages": {
+          "Python": 16093,
+          "Shell": 1378,
+          "PLpgSQL": 1275
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "automacao",
+      "title": "SIA — Módulo IA",
+      "pitch": "Módulo de funcionalidades de IA integradas ao ecossistema SIA/PI: embeddings, similaridade semântica e pipelines de classificação de documentos.",
+      "relevance": "baixa",
+      "technologies": [
+        "Python",
+        "Shell",
+        "PostgreSQL"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "backend-questions",
+        "full_name": "SIA-PI/backend-questions",
+        "description": "Sistema de questionário para alunos das redes públicas do estado e municípios do Piauí",
+        "language": "Python",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2026-02-22T14:12:49Z",
+        "url": "https://github.com/SIA-PI/backend-questions",
+        "org": "SIA-PI",
+        "my_commits_last_year": 7,
+        "languages": {
+          "Python": 53397,
+          "Dockerfile": 578
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "web-backend",
+      "title": "Sistema de Questionário",
+      "pitch": "API backend para sistema de questionário destinado a alunos das redes públicas estaduais e municipais do Piauí.",
+      "relevance": "baixa",
+      "technologies": [
+        "Python",
+        "Docker"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "fia-sia",
+        "full_name": "alexand7e/fia-sia",
+        "description": null,
+        "language": "JavaScript",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2026-02-22T14:10:53Z",
+        "url": "https://github.com/alexand7e/fia-sia",
+        "org": null,
+        "my_commits_last_year": 2,
+        "languages": {
+          "JavaScript": 26182,
+          "CSS": 18035,
+          "HTML": 3802
+        },
+        "readme_path": "README.md",
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "frontend",
+      "title": "FIA × SIA",
+      "pitch": "Interface web para a Fundação IA e SIA/PI, apresentando iniciativas, programas e resultados do ecossistema de inteligência artificial do estado.",
+      "relevance": "baixa",
+      "technologies": [
+        "JavaScript",
+        "CSS",
+        "HTML"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "vetor.ai",
+        "full_name": "alexand7e/vetor.ai",
+        "description": null,
+        "language": "Python",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2026-02-21T15:34:00Z",
+        "url": "https://github.com/alexand7e/vetor.ai",
+        "org": null,
+        "my_commits_last_year": 4,
+        "languages": {
+          "Python": 237973,
+          "PLpgSQL": 8796,
+          "PowerShell": 3975
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "automacao",
+      "title": "Vetor.Ai",
+      "pitch": "Plataforma de busca semântica com embeddings vetoriais, PostgreSQL + pgvector e pipeline de ingestão de documentos para recuperação de informações.",
+      "relevance": "baixa",
+      "technologies": [
+        "Python",
+        "PostgreSQL"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "transcrip-sec",
+        "full_name": "alexand7e/transcrip-sec",
+        "description": null,
+        "language": "Python",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2026-02-20T00:23:25Z",
+        "url": "https://github.com/alexand7e/transcrip-sec",
+        "org": null,
+        "my_commits_last_year": 5,
+        "languages": {
+          "Python": 78995,
+          "PowerShell": 3747
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "automacao",
+      "title": "Transcrição Interna",
+      "pitch": "Ferramenta de transcrição automatizada de áudio para uso interno na secretaria, com suporte a reuniões, audiências e eventos gravados.",
+      "relevance": "baixa",
+      "technologies": [
+        "Python",
+        "PowerShell"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "teaser-landing",
+        "full_name": "Teaser-Solucoes-Empresariais/teaser-landing",
+        "description": null,
+        "language": "TypeScript",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2026-02-17T16:18:22Z",
+        "url": "https://github.com/Teaser-Solucoes-Empresariais/teaser-landing",
+        "org": "Teaser-Solucoes-Empresariais",
+        "my_commits_last_year": 2,
+        "languages": {
+          "TypeScript": 200007,
+          "CSS": 4602,
+          "Dockerfile": 782,
+          "JavaScript": 474
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "frontend",
+      "title": "Landing Teaser",
+      "pitch": "Landing page institucional da Teaser Soluções Empresariais, desenvolvida com Next.js e Tailwind CSS com foco em conversão e performance.",
+      "relevance": "baixa",
+      "technologies": [
+        "TypeScript",
+        "CSS"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "ai-agents-manager",
+        "full_name": "alexand7e/ai-agents-manager",
+        "description": null,
+        "language": "Python",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2026-01-29T23:34:57Z",
+        "url": "https://github.com/alexand7e/ai-agents-manager",
+        "org": null,
+        "my_commits_last_year": 31,
+        "languages": {
+          "Python": 209210,
+          "JavaScript": 72122,
+          "HTML": 50962,
+          "CSS": 24666,
+          "PowerShell": 1054,
+          "Shell": 854,
+          "Mermaid": 746,
+          "Dockerfile": 334
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "web-backend",
+      "title": "AI Agents Manager",
+      "pitch": "Orquestrador de agentes de IA em Python: gerencia múltiplos agentes LLM em paralelo, com fila de tarefas, retry e logging estruturado.",
+      "relevance": "media",
+      "technologies": [
+        "Python",
+        "JavaScript",
+        "HTML",
+        "CSS"
+      ],
+      "showcase": false,
+      "is_case_study": true
+    },
+    {
+      "raw": {
+        "name": "noticias-gov",
+        "full_name": "alexand7e/noticias-gov",
+        "description": null,
+        "language": "Python",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2026-01-28T11:38:36Z",
+        "url": "https://github.com/alexand7e/noticias-gov",
+        "org": null,
+        "my_commits_last_year": 1,
+        "languages": {
+          "Python": 20126
+        },
+        "readme_path": "README.md",
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "data-pipeline",
+      "title": "Notícias Gov",
+      "pitch": "Scraper e normalizador de notícias de portais governamentais do Piauí para alimentar o pipeline de publicação do portal SIA.",
+      "relevance": "baixa",
+      "technologies": [
+        "Python"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "seduc_ia",
+        "full_name": "SIA-PI/seduc_ia",
+        "description": null,
+        "language": "JavaScript",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2026-01-27T11:40:54Z",
+        "url": "https://github.com/SIA-PI/seduc_ia",
+        "org": "SIA-PI",
+        "my_commits_last_year": 15,
+        "languages": {
+          "JavaScript": 72178,
+          "HTML": 1196,
+          "Dockerfile": 777
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "frontend",
+      "title": "SEDUC — Portal IA",
+      "pitch": "Portal web da SEDUC/PI para o programa de IA na educação pública, com listagem de iniciativas, capacitações e recursos pedagógicos.",
+      "relevance": "baixa",
+      "technologies": [
+        "JavaScript",
+        "HTML"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "sia-sejus",
+        "full_name": "SIA-PI/sia-sejus",
+        "description": null,
+        "language": "Python",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2026-01-23T11:18:57Z",
+        "url": "https://github.com/SIA-PI/sia-sejus",
+        "org": "SIA-PI",
+        "my_commits_last_year": 14,
+        "languages": {
+          "Python": 39583,
+          "HTML": 31183,
+          "CSS": 2429,
+          "Shell": 859,
+          "Dockerfile": 324
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "web-backend",
+      "title": "SIA — SEJUS/PI",
+      "pitch": "Sistema de apoio à gestão da SEJUS/PI com Python, integrando dados de processos, indicadores e relatórios automatizados.",
+      "relevance": "baixa",
+      "technologies": [
+        "Python",
+        "HTML",
+        "CSS"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "whatsapp-interface",
+        "full_name": "alexand7e/whatsapp-interface",
+        "description": null,
+        "language": "Go",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2026-01-22T19:39:52Z",
+        "url": "https://github.com/alexand7e/whatsapp-interface",
+        "org": null,
+        "my_commits_last_year": 30,
+        "languages": {
+          "Go": 71131,
+          "JavaScript": 36847,
+          "CSS": 21735,
+          "HTML": 20514,
+          "Dockerfile": 302
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "web-backend",
+      "title": "WhatsApp Interface (Go)",
+      "pitch": "Serviço Go com biblioteca whatsmeow expondo REST API para envio e recebimento de mensagens WhatsApp multidevice, usado como backbone de automações institucionais.",
+      "relevance": "media",
+      "technologies": [
+        "Go",
+        "JavaScript",
+        "CSS",
+        "HTML"
+      ],
+      "showcase": false,
+      "is_case_study": true
+    },
+    {
+      "raw": {
+        "name": "qr-stilium",
+        "full_name": "alexand7e/qr-stilium",
+        "description": null,
+        "language": "JavaScript",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2026-01-19T13:25:11Z",
+        "url": "https://github.com/alexand7e/qr-stilium",
+        "org": null,
+        "my_commits_last_year": 6,
+        "languages": {
+          "JavaScript": 69401,
+          "HTML": 9572,
+          "CSS": 8134
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "web-backend",
+      "title": "QR Stilium",
+      "pitch": "Gerador e leitor de QR codes para o sistema Stilium, com rastreabilidade de produtos e integração com banco de dados.",
+      "relevance": "baixa",
+      "technologies": [
+        "JavaScript",
+        "HTML",
+        "CSS"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "stack-art-pan",
+        "full_name": "Teaser-Solucoes-Empresariais/stack-art-pan",
+        "description": null,
+        "language": "Shell",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2026-01-18T21:10:56Z",
+        "url": "https://github.com/Teaser-Solucoes-Empresariais/stack-art-pan",
+        "org": "Teaser-Solucoes-Empresariais",
+        "my_commits_last_year": 89,
+        "languages": {
+          "Shell": 14211,
+          "Python": 5323,
+          "Dockerfile": 433
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "infra-devops",
+      "title": "ART-PAN — Infraestrutura",
+      "pitch": "Stack completa de infraestrutura Docker Swarm para o sistema ART-PAN: orquestração, rede overlay, balanceamento e scripts de provisionamento de servidores.",
+      "relevance": "alta",
+      "technologies": [
+        "Shell",
+        "Python"
+      ],
+      "showcase": false,
+      "is_case_study": true
+    },
+    {
+      "raw": {
+        "name": "roadmap-ia",
+        "full_name": "alexand7e/roadmap-ia",
+        "description": null,
+        "language": "HTML",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2026-01-14T15:34:47Z",
+        "url": "https://github.com/alexand7e/roadmap-ia",
+        "org": null,
+        "my_commits_last_year": 10,
+        "languages": {
+          "HTML": 159501,
+          "JavaScript": 20544,
+          "CSS": 3607
+        },
+        "readme_path": "README.md",
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "frontend",
+      "title": "Roadmap IA — Piauí",
+      "pitch": "10 infográficos educacionais progressivos sobre fundamentos de IA para o governo do Piauí, com SVGs animados, modo de alto contraste e servidor Express.",
+      "relevance": "media",
+      "technologies": [
+        "HTML",
+        "JavaScript"
+      ],
+      "showcase": true,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "vc-image",
+        "full_name": "alexand7e/vc-image",
+        "description": null,
+        "language": "HTML",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2026-01-11T20:56:15Z",
+        "url": "https://github.com/alexand7e/vc-image",
+        "org": null,
+        "my_commits_last_year": 3,
+        "languages": {
+          "HTML": 32708,
+          "CSS": 3889
+        },
+        "readme_path": "README.md",
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "frontend",
+      "title": "VC Image",
+      "pitch": "Ferramenta web para gerar e editar imagens com metadados, foco em acessibilidade e geração de conteúdo para portais governamentais.",
+      "relevance": "baixa",
+      "technologies": [
+        "HTML",
+        "CSS"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "model-football",
+        "full_name": "alexand7e/model-football",
+        "description": null,
+        "language": "Python",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2026-01-08T19:50:28Z",
+        "url": "https://github.com/alexand7e/model-football",
+        "org": null,
+        "my_commits_last_year": 9,
+        "languages": {
+          "Python": 467120
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "data-pipeline",
+      "title": "Modelo de Predição — Futebol",
+      "pitch": "Modelo preditivo de resultados de partidas de futebol com Python, explorando feature engineering, séries temporais e métricas de performance.",
+      "relevance": "baixa",
+      "technologies": [
+        "Python"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "via10-app",
+        "full_name": "Teaser-Solucoes-Empresariais/via10-app",
+        "description": null,
+        "language": "Python",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2025-12-23T11:59:32Z",
+        "url": "https://github.com/Teaser-Solucoes-Empresariais/via10-app",
+        "org": "Teaser-Solucoes-Empresariais",
+        "my_commits_last_year": 16,
+        "languages": {
+          "Python": 306207,
+          "HTML": 49377,
+          "PLpgSQL": 23477,
+          "JavaScript": 14968,
+          "Shell": 1503,
+          "Dockerfile": 1301
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "web-backend",
+      "title": "Via10 — Backend (Teaser)",
+      "pitch": "Backend do sistema Via10 (Teaser) para gestão de rotas, veículos e motoristas, com Python, PostgreSQL e integração com APIs de rastreamento.",
+      "relevance": "baixa",
+      "technologies": [
+        "Python",
+        "HTML",
+        "PostgreSQL",
+        "JavaScript"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "via10-front",
+        "full_name": "Teaser-Solucoes-Empresariais/via10-front",
+        "description": null,
+        "language": "TypeScript",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2025-12-23T11:58:45Z",
+        "url": "https://github.com/Teaser-Solucoes-Empresariais/via10-front",
+        "org": "Teaser-Solucoes-Empresariais",
+        "my_commits_last_year": 5,
+        "languages": {
+          "TypeScript": 301682,
+          "CSS": 7763,
+          "Dockerfile": 1639,
+          "JavaScript": 1304
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "frontend",
+      "title": "Via10 — Frontend (Teaser)",
+      "pitch": "Frontend TypeScript do sistema Via10 com painel de controle em tempo real para gestão de frotas e monitoramento de rotas.",
+      "relevance": "baixa",
+      "technologies": [
+        "TypeScript",
+        "CSS"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "ferramentas-ia",
+        "full_name": "alexand7e/ferramentas-ia",
+        "description": null,
+        "language": "TypeScript",
+        "topics": [],
+        "visibility": "public",
+        "stars": 1,
+        "last_pushed": "2025-12-21T22:07:35Z",
+        "url": "https://github.com/alexand7e/ferramentas-ia",
+        "org": null,
+        "my_commits_last_year": 26,
+        "languages": {
+          "TypeScript": 403739,
+          "JavaScript": 20187,
+          "CSS": 4168
+        },
+        "readme_path": "README.md",
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "frontend",
+      "title": "Ferramentas IA",
+      "pitch": "Plataforma web que cataloga e categoriza ferramentas de IA para desenvolvedores, designers e profissionais. Nasceu da necessidade de organizar o ecossistema de IA em expansão.",
+      "relevance": "alta",
+      "technologies": [
+        "TypeScript",
+        "JavaScript"
+      ],
+      "showcase": true,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "app-confirmador",
+        "full_name": "alexand7e/app-confirmador",
+        "description": null,
+        "language": "EJS",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2025-12-21T20:56:04Z",
+        "url": "https://github.com/alexand7e/app-confirmador",
+        "org": null,
+        "my_commits_last_year": 23,
+        "languages": {
+          "EJS": 124399,
+          "JavaScript": 117884
+        },
+        "readme_path": "README.md",
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "web-backend",
+      "title": "CapacitIA – Confirmador",
+      "pitch": "Sistema para confirmações de participação no treinamento 'CapacitIA – Autonomia Digital para Pessoas Idosas': rotas únicas, painel admin e envio automático de WhatsApp via n8n.",
+      "relevance": "media",
+      "technologies": [
+        "EJS",
+        "JavaScript"
+      ],
+      "showcase": true,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "waba-provider",
+        "full_name": "alexand7e/waba-provider",
+        "description": null,
+        "language": "HTML",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2025-12-19T00:07:22Z",
+        "url": "https://github.com/alexand7e/waba-provider",
+        "org": null,
+        "my_commits_last_year": 11,
+        "languages": {
+          "HTML": 46009,
+          "Python": 23150,
+          "Shell": 1591,
+          "Dockerfile": 730
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "web-backend",
+      "title": "WABA Provider",
+      "pitch": "Serviço provedor de WhatsApp Business API (WABA) com gateway HTTP, suporte a templates, envio em lote e webhook para recebimento de mensagens.",
+      "relevance": "baixa",
+      "technologies": [
+        "HTML",
+        "Python"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "mapa-emprego-the",
+        "full_name": "alexand7e/mapa-emprego-the",
+        "description": null,
+        "language": "Python",
+        "topics": [],
+        "visibility": "public",
+        "stars": 1,
+        "last_pushed": "2025-12-03T02:44:53Z",
+        "url": "https://github.com/alexand7e/mapa-emprego-the",
+        "org": null,
+        "my_commits_last_year": 10,
+        "languages": {
+          "Python": 44482
+        },
+        "readme_path": "README.md",
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "data-pipeline",
+      "title": "Mapa do Emprego — Teresina",
+      "pitch": "Visualização open-source da distribuição de empregos formais em Teresina/PI por CEP, bairro e Zona SDU, usando dados públicos da RAIS.",
+      "relevance": "media",
+      "technologies": [
+        "Python"
+      ],
+      "showcase": true,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "sia-ssp-educ",
+        "full_name": "SIA-PI/sia-ssp-educ",
+        "description": null,
+        "language": "Jupyter Notebook",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2025-11-28T15:39:27Z",
+        "url": "https://github.com/SIA-PI/sia-ssp-educ",
+        "org": "SIA-PI",
+        "my_commits_last_year": 30,
+        "languages": {
+          "Jupyter Notebook": 14080114,
+          "Python": 433099,
+          "CSS": 3552,
+          "Dockerfile": 516
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "data-pipeline",
+      "title": "SSP × SEDUC — Análise de Dados",
+      "pitch": "Projeto de ciência de dados cruzando bases da SSP e SEDUC do Piauí para identificar correlações entre indicadores educacionais e de segurança, apoiando políticas públicas.",
+      "relevance": "media",
+      "technologies": [
+        "Jupyter",
+        "Python"
+      ],
+      "showcase": false,
+      "is_case_study": true
+    },
+    {
+      "raw": {
+        "name": "art-pan",
+        "full_name": "alexand7e/art-pan",
+        "description": null,
+        "language": "TypeScript",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2025-11-24T13:18:36Z",
+        "url": "https://github.com/alexand7e/art-pan",
+        "org": null,
+        "my_commits_last_year": 2,
+        "languages": {
+          "TypeScript": 16503
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "frontend",
+      "title": "ART-PAN — Frontend",
+      "pitch": "Repositório público do frontend TypeScript do sistema ART-PAN, servindo como referência de arquitetura para projetos de gestão de contratos.",
+      "relevance": "baixa",
+      "technologies": [
+        "TypeScript"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "news-next",
+        "full_name": "SIA-PI/news-next",
+        "description": null,
+        "language": "TypeScript",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2025-11-17T12:25:05Z",
+        "url": "https://github.com/SIA-PI/news-next",
+        "org": "SIA-PI",
+        "my_commits_last_year": 24,
+        "languages": {
+          "TypeScript": 128569,
+          "CSS": 9126,
+          "Dockerfile": 2163,
+          "PowerShell": 1184,
+          "Shell": 928,
+          "JavaScript": 474
+        },
+        "readme_path": "README.md",
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "frontend",
+      "title": "Portal de Notícias SIA",
+      "pitch": "Portal de notícias do ecossistema SIA/PI desenvolvido com Next.js, com geração estática, deploy containerizado e integração com pipeline de processamento de conteúdo.",
+      "relevance": "media",
+      "technologies": [
+        "TypeScript",
+        "CSS"
+      ],
+      "showcase": true,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "oficina-economia",
+        "full_name": "alexand7e/oficina-economia",
+        "description": null,
+        "language": "Jupyter Notebook",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2025-11-14T17:26:14Z",
+        "url": "https://github.com/alexand7e/oficina-economia",
+        "org": null,
+        "my_commits_last_year": 2,
+        "languages": {
+          "Jupyter Notebook": 40620
+        },
+        "readme_path": "README.md",
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "data-pipeline",
+      "title": "Oficina de Economia",
+      "pitch": "Notebooks de economia aplicada: séries temporais, análise de mercado de trabalho, visualizações e exercícios reproduzíveis para cursos e pesquisa.",
+      "relevance": "baixa",
+      "technologies": [
+        "Jupyter"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "api-process-news",
+        "full_name": "SIA-PI/api-process-news",
+        "description": null,
+        "language": "TypeScript",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2025-11-12T17:11:53Z",
+        "url": "https://github.com/SIA-PI/api-process-news",
+        "org": "SIA-PI",
+        "my_commits_last_year": 61,
+        "languages": {
+          "TypeScript": 111090,
+          "Dockerfile": 1816,
+          "JavaScript": 836
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "web-backend",
+      "title": "Pipeline de Notícias SIA",
+      "pitch": "API de processamento automático de notícias para o portal SIA/PI: coleta, normalização, categorização e publicação de conteúdo com TypeScript e Docker.",
+      "relevance": "alta",
+      "technologies": [
+        "TypeScript",
+        "Docker"
+      ],
+      "showcase": false,
+      "is_case_study": true
+    },
+    {
+      "raw": {
+        "name": "landing-nanda",
+        "full_name": "alexand7e/landing-nanda",
+        "description": null,
+        "language": "TypeScript",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2025-11-12T12:29:15Z",
+        "url": "https://github.com/alexand7e/landing-nanda",
+        "org": null,
+        "my_commits_last_year": 18,
+        "languages": {
+          "TypeScript": 220076,
+          "CSS": 9539,
+          "JavaScript": 285
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "frontend",
+      "title": "Landing Page (Freelance)",
+      "pitch": "Landing page profissional desenvolvida como freelance em TypeScript, com animações, formulário de contato e otimizações de SEO e performance.",
+      "relevance": "baixa",
+      "technologies": [
+        "TypeScript",
+        "CSS"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "portal-capacitia",
+        "full_name": "alexand7e/portal-capacitia",
+        "description": null,
+        "language": "TypeScript",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2025-11-07T13:48:38Z",
+        "url": "https://github.com/alexand7e/portal-capacitia",
+        "org": null,
+        "my_commits_last_year": 1,
+        "languages": {
+          "TypeScript": 266645,
+          "CSS": 11116,
+          "JavaScript": 1985
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "outro",
+      "title": "Portal Capacitia",
+      "pitch": "Projeto portal-capacitia — private.",
+      "relevance": "baixa",
+      "technologies": [
+        "TypeScript",
+        "CSS"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "net-assist-plus",
+        "full_name": "alexand7e/net-assist-plus",
+        "description": null,
+        "language": "TypeScript",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2025-10-14T19:40:41Z",
+        "url": "https://github.com/alexand7e/net-assist-plus",
+        "org": null,
+        "my_commits_last_year": 29,
+        "languages": {
+          "TypeScript": 565869,
+          "JavaScript": 25715,
+          "PLpgSQL": 12115,
+          "CSS": 2545,
+          "HTML": 861
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "frontend",
+      "title": "Net Assist Plus",
+      "pitch": "Plataforma de suporte com chat em tempo real e integração de LLM para roteamento inteligente de atendimentos e base de conhecimento consultável.",
+      "relevance": "media",
+      "technologies": [
+        "TypeScript",
+        "JavaScript"
+      ],
+      "showcase": false,
+      "is_case_study": true
+    },
+    {
+      "raw": {
+        "name": "teaser-stack-multiserver",
+        "full_name": "Teaser-Solucoes-Empresariais/teaser-stack-multiserver",
+        "description": null,
+        "language": "Shell",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2025-09-25T13:30:11Z",
+        "url": "https://github.com/Teaser-Solucoes-Empresariais/teaser-stack-multiserver",
+        "org": "Teaser-Solucoes-Empresariais",
+        "my_commits_last_year": 19,
+        "languages": {
+          "Shell": 69311,
+          "PowerShell": 2660
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "infra-devops",
+      "title": "Infra Multi-Servidor",
+      "pitch": "Scripts de provisionamento e orquestração multi-servidor para a Teaser: Docker Swarm em cluster com Traefik, Portainer e monitoramento.",
+      "relevance": "baixa",
+      "technologies": [
+        "Shell",
+        "PowerShell"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "portfolio-engenharia",
+        "full_name": "alexand7e/portfolio-engenharia",
+        "description": null,
+        "language": "Vue",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2025-09-16T20:55:07Z",
+        "url": "https://github.com/alexand7e/portfolio-engenharia",
+        "org": null,
+        "my_commits_last_year": 9,
+        "languages": {
+          "Vue": 280094,
+          "JavaScript": 30843,
+          "HTML": 21920,
+          "CSS": 2566
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "frontend",
+      "title": "Portfolio de Engenheiro",
+      "pitch": "Portfolio desenvolvido em Vue.js para um engenheiro, com seções de projetos, experiências, habilidades e formulário de contato.",
+      "relevance": "baixa",
+      "technologies": [
+        "Vue.js",
+        "JavaScript",
+        "HTML"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "stack-kubernetes",
+        "full_name": "alexand7e/stack-kubernetes",
+        "description": null,
+        "language": "Shell",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2025-09-16T12:04:26Z",
+        "url": "https://github.com/alexand7e/stack-kubernetes",
+        "org": null,
+        "my_commits_last_year": 19,
+        "languages": {
+          "Shell": 69311,
+          "PowerShell": 2660
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "infra-devops",
+      "title": "Kubernetes Stack",
+      "pitch": "Manifests e scripts para cluster Kubernetes: deployments, services, ingress com cert-manager e pipeline de CI/CD integrado.",
+      "relevance": "baixa",
+      "technologies": [
+        "Shell",
+        "PowerShell"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "rachei-conta-mobile",
+        "full_name": "alexand7e/rachei-conta-mobile",
+        "description": null,
+        "language": "TypeScript",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2025-08-31T14:38:15Z",
+        "url": "https://github.com/alexand7e/rachei-conta-mobile",
+        "org": null,
+        "my_commits_last_year": 2,
+        "languages": {
+          "TypeScript": 70572
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "mobile",
+      "title": "Rachei a Conta (Mobile)",
+      "pitch": "App mobile em TypeScript para divisão de contas entre amigos, com cálculo automático de splits e histórico de grupos.",
+      "relevance": "baixa",
+      "technologies": [
+        "TypeScript"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "api-reservas-teaser",
+        "full_name": "Teaser-Solucoes-Empresariais/api-reservas-teaser",
+        "description": null,
+        "language": "TypeScript",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2025-08-28T01:43:27Z",
+        "url": "https://github.com/Teaser-Solucoes-Empresariais/api-reservas-teaser",
+        "org": "Teaser-Solucoes-Empresariais",
+        "my_commits_last_year": 12,
+        "languages": {
+          "TypeScript": 77198,
+          "JavaScript": 2813,
+          "Shell": 1279,
+          "Dockerfile": 1234
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "web-backend",
+      "title": "API de Reservas (Teaser)",
+      "pitch": "API de reservas para a Teaser: gestão de disponibilidade, agendamentos, confirmações e notificações automáticas.",
+      "relevance": "baixa",
+      "technologies": [
+        "TypeScript",
+        "JavaScript"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "api-get-url",
+        "full_name": "alexand7e/api-get-url",
+        "description": null,
+        "language": "TypeScript",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2025-08-07T12:25:05Z",
+        "url": "https://github.com/alexand7e/api-get-url",
+        "org": null,
+        "my_commits_last_year": 4,
+        "languages": {
+          "TypeScript": 19834,
+          "JavaScript": 836
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "web-backend",
+      "title": "API Get URL",
+      "pitch": "Micro-serviço TypeScript para extração, normalização e validação de metadados de URLs, usado em pipelines de coleta de conteúdo.",
+      "relevance": "baixa",
+      "technologies": [
+        "TypeScript",
+        "JavaScript"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "app-prompts-streamlit",
+        "full_name": "alexand7e/app-prompts-streamlit",
+        "description": null,
+        "language": "Python",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2025-07-30T15:23:13Z",
+        "url": "https://github.com/alexand7e/app-prompts-streamlit",
+        "org": null,
+        "my_commits_last_year": 1,
+        "languages": {
+          "Python": 14917,
+          "CSS": 2535
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "automacao",
+      "title": "App de Prompts",
+      "pitch": "App Streamlit para gerenciar, versionar e testar prompts de LLM, com histórico de respostas e comparação entre modelos.",
+      "relevance": "baixa",
+      "technologies": [
+        "Python",
+        "CSS"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "teaser-atend-app",
+        "full_name": "Teaser-Solucoes-Empresariais/teaser-atend-app",
+        "description": null,
+        "language": "TypeScript",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2025-07-24T12:06:41Z",
+        "url": "https://github.com/Teaser-Solucoes-Empresariais/teaser-atend-app",
+        "org": "Teaser-Solucoes-Empresariais",
+        "my_commits_last_year": 4,
+        "languages": {
+          "TypeScript": 91020,
+          "CSS": 1803,
+          "JavaScript": 1402,
+          "HTML": 619
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "web-backend",
+      "title": "App de Atendimento (Teaser)",
+      "pitch": "Aplicativo de atendimento da Teaser com TypeScript: triagem de chamados, atribuição de agentes e histórico de interações.",
+      "relevance": "baixa",
+      "technologies": [
+        "TypeScript",
+        "CSS"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "chat-iai",
+        "full_name": "SIA-PI/chat-iai",
+        "description": null,
+        "language": "HTML",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2025-07-09T23:07:23Z",
+        "url": "https://github.com/SIA-PI/chat-iai",
+        "org": "SIA-PI",
+        "my_commits_last_year": 3,
+        "languages": {
+          "HTML": 15750,
+          "JavaScript": 5491
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "frontend",
+      "title": "Chat IAI — Educação",
+      "pitch": "Interface de chat HTML/JS para o programa IAI (IA na Educação) do Piauí, conectando alunos a tutores de IA para suporte pedagógico.",
+      "relevance": "baixa",
+      "technologies": [
+        "HTML",
+        "JavaScript"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "Neon-Chat",
+        "full_name": "alexand7e/Neon-Chat",
+        "description": null,
+        "language": "Python",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2025-07-08T14:45:41Z",
+        "url": "https://github.com/alexand7e/Neon-Chat",
+        "org": null,
+        "my_commits_last_year": 2,
+        "languages": {
+          "Python": 3873
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "automacao",
+      "title": "Neon Chat",
+      "pitch": "Chatbot em Python com interface neon/dark, explorando integração com APIs de LLM e WebSocket para conversas em tempo real.",
+      "relevance": "baixa",
+      "technologies": [
+        "Python"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "transcricao-teste",
+        "full_name": "alexand7e/transcricao-teste",
+        "description": null,
+        "language": "Python",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2025-07-01T20:10:14Z",
+        "url": "https://github.com/alexand7e/transcricao-teste",
+        "org": null,
+        "my_commits_last_year": 16,
+        "languages": {
+          "Python": 30448
+        },
+        "readme_path": "README.md",
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "automacao",
+      "title": "Transcrição com Whisper",
+      "pitch": "Ferramenta de transcrição automatizada de áudio e vídeo com Whisper/OpenAI, desenvolvida para uso em reuniões e eventos institucionais.",
+      "relevance": "media",
+      "technologies": [
+        "Python"
+      ],
+      "showcase": true,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "Painel-Editais",
+        "full_name": "alexand7e/Painel-Editais",
+        "description": null,
+        "language": "Python",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2025-06-26T11:41:27Z",
+        "url": "https://github.com/alexand7e/Painel-Editais",
+        "org": null,
+        "my_commits_last_year": 5,
+        "languages": {
+          "Python": 6882
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "data-pipeline",
+      "title": "Painel de Editais",
+      "pitch": "Dashboard Python para monitoramento e análise de editais públicos do estado do Piauí, com filtros por órgão, valor e prazo.",
+      "relevance": "baixa",
+      "technologies": [
+        "Python"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "Teaser-Auth",
+        "full_name": "alexand7e/Teaser-Auth",
+        "description": null,
+        "language": "CSS",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2025-06-25T19:01:41Z",
+        "url": "https://github.com/alexand7e/Teaser-Auth",
+        "org": null,
+        "my_commits_last_year": 5,
+        "languages": {
+          "CSS": 3938,
+          "JavaScript": 3169,
+          "HTML": 1906,
+          "Dockerfile": 122
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "frontend",
+      "title": "Teaser Auth",
+      "pitch": "Módulo de autenticação da Teaser: telas de login, recuperação de senha e integração com fluxo SSO/OAuth.",
+      "relevance": "baixa",
+      "technologies": [
+        "CSS",
+        "JavaScript",
+        "HTML"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "Capacitia",
+        "full_name": "alexand7e/Capacitia",
+        "description": null,
+        "language": "Jupyter Notebook",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2025-06-11T15:55:28Z",
+        "url": "https://github.com/alexand7e/Capacitia",
+        "org": null,
+        "my_commits_last_year": 6,
+        "languages": {
+          "Jupyter Notebook": 259543,
+          "Python": 29245
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "data-pipeline",
+      "title": "Capacitia",
+      "pitch": "Notebooks de análise exploratória e modelagem para o programa CapacitIA do governo do Piauí, com dados de servidores e avaliações.",
+      "relevance": "baixa",
+      "technologies": [
+        "Jupyter",
+        "Python"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "transcription-yt",
+        "full_name": "alexand7e/transcription-yt",
+        "description": null,
+        "language": "Python",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2025-06-03T12:56:33Z",
+        "url": "https://github.com/alexand7e/transcription-yt",
+        "org": null,
+        "my_commits_last_year": 1,
+        "languages": {
+          "Python": 14222,
+          "Dockerfile": 1351
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "automacao",
+      "title": "Transcrição YouTube",
+      "pitch": "Script Python para transcrição automática de vídeos do YouTube usando Whisper, com saída em texto formatado.",
+      "relevance": "baixa",
+      "technologies": [
+        "Python",
+        "Docker"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "datalake-remoto",
+        "full_name": "alexand7e/datalake-remoto",
+        "description": null,
+        "language": "Shell",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2025-05-12T13:12:42Z",
+        "url": "https://github.com/alexand7e/datalake-remoto",
+        "org": null,
+        "my_commits_last_year": 2,
+        "languages": {
+          "Shell": 5588,
+          "Python": 2189
+        },
+        "readme_path": "README.MD",
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "infra-devops",
+      "title": "Datalake Remoto",
+      "pitch": "Scripts Shell e Python para provisionamento de datalake remoto: sincronização de dados, particionamento e pipelines de ingestão.",
+      "relevance": "baixa",
+      "technologies": [
+        "Shell",
+        "Python"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "siaplus_frontend",
+        "full_name": "sia-plus/siaplus_frontend",
+        "description": "Front SIA+",
+        "language": "TypeScript",
+        "topics": [],
+        "visibility": "private",
+        "stars": 0,
+        "last_pushed": "2025-04-14T13:52:13Z",
+        "url": "https://github.com/sia-plus/siaplus_frontend",
+        "org": "sia-plus",
+        "my_commits_last_year": 0,
+        "languages": {
+          "TypeScript": 420655,
+          "CSS": 9746,
+          "JavaScript": 3752
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "outro",
+      "title": "Siaplus Frontend",
+      "pitch": "Front SIA+",
+      "relevance": "baixa",
+      "technologies": [
+        "TypeScript",
+        "CSS"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "sia-ferramentas-ia",
+        "full_name": "alexand7e/sia-ferramentas-ia",
+        "description": null,
+        "language": "JavaScript",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2025-04-07T12:34:14Z",
+        "url": "https://github.com/alexand7e/sia-ferramentas-ia",
+        "org": null,
+        "my_commits_last_year": 2,
+        "languages": {
+          "JavaScript": 224683,
+          "CSS": 14828,
+          "HTML": 5018
+        },
+        "readme_path": null,
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "frontend",
+      "title": "Ferramentas IA (Gov)",
+      "pitch": "Versão institucional do catálogo de ferramentas de IA, adaptada para o contexto do governo do Piauí com curadoria de ferramentas para servidores.",
+      "relevance": "baixa",
+      "technologies": [
+        "JavaScript",
+        "CSS"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    },
+    {
+      "raw": {
+        "name": "sei-assistente-ia",
+        "full_name": "alexand7e/sei-assistente-ia",
+        "description": null,
+        "language": "Python",
+        "topics": [],
+        "visibility": "public",
+        "stars": 0,
+        "last_pushed": "2025-04-01T22:53:41Z",
+        "url": "https://github.com/alexand7e/sei-assistente-ia",
+        "org": null,
+        "my_commits_last_year": 1,
+        "languages": {
+          "Python": 46112
+        },
+        "readme_path": "README.md",
+        "readme_sha": null,
+        "readme_text": null,
+        "readme_truncated": false
+      },
+      "category": "automacao",
+      "title": "Assistente IA — SEI",
+      "pitch": "Assistente de IA para o sistema SEI (Sistema Eletrônico de Informações), auxiliando na redação, triagem e análise de processos administrativos.",
+      "relevance": "baixa",
+      "technologies": [
+        "Python"
+      ],
+      "showcase": false,
+      "is_case_study": false
+    }
+  ]
+}
