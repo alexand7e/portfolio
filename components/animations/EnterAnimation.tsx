@@ -38,10 +38,10 @@ const Stairs = () => {
 }
 
 const StairTransition = () => {
-    const pathnane = usePathname();
+    const pathname = usePathname();
     return (
         <AnimatePresence>
-            <div key={pathnane}>
+            <div key={pathname}>
                 <div className={"h-screen w-screen fixed top-0 right-0 left-0 pointer-events-none z-40 flex"}>
                     <Stairs/>
                 </div>

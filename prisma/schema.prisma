@@ -86,6 +86,135 @@ model Experience {
   @@map("experiences")
 }
 
+model Subscriber {
+  id        String           @id @default(cuid())
+  email     String           @unique
+  name      String?
+  status    SubscriberStatus @default(PENDING)
+  locale    String           @default("pt")
+  token     String?          @unique
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  @@map("subscribers")
+}
+
+model Tutorial {
+  id            String     @id @default(cuid())
+  slug          String     @unique
+  title         String
+  titleEn       String?
+  description   String
+  descriptionEn String?
+  content       String
+  contentEn     String?
+  coverUrl      String?
+  coverImage    String?
+  difficulty    Difficulty @default(BEGINNER)
+  estimatedTime Int?
+  tags          String[]
+  technologies  String[]
+  published     Boolean    @default(false)
+  publishedAt   DateTime?
+  seriesId      String?
+  seriesOrder   Int?
+  series        Series?    @relation(fields: [seriesId], references: [id])
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  @@map("tutorials")
+}
+
+model Series {
+  id            String       @id @default(cuid())
+  slug          String       @unique
+  title         String
+  titleEn       String?
+  description   String?
+  descriptionEn String?
+  published     Boolean      @default(false)
+  tutorials     Tutorial[]
+  blogPosts     SeriesBlog[]
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  @@map("series")
+}
+
+model SeriesBlog {
+  id       String @id @default(cuid())
+  seriesId String
+  blogSlug String
+  order    Int    @default(0)
+  series   Series @relation(fields: [seriesId], references: [id])
+
+  @@unique([seriesId, blogSlug])
+  @@map("series_blog")
+}
+
+model Talk {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  title         String
+  titleEn       String?
+  description   String?
+  descriptionEn String?
+  event         String
+  eventEn       String?
+  location      String?
+  date          DateTime
+  slidesUrl     String?
+  videoUrl      String?
+  coverImage    String?
+  tags          String[]
+  published     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("talks")
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  company   String?
+  text      String
+  textEn    String?
+  avatarUrl String?
+  linkedIn  String?
+  order     Int      @default(0)
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("testimonials")
+}
+
+model UseItem {
+  id            String   @id @default(cuid())
+  category      String
+  categoryEn    String?
+  name          String
+  description   String?
+  descriptionEn String?
+  url           String?
+  order         Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("use_items")
+}
+
+model SiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+
+  @@map("site_settings")
+}
+
 enum Role {
   ADMIN
   USER
@@ -94,4 +223,16 @@ enum Role {
 enum Status {
   DRAFT
   PUBLISHED
+}
+
+enum SubscriberStatus {
+  PENDING
+  ACTIVE
+  UNSUBSCRIBED
+}
+
+enum Difficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
 }

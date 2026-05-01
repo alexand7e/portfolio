@@ -2,6 +2,7 @@
 import React, { HTMLProps } from "react";
 import {DesktopNav, MobileNav} from "@/components/ui/NavComponents";
 import LanguageSelector from "./LanguageSelector";
+import SearchModal from "./SearchModal";
 
 export const Header = () => {
     const afterStyle: HTMLProps<HTMLElement>["className"] = `after:content-[';'] after:text-accent`
@@ -13,7 +14,8 @@ export const Header = () => {
                 Alexandre
             </a>
             
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
+                <SearchModal />
                 <LanguageSelector />
                 <div className="lg:hidden">
                     <MobileNav/>

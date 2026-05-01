@@ -48,7 +48,7 @@ export const translations: Record<Language, Translations> = {
     home: {
       title: "Data Engineer | Full-Stack Developer | Tech Leader",
       subtitle: "Olá, eu sou",
-      description: "Sou um Data Engineer e Full-Stack Developer com formação em Economia e Ciência da Computação. Especializo-me em conectar estratégia de negócios com tecnologia de ponta, criando soluções inovadoras que impulsionam resultados. Atualmente atuo como Manager na SIA-PI e Co-Founder & CTO na Teaser.",
+      description: "Dados não mentem. Pessoas interpretam, narrativas distorcem — mas os números estão lá, esperando alguém que saiba o que perguntar. Trabalho na interseção entre dados e tecnologia desde 2022, no setor público e no privado, tentando transformar o que os dados mostram em decisões que mudam alguma coisa de verdade.",
       contactButton: "Entre em Contato"
     },
     skills: {
@@ -90,7 +90,7 @@ export const translations: Record<Language, Translations> = {
     home: {
       title: "Data Engineer | Full-Stack Developer | Tech Leader",
       subtitle: "Hello, I'm",
-      description: "I'm a Data Engineer and Full-Stack Developer with a background in Economics and Computer Science. I specialize in connecting business strategy with cutting-edge technology, creating innovative solutions that drive results. Currently working as Manager at SIA-PI and Co-Founder & CTO at Teaser.",
+      description: "Data doesn't lie. People interpret, narratives distort — but the numbers are there, waiting for someone who knows what to ask. I've worked at the intersection of data and technology since 2022, in the public and private sectors, trying to turn what the data shows into decisions that actually change something.",
       contactButton: "Get in Touch"
     },
     skills: {
