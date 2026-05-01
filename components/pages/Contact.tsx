@@ -1,3 +1,4 @@
+"use client";
 import SectionBody from "@/components/ui/SectionBody";
 import DefaultSection from "@/components/ui/Section";
 import React, { useState, useRef } from "react";
@@ -102,7 +103,7 @@ export default function Contact({
     <DefaultSection
       ref={ref}
       id={`${id}`}
-      className={"!bg-primary"}
+      className={"!bg-transparent"}
     >
       <SectionBody>
         <SectionTitle 

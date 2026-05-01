@@ -6,18 +6,19 @@ import { ptBR } from 'date-fns/locale';
 import Link from 'next/link';
 import { FiCalendar, FiClock, FiArrowRight, FiArrowLeft, FiTag } from 'react-icons/fi';
 import { Metadata } from 'next';
+import { SubpageLayout } from '@/components/ui/SubpageLayout';
 
 export const metadata: Metadata = {
-  title: 'Blog - Alexandre Barros',
+  title: 'Blog',
   description: 'Artigos sobre tecnologia, ciência de dados e desenvolvimento web',
   alternates: {
-    canonical: 'https://alexand7e.dev.br/blog',
+    canonical: 'https://www.alexand7e.dev.br/blog',
   },
   openGraph: {
-    title: 'Blog - Alexandre Barros',
+    title: 'Blog | Alexandre Barros',
     description: 'Artigos sobre tecnologia, ciência de dados e desenvolvimento web',
     type: 'website',
-    url: 'https://alexand7e.dev.br/blog',
+    url: 'https://www.alexand7e.dev.br/blog',
   },
 };
 
@@ -49,10 +50,10 @@ export default async function BlogPage() {
   const rest = posts.slice(1) as BlogPost[];
 
   return (
-    <main className="min-h-screen bg-primary">
+    <SubpageLayout>
       {/* Header */}
       <div className="bg-secondary border-b border-accent/20">
-        <div className="max-w-6xl mx-auto px-6 py-10">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8 py-10">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-accent hover:text-accent/70 transition-colors mb-8 text-sm"
@@ -69,7 +70,7 @@ export default async function BlogPage() {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 py-12">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 py-12">
 
         {/* Empty state */}
         {posts.length === 0 && (
@@ -217,6 +218,6 @@ export default async function BlogPage() {
           </section>
         )}
       </div>
-    </main>
+    </SubpageLayout>
   );
 }

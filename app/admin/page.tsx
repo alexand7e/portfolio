@@ -9,10 +9,13 @@ interface Stats {
   blogPosts: number
   projects: number
   experiences: number
+  tutorials: number
+  subscribers: number
+  talks: number
 }
 
 export default function AdminDashboard() {
-  const [stats, setStats] = useState<Stats>({ blogPosts: 0, projects: 0, experiences: 0 })
+  const [stats, setStats] = useState<Stats>({ blogPosts: 0, projects: 0, experiences: 0, tutorials: 0, subscribers: 0, talks: 0 })
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -49,30 +52,54 @@ export default function AdminDashboard() {
       />
         
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         <StatsCard
-          title="Posts do Blog"
+          title="Posts"
           value={stats.blogPosts}
           icon="📝"
           linkHref="/admin/blog"
-          linkText="Gerenciar posts"
-          linkColor="text-blue-600 hover:text-blue-800"
+          linkText="Ver posts"
+          linkColor="text-blue-400 hover:text-blue-300"
+        />
+        <StatsCard
+          title="Tutoriais"
+          value={stats.tutorials}
+          icon="📚"
+          linkHref="/admin/tutorials"
+          linkText="Ver tutoriais"
+          linkColor="text-cyan-400 hover:text-cyan-300"
+        />
+        <StatsCard
+          title="Inscritos"
+          value={stats.subscribers}
+          icon="✉️"
+          linkHref="/admin/newsletter"
+          linkText="Newsletter"
+          linkColor="text-accent hover:text-accent/80"
+        />
+        <StatsCard
+          title="Talks"
+          value={stats.talks}
+          icon="🎙️"
+          linkHref="/admin/talks"
+          linkText="Ver talks"
+          linkColor="text-yellow-400 hover:text-yellow-300"
         />
         <StatsCard
           title="Projetos"
           value={stats.projects}
           icon="🚀"
           linkHref="/admin/projects"
-          linkText="Gerenciar projetos"
-          linkColor="text-green-600 hover:text-green-800"
+          linkText="Ver projetos"
+          linkColor="text-green-400 hover:text-green-300"
         />
         <StatsCard
           title="Experiências"
           value={stats.experiences}
           icon="💼"
           linkHref="/admin/experiences"
-          linkText="Gerenciar experiências"
-          linkColor="text-purple-600 hover:text-purple-800"
+          linkText="Ver experiências"
+          linkColor="text-purple-400 hover:text-purple-300"
         />
       </div>
 

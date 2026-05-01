@@ -1,0 +1,29 @@
+services:
+  portfolio:
+    image: node:20-alpine
+    container_name: portfolio-local
+    working_dir: /app
+    command: sh -c "apk add --no-cache libc6-compat && npm install && npx prisma generate && npm run dev"
+    restart: unless-stopped
+    ports:
+      - "7000:7000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      NODE_ENV: development
+      NEXT_TELEMETRY_DISABLED: "1"
+      WATCHPACK_POLLING: "true"
+      DATABASE_URL: "postgresql://neondb_owner:npg_8GWsfJ5pjqoF@ep-withered-pond-adx1vxtq-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&pgbouncer=true&connect_timeout=15"
+      NEXTAUTH_SECRET: "4STsBbS9n9KAZVE7fX4EHVCuGaoVry8Y8Nnf5vMQfw97qWSAX4qK3Zi8sR5uRmwF"
+      NEXTAUTH_URL: "http://localhost:7000"
+      NEXT_PUBLIC_EMAILJS_SERVICE_ID: "service_rvbv6bd"
+      NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: "template_kys4fze"
+      NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: "1frXxdEDyvDT4YNOl"
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:7000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s

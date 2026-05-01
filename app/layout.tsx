@@ -7,6 +7,7 @@ import StairTransition from "@/components/animations/EnterAnimation";
 import LanguageProvider from "@/components/providers/LanguageProvider";
 import StructuredData from "@/components/seo/StructuredData";
 import GoogleAnalytics from "@/components/seo/GoogleAnalytics";
+import { NeuralGrid } from "@/components/ui/NeuralGrid";
 
 const jMono = JetBrains_Mono({
     subsets: ["latin"],
@@ -16,49 +17,55 @@ const jMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
     title: {
-        default: "Alexandre Barros - Engenheiro e Cientista de Dados | Portfolio",
+        default: "Alexandre Barros — Dados, IA e Tecnologia | SIA-PI",
         template: "%s | Alexandre Barros",
     },
-    description: "Portfolio profissional de Alexandre Barros dos Santos - Engenheiro e Cientista de Dados especialista em IA, Python, R e transformação digital. Gerente de Programas em IA na Secretaria de Inteligência Artificial do Piauí.",
+    description: "Alexandre Barros dos Santos — Gerente de IA na Secretaria de Inteligência Artificial do Piauí (SIA), formado pela UFPI. Engenheiro e Cientista de Dados especialista em IA, Python e transformação digital no setor público.",
     keywords: [
-        "Alexandre Barros", "Cientista de Dados", "Engenheiro de Dados",
-        "Inteligência Artificial", "Python", "R", "Data Science", "Machine Learning",
-        "Portfolio", "Piauí", "Blog tecnologia", "Artigos sobre dados",
+        "Alexandre Barros", "Alexandre Barros SIA", "Alexandre Barros UFPI",
+        "alexandre barros sia", "gerente de ia sia", "Sia", "SIA Piauí", "SIA-PI",
+        "Secretaria de Inteligência Artificial do Piauí",
+        "Inteligência Artificial setor público", "IA governo Piauí",
+        "Cientista de Dados", "Engenheiro de Dados", "Data Science",
+        "Machine Learning", "Python", "R", "Transformação Digital",
+        "Blog IA", "Tutoriais Data Science", "Newsletter tecnologia",
+        "UFPI", "Universidade Federal do Piauí",
         "Desenvolvimento web", "Next.js", "React", "TypeScript",
-        "Transformação digital", "IA no setor público", "Big Data",
-        "Análise de dados", "Visualização de dados", "Deep Learning",
     ],
     authors: [{ name: "Alexandre Barros dos Santos" }],
     creator: "Alexandre Barros dos Santos",
     publisher: "Alexandre Barros dos Santos",
-    metadataBase: new URL('https://alexand7e.dev.br'),
+    metadataBase: new URL('https://www.alexand7e.dev.br'),
     alternates: {
         canonical: '/',
         languages: {
             'pt-BR': '/',
             'en': '/en',
         },
+        types: {
+            'application/rss+xml': 'https://www.alexand7e.dev.br/feed.xml',
+        },
     },
     openGraph: {
         type: 'website',
         locale: 'pt_BR',
-        url: 'https://alexand7e.dev.br',
-        title: 'Alexandre Barros - Engenheiro e Cientista de Dados',
-        description: 'Portfolio profissional de Alexandre Barros dos Santos - Especialista em IA, Data Science e transformação digital.',
-        siteName: 'Alexandre Barros Portfolio',
+        url: 'https://www.alexand7e.dev.br',
+        title: 'Alexandre Barros — Dados, IA e Tecnologia | SIA-PI',
+        description: 'Alexandre Barros — Gerente de IA na SIA-PI (Piauí), formado pela UFPI. Artigos, tutoriais e projetos sobre IA e dados.',
+        siteName: 'Alexandre Barros',
         images: [
             {
                 url: 'https://github.com/alexand7e.png',
                 width: 400,
                 height: 400,
-                alt: 'Alexandre Barros - Profile Picture',
+                alt: 'Alexandre Barros — SIA-PI',
             },
         ],
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Alexandre Barros - Engenheiro e Cientista de Dados',
-        description: 'Portfolio profissional - Especialista em IA, Data Science e transformação digital.',
+        title: 'Alexandre Barros — Dados, IA e Tecnologia | SIA-PI',
+        description: 'Gerente de IA na SIA-PI, formado pela UFPI. Artigos, tutoriais e projetos sobre IA e dados.',
         images: ['https://github.com/alexand7e.png'],
         creator: '@alexand7e',
     },
@@ -87,12 +94,15 @@ export default function RootLayout({
                 <StructuredData />
             </head>
             <body className={jMono.className}>
-                <StairTransition />
-                <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Carregando...</div>}>
-                    <LanguageProvider>
-                        {children}
-                    </LanguageProvider>
-                </Suspense>
+                <NeuralGrid />
+                <div className="relative" style={{ zIndex: 2 }}>
+                    <StairTransition />
+                    <Suspense fallback={null}>
+                        <LanguageProvider>
+                            {children}
+                        </LanguageProvider>
+                    </Suspense>
+                </div>
             </body>
         </html>
     );

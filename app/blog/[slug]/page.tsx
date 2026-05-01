@@ -7,6 +7,8 @@ import { FiCalendar, FiClock, FiUser, FiArrowLeft, FiEdit } from 'react-icons/fi
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import GiscusComments from '@/components/ui/GiscusComments';
+import { SubpageLayout } from '@/components/ui/SubpageLayout';
 
 interface PostPageProps {
   params: {
@@ -14,7 +16,7 @@ interface PostPageProps {
   };
 }
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 async function getPost(slug: string) {
   const post = await prisma.blog.findFirst({
@@ -35,7 +37,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   if (!post) return { title: 'Post não encontrado' };
 
   const cover = post.coverImage || post.coverUrl || undefined;
-  const baseUrl = 'https://alexand7e.dev.br';
+  const baseUrl = 'https://www.alexand7e.dev.br';
 
   return {
     title: post.title,
@@ -84,18 +86,18 @@ export default async function PostPage({ params }: PostPageProps) {
     author: {
       '@type': 'Person',
       name: 'Alexandre Barros dos Santos',
-      url: 'https://alexand7e.dev.br',
+      url: 'https://www.alexand7e.dev.br',
     },
     publisher: {
       '@type': 'Person',
       name: 'Alexandre Barros dos Santos',
-      url: 'https://alexand7e.dev.br',
+      url: 'https://www.alexand7e.dev.br',
     },
     datePublished: new Date(date).toISOString(),
     dateModified: post.updatedAt.toISOString(),
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://alexand7e.dev.br/blog/${post.slug}`,
+      '@id': `https://www.alexand7e.dev.br/blog/${post.slug}`,
     },
     keywords: post.tags.join(', '),
   };
@@ -106,11 +108,10 @@ export default async function PostPage({ params }: PostPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleStructuredData) }}
       />
-      <main className="min-h-screen bg-primary">
+      <SubpageLayout>
 
-      {/* Top nav */}
-      <div className="bg-secondary/80 backdrop-blur border-b border-accent/20 sticky top-0 z-10">
-        <div className="max-w-4xl mx-auto px-6 py-3">
+      <div className="bg-secondary border-b border-accent/20">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8 py-6">
           <Link
             href="/blog"
             className="inline-flex items-center gap-2 text-accent hover:text-accent/70 transition-colors text-sm"
@@ -135,16 +136,17 @@ export default async function PostPage({ params }: PostPageProps) {
 
       {/* Article header */}
       <div className={`bg-secondary border-b border-accent/20 ${!cover ? 'pt-10' : ''}`}>
-        <div className="max-w-4xl mx-auto px-6 py-10">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8 py-10">
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-5">
             {post.tags.map((tag: string) => (
-              <span
+              <Link
                 key={tag}
-                className="px-3 py-1 bg-accent/15 text-accent text-xs rounded-full font-medium"
+                href={`/tags/${encodeURIComponent(tag)}`}
+                className="px-3 py-1 bg-accent/15 text-accent text-xs rounded-full font-medium hover:bg-accent/25 transition-colors"
               >
                 {tag}
-              </span>
+              </Link>
             ))}
           </div>
 
@@ -183,7 +185,7 @@ export default async function PostPage({ params }: PostPageProps) {
       </div>
 
       {/* Article content */}
-      <div className="max-w-4xl mx-auto px-6 py-12">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 py-12">
         <article
           className="
             prose prose-lg max-w-none
@@ -217,8 +219,13 @@ export default async function PostPage({ params }: PostPageProps) {
             Ver todos os artigos
           </Link>
         </div>
+
+        {/* Comments */}
+        <div className="mt-12">
+          <GiscusComments />
+        </div>
       </div>
-    </main>
+    </SubpageLayout>
     </>
   );
 }

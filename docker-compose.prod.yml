@@ -3,6 +3,11 @@ version: "3.9"
 services:
   # Portfolio - Alexand7e Personal Portfolio
   portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_GA_ID=${NEXT_PUBLIC_GA_ID:-}
     image: ghcr.io/alexand7e/portfolio:latest
     environment:
       # Configurações da aplicação
@@ -28,8 +33,7 @@ services:
       LOG_LEVEL: info
       LOG_FORMAT: json
 
-      # Configurações de SEO e analytics
-      GOOGLE_ANALYTICS_ID: ${GOOGLE_ANALYTICS_ID:-}
+      # Configurações de SEO e analytics (NEXT_PUBLIC_GA_ID é passada no build.args)
       GOOGLE_TAG_MANAGER_ID: ${GOOGLE_TAG_MANAGER_ID:-}
       FACEBOOK_PIXEL_ID: ${FACEBOOK_PIXEL_ID:-}
 
@@ -54,8 +58,8 @@ services:
       NEXTAUTH_URL: "http://localhost:7000"
 
       # Admin Configuration
-      ADMIN_EMAIL: "admin@portfolio.com"
-      ADMIN_PASSWORD: "hF8xNHgV4Y3VhtAbY9JKfjoZxRQCDqSr"
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
 
       # Configurações de timezone
       TZ: America/Sao_Paulo
