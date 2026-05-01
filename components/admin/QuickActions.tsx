@@ -35,28 +35,15 @@ export default function QuickActions() {
         <h3 className="text-lg font-semibold text-tertiary mb-6">
           Ações Rápidas
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <QuickActionButton
-            href="/admin/blog/new"
-            text="Novo Post"
-            variant="primary"
-          />
-          <QuickActionButton
-            href="/admin/projects/new"
-            text="Novo Projeto"
-            variant="primary"
-          />
-          <QuickActionButton
-            href="/admin/experiences/new"
-            text="Nova Experiência"
-            variant="primary"
-          />
-          <QuickActionButton
-            href="/"
-            text="Ver Site"
-            variant="secondary"
-            external
-          />
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <QuickActionButton href="/admin/blog/new" text="Novo Post" variant="primary" />
+          <QuickActionButton href="/admin/tutorials/new" text="Novo Tutorial" variant="primary" />
+          <QuickActionButton href="/admin/talks" text="Nova Talk" variant="primary" />
+          <QuickActionButton href="/admin/newsletter" text="Newsletter" variant="secondary" />
+          <QuickActionButton href="/admin/testimonials" text="Depoimentos" variant="secondary" />
+          <QuickActionButton href="/admin/projects/new" text="Novo Projeto" variant="primary" />
+          <QuickActionButton href="/admin/experiences/new" text="Nova Experiência" variant="primary" />
+          <QuickActionButton href="/" text="Ver Site" variant="secondary" external />
         </div>
       </div>
     </div>

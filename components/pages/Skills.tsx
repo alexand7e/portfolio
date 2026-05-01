@@ -1,3 +1,4 @@
+"use client";
 import SectionBody from "@/components/ui/SectionBody";
 import DefaultSection from "@/components/ui/Section";
 import React from "react";
@@ -53,7 +54,7 @@ export default function Skills({
     <DefaultSection
       ref={ref}
       id={`${id}`}
-      className={"!bg-secondary"}
+      className={""}
     >
       <SectionBody>
         <SectionTitle
