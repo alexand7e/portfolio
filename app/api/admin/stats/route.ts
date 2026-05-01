@@ -11,16 +11,22 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const [blogPosts, projects, experiences] = await Promise.all([
+    const [blogPosts, projects, experiences, tutorials, subscribers, talks] = await Promise.all([
       prisma.blog.count(),
       prisma.project.count(),
-      prisma.experience.count()
+      prisma.experience.count(),
+      prisma.tutorial.count(),
+      prisma.subscriber.count({ where: { status: 'ACTIVE' } }),
+      prisma.talk.count(),
     ])
 
     return NextResponse.json({
       blogPosts,
       projects,
-      experiences
+      experiences,
+      tutorials,
+      subscribers,
+      talks,
     })
   } catch (error) {
     console.error('Error fetching stats:', error)

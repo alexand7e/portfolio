@@ -6,6 +6,8 @@
 .pnp.js
 .yarn/install-state.gz
 
+.qwen/*
+
 # testing
 /coverage
 
@@ -19,6 +21,8 @@
 # misc
 .DS_Store
 *.pem
+
+seo-report
 
 # debug
 npm-debug.log*
@@ -73,3 +77,7 @@ backup-*/
 
 /.github/workflows/
 /lib/generated/prisma
+
+.claude
+.qwen/settings.json.orig
+docker.env
