@@ -45,14 +45,17 @@ html {
   
   .prose h1 {
     @apply text-3xl md:text-4xl mb-6;
+    scroll-margin-top: 5rem;
   }
   
   .prose h2 {
     @apply text-2xl md:text-3xl mb-4 mt-8;
+    scroll-margin-top: 5rem;
   }
-  
+
   .prose h3 {
     @apply text-xl md:text-2xl mb-3 mt-6;
+    scroll-margin-top: 5rem;
   }
   
   .prose p {
