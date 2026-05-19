@@ -9,6 +9,8 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import GiscusComments from '@/components/ui/GiscusComments';
 import { SubpageLayout } from '@/components/ui/SubpageLayout';
+import { TableOfContents } from '@/components/ui/TableOfContents';
+import { extractHeadings } from '@/lib/extractHeadings';
 
 interface PostPageProps {
   params: {
@@ -25,7 +27,8 @@ async function getPost(slug: string) {
   if (!post) return null;
 
   const processed = await remark().use(remarkHtml).process(post.content);
-  return { ...post, contentHtml: processed.toString() };
+  const { html: contentHtml, headings } = extractHeadings(processed.toString());
+  return { ...post, contentHtml, headings };
 }
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
@@ -76,6 +79,7 @@ export default async function PostPage({ params }: PostPageProps) {
   const readTimeLabel = post.readTime ? `${post.readTime} min de leitura` : 'Leitura rápida';
   const showUpdated = post.updatedAt && post.updatedAt > date;
   const cover = post.coverImage || post.coverUrl || null;
+  const { contentHtml, headings } = post;
 
   const articleStructuredData = {
     '@context': 'https://schema.org',
@@ -184,45 +188,57 @@ export default async function PostPage({ params }: PostPageProps) {
         </div>
       </div>
 
-      {/* Article content */}
+      {/* Article content + TOC */}
       <div className="max-w-5xl mx-auto px-6 lg:px-8 py-12">
-        <article
-          className="
-            prose prose-lg max-w-none
-            prose-headings:text-tertiary prose-headings:font-bold
-            prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl
-            prose-p:text-tertiary/80 prose-p:leading-relaxed
-            prose-a:text-accent prose-a:no-underline hover:prose-a:underline
-            prose-strong:text-tertiary
-            prose-code:text-accent prose-code:bg-accent/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
-            prose-pre:bg-secondary prose-pre:border prose-pre:border-accent/20 prose-pre:rounded-xl
-            prose-blockquote:border-l-accent prose-blockquote:text-tertiary/60 prose-blockquote:bg-secondary/50 prose-blockquote:rounded-r-lg prose-blockquote:py-1
-            prose-img:rounded-xl prose-img:border prose-img:border-accent/20
-            prose-ul:text-tertiary/80 prose-ol:text-tertiary/80
-            prose-li:text-tertiary/80
-            prose-hr:border-accent/20
-          "
-          dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-        />
+        <div className="xl:flex xl:gap-14 xl:items-start">
 
-        {/* Footer */}
-        <div className="mt-16 pt-8 border-t border-accent/20 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div>
-            <p className="text-sm text-tertiary/40">Escrito por</p>
-            <p className="font-semibold text-tertiary">Alexandre Barros</p>
+          {/* Main article */}
+          <div className="min-w-0 flex-1">
+            <article
+              className="
+                prose prose-lg max-w-none
+                prose-headings:text-tertiary prose-headings:font-bold
+                prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl
+                prose-p:text-tertiary/80 prose-p:leading-relaxed
+                prose-a:text-accent prose-a:no-underline hover:prose-a:underline
+                prose-strong:text-tertiary
+                prose-code:text-accent prose-code:bg-accent/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
+                prose-pre:bg-secondary prose-pre:border prose-pre:border-accent/20 prose-pre:rounded-xl
+                prose-blockquote:border-l-accent prose-blockquote:text-tertiary/60 prose-blockquote:bg-secondary/50 prose-blockquote:rounded-r-lg prose-blockquote:py-1
+                prose-img:rounded-xl prose-img:border prose-img:border-accent/20
+                prose-ul:text-tertiary/80 prose-ol:text-tertiary/80
+                prose-li:text-tertiary/80
+                prose-hr:border-accent/20
+              "
+              dangerouslySetInnerHTML={{ __html: contentHtml }}
+            />
+
+            {/* Footer */}
+            <div className="mt-16 pt-8 border-t border-accent/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div>
+                <p className="text-sm text-tertiary/40">Escrito por</p>
+                <p className="font-semibold text-tertiary">Alexandre Barros</p>
+              </div>
+              <Link
+                href="/blog"
+                className="inline-flex items-center gap-2 px-5 py-2.5 border border-accent/30 rounded-lg text-accent text-sm font-medium hover:border-accent hover:bg-accent/5 transition-all"
+              >
+                <FiArrowLeft size={14} />
+                Ver todos os artigos
+              </Link>
+            </div>
+
+            {/* Comments */}
+            <div className="mt-12">
+              <GiscusComments />
+            </div>
           </div>
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 px-5 py-2.5 border border-accent/30 rounded-lg text-accent text-sm font-medium hover:border-accent hover:bg-accent/5 transition-all"
-          >
-            <FiArrowLeft size={14} />
-            Ver todos os artigos
-          </Link>
-        </div>
 
-        {/* Comments */}
-        <div className="mt-12">
-          <GiscusComments />
+          {/* TOC sidebar — desktop only */}
+          <aside className="hidden xl:block w-64 shrink-0">
+            <TableOfContents headings={headings} />
+          </aside>
+
         </div>
       </div>
     </SubpageLayout>

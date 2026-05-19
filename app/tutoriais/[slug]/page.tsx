@@ -8,6 +8,8 @@ import { Metadata } from 'next'
 import GiscusComments from '@/components/ui/GiscusComments'
 import SeriesNav from '@/components/ui/SeriesNav'
 import { SubpageLayout } from '@/components/ui/SubpageLayout'
+import { TableOfContents } from '@/components/ui/TableOfContents'
+import { extractHeadings } from '@/lib/extractHeadings'
 
 interface Props {
   params: { slug: string }
@@ -44,7 +46,8 @@ async function getTutorial(slug: string) {
   })
   if (!tutorial) return null
   const processed = await remark().use(remarkHtml).process(tutorial.content)
-  return { ...tutorial, contentHtml: processed.toString() }
+  const { html: contentHtml, headings } = extractHeadings(processed.toString())
+  return { ...tutorial, contentHtml, headings }
 }
 
 export async function generateStaticParams() {
@@ -198,55 +201,67 @@ export default async function TutorialPage({ params }: Props) {
           </div>
         )}
 
-        {/* Content */}
+        {/* Content + TOC */}
         <div className="max-w-5xl mx-auto px-6 lg:px-8 py-12">
-          <article
-            className="
-              prose prose-lg max-w-none
-              prose-headings:text-tertiary prose-headings:font-bold
-              prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl
-              prose-p:text-tertiary/80 prose-p:leading-relaxed
-              prose-a:text-accent prose-a:no-underline hover:prose-a:underline
-              prose-strong:text-tertiary
-              prose-code:text-accent prose-code:bg-accent/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
-              prose-pre:bg-secondary prose-pre:border prose-pre:border-accent/20 prose-pre:rounded-xl
-              prose-blockquote:border-l-accent prose-blockquote:text-tertiary/60
-              prose-img:rounded-xl prose-img:border prose-img:border-accent/20
-              prose-ul:text-tertiary/80 prose-ol:text-tertiary/80 prose-li:text-tertiary/80
-              prose-hr:border-accent/20
-            "
-            dangerouslySetInnerHTML={{ __html: tutorial.contentHtml }}
-          />
+          <div className="xl:flex xl:gap-14 xl:items-start">
 
-          {/* Series nav (bottom) */}
-          {tutorial.series && (
-            <div className="mt-12">
-              <SeriesNav
-                series={tutorial.series}
-                currentSlug={tutorial.slug}
-                type="tutorial"
-                showPrevNext
+            {/* Main content */}
+            <div className="min-w-0 flex-1">
+              <article
+                className="
+                  prose prose-lg max-w-none
+                  prose-headings:text-tertiary prose-headings:font-bold
+                  prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl
+                  prose-p:text-tertiary/80 prose-p:leading-relaxed
+                  prose-a:text-accent prose-a:no-underline hover:prose-a:underline
+                  prose-strong:text-tertiary
+                  prose-code:text-accent prose-code:bg-accent/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
+                  prose-pre:bg-secondary prose-pre:border prose-pre:border-accent/20 prose-pre:rounded-xl
+                  prose-blockquote:border-l-accent prose-blockquote:text-tertiary/60
+                  prose-img:rounded-xl prose-img:border prose-img:border-accent/20
+                  prose-ul:text-tertiary/80 prose-ol:text-tertiary/80 prose-li:text-tertiary/80
+                  prose-hr:border-accent/20
+                "
+                dangerouslySetInnerHTML={{ __html: tutorial.contentHtml }}
               />
-            </div>
-          )}
 
-          <div className="mt-16 pt-8 border-t border-accent/20 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>
-              <p className="text-sm text-tertiary/40">Escrito por</p>
-              <p className="font-semibold text-tertiary">Alexandre Barros</p>
-            </div>
-            <Link
-              href="/tutoriais"
-              className="inline-flex items-center gap-2 px-5 py-2.5 border border-accent/30 rounded-lg text-accent text-sm font-medium hover:border-accent hover:bg-accent/5 transition-all"
-            >
-              <FiArrowLeft size={14} />
-              Ver todos os tutoriais
-            </Link>
-          </div>
+              {/* Series nav (bottom) */}
+              {tutorial.series && (
+                <div className="mt-12">
+                  <SeriesNav
+                    series={tutorial.series}
+                    currentSlug={tutorial.slug}
+                    type="tutorial"
+                    showPrevNext
+                  />
+                </div>
+              )}
 
-          {/* Comments */}
-          <div className="mt-12">
-            <GiscusComments />
+              <div className="mt-16 pt-8 border-t border-accent/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                  <p className="text-sm text-tertiary/40">Escrito por</p>
+                  <p className="font-semibold text-tertiary">Alexandre Barros</p>
+                </div>
+                <Link
+                  href="/tutoriais"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 border border-accent/30 rounded-lg text-accent text-sm font-medium hover:border-accent hover:bg-accent/5 transition-all"
+                >
+                  <FiArrowLeft size={14} />
+                  Ver todos os tutoriais
+                </Link>
+              </div>
+
+              {/* Comments */}
+              <div className="mt-12">
+                <GiscusComments />
+              </div>
+            </div>
+
+            {/* TOC sidebar — desktop only */}
+            <aside className="hidden xl:block w-64 shrink-0">
+              <TableOfContents headings={tutorial.headings} />
+            </aside>
+
           </div>
         </div>
       </SubpageLayout>
