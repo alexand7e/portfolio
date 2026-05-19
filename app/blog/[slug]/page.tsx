@@ -193,7 +193,7 @@ export default async function PostPage({ params }: PostPageProps) {
         <div className="xl:flex xl:gap-14 xl:items-start">
 
           {/* Main article */}
-          <div className="min-w-0 flex-1">
+          <div className="min-w-0 max-w-3xl">
             <article
               className="
                 prose prose-lg max-w-none

@@ -81,3 +81,7 @@ backup-*/
 .claude
 .qwen/settings.json.orig
 docker.env
+AI_RULES.md
+.gitignore
+README-PROFILE.MD
+.gitignore
