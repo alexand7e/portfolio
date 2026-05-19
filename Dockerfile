@@ -10,7 +10,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Instalar dependências (sharp já incluso no package.json)
-RUN npm ci
+RUN npm ci --legacy-peer-deps
 
 # Copiar código fonte
 COPY . .
