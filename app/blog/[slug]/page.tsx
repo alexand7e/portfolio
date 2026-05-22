@@ -188,12 +188,9 @@ export default async function PostPage({ params }: PostPageProps) {
         </div>
       </div>
 
-      {/* Article content + TOC */}
-      <div className="max-w-5xl mx-auto px-6 lg:px-8 py-12">
-        <div className="xl:flex xl:gap-14 xl:items-start">
-
-          {/* Main article */}
-          <div className="min-w-0 max-w-3xl">
+      {/* Article content */}
+      <div className="relative max-w-5xl mx-auto px-6 lg:px-8 py-12">
+        <div className="max-w-3xl">
             <article
               className="
                 prose prose-lg max-w-none
@@ -232,14 +229,11 @@ export default async function PostPage({ params }: PostPageProps) {
             <div className="mt-12">
               <GiscusComments />
             </div>
-          </div>
-
-          {/* TOC sidebar — desktop only */}
-          <aside className="hidden xl:block w-64 shrink-0">
-            <TableOfContents headings={headings} />
-          </aside>
 
         </div>
+
+        {/* TOC — absolute+sticky in right gutter, zero layout impact */}
+        <TableOfContents headings={headings} />
       </div>
     </SubpageLayout>
     </>
