@@ -45,17 +45,17 @@ services:
       CONTACT_EMAIL: ${CONTACT_EMAIL:-alexand7e@gmail.com}
       SUPPORT_EMAIL: ${SUPPORT_EMAIL:-alexand7e@gmail.com}
 
-      # EmailJS Configuration
-      NEXT_PUBLIC_EMAILJS_SERVICE_ID: "service_rvbv6bd"
-      NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: "template_kys4fze"
-      NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: "1frXxdEDyvDT4YNOl"
+# EmailJS Configuration (public, client-side)
+      NEXT_PUBLIC_EMAILJS_SERVICE_ID: ${NEXT_PUBLIC_EMAILJS_SERVICE_ID:-}
+      NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: ${NEXT_PUBLIC_EMAILJS_TEMPLATE_ID:-}
+      NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: ${NEXT_PUBLIC_EMAILJS_PUBLIC_KEY:-}
 
-      # Database Configuration
-      DATABASE_URL: "postgresql://neondb_owner:***REMOVED-NEON-PW***@ep-withered-pond-adx1vxtq-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&pgbouncer=true&connect_timeout=15"
+      # Database Configuration (inject via environment / swarm secret)
+      DATABASE_URL: ${DATABASE_URL}
 
-      # NextAuth Configuration  
-      NEXTAUTH_SECRET: "***REMOVED-NEXTAUTH-SECRET***"
-      NEXTAUTH_URL: "http://localhost:7000"
+      # NextAuth Configuration
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-https://www.alexand7e.dev.br}
 
       # Admin Configuration
       ADMIN_EMAIL: ${ADMIN_EMAIL}
