@@ -70,7 +70,7 @@ async function ensureUniqueSlug(base, existing) {
 async function main() {
   await loadEnv();
   prisma = new PrismaClient();
-  const jsonPath = path.resolve(__dirname, '..', 'projects.json');
+  const jsonPath = path.resolve(__dirname, 'projects.json');
   const raw = await readFile(jsonPath, 'utf-8');
   const data = JSON.parse(raw);
 
