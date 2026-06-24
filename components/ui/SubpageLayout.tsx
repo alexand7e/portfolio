@@ -54,7 +54,7 @@ function SideNav() {
 
 export function SubpageLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen bg-primary">
+    <div className="min-h-screen bg-primary overflow-x-clip">
       {/* Mobile: top bar compacto */}
       <header className="lg:hidden sticky top-0 z-20 flex items-center justify-between px-5 py-3 bg-primary/95 backdrop-blur-sm border-b border-accent/10">
         <Link href="/" className="text-accent font-bold text-sm tracking-widest">

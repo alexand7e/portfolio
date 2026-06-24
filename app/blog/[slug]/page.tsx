@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import { remark } from 'remark';
 import remarkHtml from 'remark-html';
+import remarkGfm from 'remark-gfm';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { FiCalendar, FiClock, FiUser, FiArrowLeft, FiEdit } from 'react-icons/fi';
@@ -26,7 +27,7 @@ async function getPost(slug: string) {
   });
   if (!post) return null;
 
-  const processed = await remark().use(remarkHtml).process(post.content);
+  const processed = await remark().use(remarkGfm).use(remarkHtml).process(post.content);
   const { html: contentHtml, headings } = extractHeadings(processed.toString());
   return { ...post, contentHtml, headings };
 }
@@ -190,7 +191,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
       {/* Article content */}
       <div className="relative max-w-5xl mx-auto px-6 lg:px-8 py-12">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl 2xl:max-w-4xl">
             <article
               className="
                 prose prose-lg max-w-none
@@ -206,6 +207,11 @@ export default async function PostPage({ params }: PostPageProps) {
                 prose-ul:text-tertiary/80 prose-ol:text-tertiary/80
                 prose-li:text-tertiary/80
                 prose-hr:border-accent/20
+                prose-table:w-full prose-table:border-collapse prose-table:overflow-hidden
+                prose-thead:border-b prose-thead:border-accent/20
+                prose-th:py-2.5 prose-th:px-4 prose-th:text-left prose-th:font-semibold prose-th:text-sm prose-th:text-tertiary prose-th:bg-secondary/50
+                prose-td:py-2 prose-td:px-4 prose-td:text-tertiary/80 prose-td:border-b prose-td:border-accent/10
+                prose-tr:border-b prose-tr:border-accent/10
               "
               dangerouslySetInnerHTML={{ __html: contentHtml }}
             />
