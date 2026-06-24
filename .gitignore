@@ -6,8 +6,6 @@
 .pnp.js
 .yarn/install-state.gz
 
-.qwen/*
-
 # testing
 /coverage
 
@@ -79,5 +77,4 @@ backup-*/
 /lib/generated/prisma
 
 .claude
-.qwen/settings.json.orig
 docker.env
