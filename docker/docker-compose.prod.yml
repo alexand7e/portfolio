@@ -4,7 +4,7 @@ services:
   # Portfolio - Alexand7e Personal Portfolio
   portfolio:
     build:
-      context: .
+      context: ..
       dockerfile: Dockerfile
       args:
         - NEXT_PUBLIC_GA_ID=${NEXT_PUBLIC_GA_ID:-}

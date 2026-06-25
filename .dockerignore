@@ -36,7 +36,7 @@ yarn-error.log*
 
 # Docker
 Dockerfile
-docker-compose.yml
+docker/
 .dockerignore
 
 # Documentation
