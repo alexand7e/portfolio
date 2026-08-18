@@ -5,12 +5,13 @@ import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 
 interface Props {
-  params: { tag: string }
+  params: Promise<{ tag: string }>
 }
 
 export const dynamic = 'force-dynamic'
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
   const tag = decodeURIComponent(params.tag)
   return {
     title: `#${tag}`,
@@ -19,7 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function TagPage({ params }: Props) {
+export default async function TagPage(props: Props) {
+  const params = await props.params;
   const tag = decodeURIComponent(params.tag)
 
   const [posts, tutorials] = await Promise.all([

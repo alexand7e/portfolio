@@ -5,10 +5,8 @@ import { prisma } from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
 
 // GET - Get single blog post
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   try {
     const session = await getServerSession(authOptions)
     
@@ -40,10 +38,8 @@ export async function GET(
 }
 
 // PATCH - Update blog post
-export async function PATCH(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function PATCH(request: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   try {
     const session = await getServerSession(authOptions)
     
@@ -144,10 +140,8 @@ export async function PATCH(
 }
 
 // DELETE - Delete blog post
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE(request: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   try {
     const session = await getServerSession(authOptions)
     

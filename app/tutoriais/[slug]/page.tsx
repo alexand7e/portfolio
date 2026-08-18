@@ -12,7 +12,7 @@ import { TableOfContents } from '@/components/ui/TableOfContents'
 import { extractHeadings } from '@/lib/extractHeadings'
 
 interface Props {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export const revalidate = 3600
@@ -62,7 +62,8 @@ export async function generateStaticParams() {
   }
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
   const tutorial = await prisma.tutorial.findUnique({
     where: { slug: params.slug },
     select: { title: true, description: true, tags: true, coverImage: true, coverUrl: true, publishedAt: true, updatedAt: true },
@@ -99,7 +100,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function TutorialPage({ params }: Props) {
+export default async function TutorialPage(props: Props) {
+  const params = await props.params;
   const tutorial = await getTutorial(params.slug)
   if (!tutorial) notFound()
 
