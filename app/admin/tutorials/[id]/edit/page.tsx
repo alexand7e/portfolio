@@ -1,16 +1,17 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation'
 import AdminPageHeader from '@/components/admin/AdminPageHeader'
 import { FiArrowLeft, FiSave, FiX } from 'react-icons/fi'
 import Link from 'next/link'
 
 interface Props {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
-export default function EditTutorialPage({ params }: Props) {
+export default function EditTutorialPage(props: Props) {
+  const params = use(props.params);
   const router = useRouter()
   const [saving, setSaving] = useState(false)
   const [loading, setLoading] = useState(true)

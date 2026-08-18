@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
@@ -18,18 +18,19 @@ interface ExperienceFormData {
 }
 
 interface ExperienceEditPageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
-export default function ExperienceEditPage({ params }: ExperienceEditPageProps) {
+export default function ExperienceEditPage(props: ExperienceEditPageProps) {
+  const params = use(props.params);
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [initialLoading, setInitialLoading] = useState(true)
   const [error, setError] = useState('')
   const [techInput, setTechInput] = useState('')
-  
+
   const [formData, setFormData] = useState<ExperienceFormData>({
     company: '',
     companyEn: '',

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import ImageUpload from '@/components/admin/ImageUpload'
@@ -20,18 +20,19 @@ interface ProjectFormData {
 }
 
 interface ProjectEditPageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
-export default function ProjectEditPage({ params }: ProjectEditPageProps) {
+export default function ProjectEditPage(props: ProjectEditPageProps) {
+  const params = use(props.params);
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [initialLoading, setInitialLoading] = useState(true)
   const [error, setError] = useState('')
   const [techInput, setTechInput] = useState('')
-  
+
   const [formData, setFormData] = useState<ProjectFormData>({
     slug: '',
     title: '',
@@ -94,7 +95,7 @@ export default function ProjectEditPage({ params }: ProjectEditPageProps) {
       .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
       .replace(/\s+/g, '-') // Replace spaces with hyphens
       .replace(/-+/g, '-') // Replace multiple hyphens with single
-      .trim()
+      .trim();
   }
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

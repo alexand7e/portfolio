@@ -13,9 +13,9 @@ import { TableOfContents } from '@/components/ui/TableOfContents';
 import { extractHeadings } from '@/lib/extractHeadings';
 
 interface PostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export const revalidate = 3600;
@@ -31,7 +31,8 @@ async function getPost(slug: string) {
   return { ...post, contentHtml, headings };
 }
 
-export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
+export async function generateMetadata(props: PostPageProps): Promise<Metadata> {
+  const params = await props.params;
   const post = await prisma.blog.findUnique({
     where: { slug: params.slug },
     select: { title: true, description: true, tags: true, publishedAt: true, updatedAt: true, coverImage: true, coverUrl: true },
@@ -70,7 +71,8 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   };
 }
 
-export default async function PostPage({ params }: PostPageProps) {
+export default async function PostPage(props: PostPageProps) {
+  const params = await props.params;
   const post = await getPost(params.slug);
 
   if (!post) notFound();
