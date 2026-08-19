@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "import:projects": "node scripts/import-projects-from-json.mjs",
     "create-admin": "npx tsx scripts/create-admin.ts",
+    "seed:talks": "npx tsx scripts/seed-talks.ts",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"

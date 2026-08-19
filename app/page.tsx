@@ -7,6 +7,7 @@ import Contact from "@/components/pages/Contact";
 import Testimonials from "@/components/pages/Testimonials";
 import Articles from "@/components/pages/Articles";
 import Services from "@/components/pages/Services";
+import Trilha from "@/components/pages/Trilha";
 import { Header } from "@/components/ui/Header";
 import Divider from "@/components/ui/Divider";
 import PageGridFrame from "@/components/ui/PageGridFrame";
@@ -20,6 +21,8 @@ function Home () {
             <div style={{ position: 'relative', zIndex: 10 }}>
                 <Suspense fallback={null}><Header/></Suspense>
                 <Suspense fallback={null}><HomePage id={"home"}/></Suspense>
+                <Divider />
+                <Suspense fallback={null}><Trilha id={"trilha"}/></Suspense>
                 <Divider />
                 <Suspense fallback={null}><Services /></Suspense>
                 <Divider />
