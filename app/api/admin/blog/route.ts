@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
+import { notifyIndexNow } from '@/lib/indexnow'
 
 // GET - List all blog posts
 export async function GET() {
@@ -88,6 +89,10 @@ export async function POST(request: NextRequest) {
     revalidatePath('/')
     if (post.slug) {
       revalidatePath(`/blog/${post.slug}`)
+    }
+
+    if (post.published) {
+      notifyIndexNow(['/blog', `/blog/${post.slug}`])
     }
 
     return NextResponse.json(post, { status: 201 })

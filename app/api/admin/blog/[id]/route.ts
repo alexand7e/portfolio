@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
+import { notifyIndexNow } from '@/lib/indexnow'
 
 // GET - Get single blog post
 export async function GET(request: NextRequest, props: { params: Promise<{ id: string }> }) {
@@ -127,6 +128,10 @@ export async function PATCH(request: NextRequest, props: { params: Promise<{ id:
     revalidatePath('/')
     if (post.slug) {
       revalidatePath(`/blog/${post.slug}`)
+    }
+
+    if (post.published) {
+      notifyIndexNow(['/blog', `/blog/${post.slug}`])
     }
 
     return NextResponse.json(post)

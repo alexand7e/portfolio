@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { sendNewsletterForTutorial } from '@/lib/newsletter'
+import { notifyIndexNow } from '@/lib/indexnow'
 
 export async function GET() {
   const session = await getServerSession(authOptions)
@@ -47,6 +48,7 @@ export async function POST(req: NextRequest) {
     sendNewsletterForTutorial(tutorial).catch((err) =>
       console.error('Newsletter dispatch error:', err)
     )
+    notifyIndexNow(['/tutoriais', `/tutoriais/${tutorial.slug}`])
   }
 
   return NextResponse.json(tutorial, { status: 201 })
