@@ -3,11 +3,11 @@ import { JetBrains_Mono } from "next/font/google";
 import React, { Suspense } from "react";
 import "./globals.css";
 
-import StairTransition from "@/components/animations/EnterAnimation";
 import LanguageProvider from "@/components/providers/LanguageProvider";
+import ThemeProvider from "@/components/providers/ThemeProvider";
 import StructuredData from "@/components/seo/StructuredData";
 import GoogleAnalytics from "@/components/seo/GoogleAnalytics";
-import { NeuralGrid } from "@/components/ui/NeuralGrid";
+import { getBaseUrl } from "@/lib/seo";
 
 const jMono = JetBrains_Mono({
     subsets: ["latin"],
@@ -35,15 +35,14 @@ export const metadata: Metadata = {
     authors: [{ name: "Alexandre Barros dos Santos" }],
     creator: "Alexandre Barros dos Santos",
     publisher: "Alexandre Barros dos Santos",
-    metadataBase: new URL('https://www.alexand7e.dev.br'),
+    metadataBase: new URL(getBaseUrl()),
+    verification: process.env.GOOGLE_SITE_VERIFICATION
+        ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+        : undefined,
     alternates: {
         canonical: '/',
-        languages: {
-            'pt-BR': '/',
-            'en': '/en',
-        },
         types: {
-            'application/rss+xml': 'https://www.alexand7e.dev.br/feed.xml',
+            'application/rss+xml': `${getBaseUrl()}/feed.xml`,
         },
     },
     openGraph: {
@@ -90,17 +89,22 @@ export default function RootLayout({
     return (
         <html lang="pt-BR">
             <head>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: "try{if(localStorage.getItem('theme')==='light'){document.documentElement.classList.add('light')}}catch(e){}",
+                    }}
+                />
                 <GoogleAnalytics />
                 <StructuredData />
             </head>
             <body className={jMono.className}>
-                <NeuralGrid />
                 <div className="relative" style={{ zIndex: 2 }}>
-                    <StairTransition />
                     <Suspense fallback={null}>
-                        <LanguageProvider>
-                            {children}
-                        </LanguageProvider>
+                        <ThemeProvider>
+                            <LanguageProvider>
+                                {children}
+                            </LanguageProvider>
+                        </ThemeProvider>
                     </Suspense>
                 </div>
             </body>
