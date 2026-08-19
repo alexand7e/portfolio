@@ -26,20 +26,19 @@ export interface Translations {
     showMore: string;
     showLess: string;
   };
+  services: {
+    title: string;
+    subtitle: string;
+  };
+  blog: {
+    title: string;
+    subtitle: string;
+  };
   contact: {
     title: string;
     subtitle: string;
     getInTouch: string;
     description: string;
-    form: {
-      name: string;
-      email: string;
-      message: string;
-      send: string;
-      sending: string;
-    };
-    success: string;
-    error: string;
   };
 }
 
@@ -70,20 +69,19 @@ export const translations: Record<Language, Translations> = {
       showMore: "Ver Mais",
       showLess: "Ver Menos"
     },
+    services: {
+      title: "O que faço",
+      subtitle: "Atuação em dados, IA e desenvolvimento no setor público e privado"
+    },
+    blog: {
+      title: "Artigos recentes",
+      subtitle: "Últimas publicações sobre IA, dados e tecnologia"
+    },
     contact: {
       title: "Contact",
       subtitle: "Tem um projeto em mente ou quer conversar? Entre em contato!",
       getInTouch: "Entre em contato",
-      description: "Atualmente atuo como Manager na SIA-PI (Secretaria de Inteligência Artificial) e Co-Founder & CTO na Teaser. Estou aberto a colaborações em projetos de data science, IA e transformação digital. Seja para uma pergunta ou discussão de parcerias, ficarei feliz em conectar!",
-      form: {
-        name: "Nome",
-        email: "Email",
-        message: "Mensagem",
-        send: "Enviar Mensagem",
-        sending: "Enviando..."
-      },
-      success: "Mensagem enviada com sucesso! Entrarei em contato em breve.",
-      error: "Algo deu errado. Tente novamente."
+      description: "Atualmente atuo como Manager na SIA-PI (Secretaria de Inteligência Artificial) e Co-Founder & CTO na Teaser. Estou aberto a colaborações em projetos de data science, IA e transformação digital. Seja para uma pergunta ou discussão de parcerias, ficarei feliz em conectar!"
     }
   },
   en: {
@@ -112,20 +110,19 @@ export const translations: Record<Language, Translations> = {
       showMore: "Show More",
       showLess: "Show Less"
     },
+    services: {
+      title: "What I do",
+      subtitle: "Working with data, AI and development across public and private sectors"
+    },
+    blog: {
+      title: "Latest articles",
+      subtitle: "Recent posts on AI, data and technology"
+    },
     contact: {
       title: "Contact",
       subtitle: "Have a project in mind or want to chat? Get in touch!",
       getInTouch: "Get in touch",
-      description: "I currently work as Manager at SIA-PI (Artificial Intelligence Secretariat) and Co-Founder & CTO at Teaser. I'm open to collaborations in data science, AI and digital transformation projects. Whether for a question or partnership discussion, I'll be happy to connect!",
-      form: {
-        name: "Name",
-        email: "Email",
-        message: "Message",
-        send: "Send Message",
-        sending: "Sending..."
-      },
-      success: "Message sent successfully! I'll get back to you soon.",
-      error: "Something went wrong. Please try again."
+      description: "I currently work as Manager at SIA-PI (Artificial Intelligence Secretariat) and Co-Founder & CTO at Teaser. I'm open to collaborations in data science, AI and digital transformation projects. Whether for a question or partnership discussion, I'll be happy to connect!"
     }
   }
 };

@@ -64,6 +64,7 @@ export default function SearchModal() {
 
   useEffect(() => {
     if (open) setTimeout(() => inputRef.current?.focus(), 50)
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     else { setQuery(''); setResults([]) }
   }, [open])
 
@@ -71,7 +72,7 @@ export default function SearchModal() {
     return (
       <button
         onClick={() => setOpen(true)}
-        className="flex items-center gap-2 px-3 py-1.5 bg-secondary/80 border border-accent/20 rounded-lg text-tertiary/50 text-sm hover:border-accent/50 hover:text-tertiary/80 transition-all"
+        className="flex items-center gap-2 px-2.5 md:px-3 py-1.5 bg-secondary/80 border border-accent/20 rounded-lg text-tertiary/50 text-sm hover:border-accent/50 hover:text-tertiary/80 transition-all"
         title="Buscar (Ctrl+K)"
       >
         <FiSearch size={14} />

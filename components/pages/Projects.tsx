@@ -1,11 +1,11 @@
 "use client";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import SiaContainer from "@/components/ui/SiaContainer";
+import ColumnGrid from "@/components/ui/ColumnGrid";
+import Reveal from "@/components/animations/Reveal";
 import { useLanguage } from "@/lib/useLanguage";
-import DefaultSection from "@/components/ui/Section";
-import SectionTitle from "@/components/ui/SectionTitle";
-import SectionBody from "@/components/ui/SectionBody";
-import ProjectCard from "@/components/ui/ProjectCard";
-import Button from "@/components/ui/Button";
-import { useState, useEffect } from "react";
+import { FiFolder, FiGithub, FiArrowRight } from "react-icons/fi";
 
 interface Project {
   id: string;
@@ -16,53 +16,24 @@ interface Project {
   technologies: string[];
   githubUrl?: string;
   liveUrl?: string;
-  imageUrl?: string;
   featured: boolean;
-  order: number;
-  createdAt: Date;
-  updatedAt: Date;
 }
-
-interface ProjectCardData {
-  title: string;
-  description: string;
-  technologies: string[];
-  githubUrl?: string;
-  liveUrl?: string;
-  imageUrl?: string;
-}
-
-
 
 export default function Projects({
-  className = "",
+  id
 }: {
-  className?: string;
-  id?: string;
+  id?: string
 }) {
   const { language, t } = useLanguage();
-  const [projects, setProjects] = useState<ProjectCardData[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
-  const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const response = await fetch('/api/projects');
         if (response.ok) {
-          const data: Project[] = await response.json();
-          
-          // Transform database data to component format
-          const transformedProjects: ProjectCardData[] = data.map((project) => ({
-            title: language === 'en' && project.titleEn ? project.titleEn : project.title,
-            description: language === 'en' && project.descriptionEn ? project.descriptionEn : project.description,
-            technologies: project.technologies,
-            githubUrl: project.githubUrl,
-            liveUrl: project.liveUrl,
-            imageUrl: project.imageUrl
-          }));
-          
-          setProjects(transformedProjects);
+          setProjects(await response.json());
         }
       } catch (error) {
         console.error('Error fetching projects:', error);
@@ -72,73 +43,84 @@ export default function Projects({
     };
 
     fetchProjects();
-  }, [language]);
+  }, []);
 
-  const displayedProjects = showAll ? projects : projects.slice(0, 6);
-
-  if (loading) {
-    return (
-      <DefaultSection id="projects" className={className}>
-        <SectionTitle
-          title={t("projects.title")}
-          subtitle={t("projects.subtitle")}
-        />
-        <SectionBody>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(6)].map((_, index) => (
-              <div key={index} className="animate-pulse">
-                <div className="h-48 bg-secondary rounded-lg mb-4"></div>
-                <div className="h-4 bg-secondary rounded mb-2"></div>
-                <div className="h-3 bg-secondary rounded mb-2"></div>
-                <div className="h-3 bg-secondary rounded w-3/4"></div>
-              </div>
-            ))}
-          </div>
-        </SectionBody>
-      </DefaultSection>
-    );
-  }
+  const featured = projects.filter((p) => p.featured);
+  const displayed = (featured.length ? featured : projects).slice(0, 4);
 
   return (
-    <DefaultSection id="projects" className={className}>
-      <SectionTitle
-        title={t("projects.title")}
-        subtitle={t("projects.subtitle")}
-      />
-      <SectionBody>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayedProjects.map((project, index) => (
-            <ProjectCard
-              key={index}
-              title={project.title}
-              description={project.description}
-              technologies={project.technologies}
-              githubUrl={project.githubUrl}
-              liveUrl={project.liveUrl}
-              imageUrl={project.imageUrl}
-            />
-          ))}
-        </div>
-        
-        <div className="flex justify-center mt-8 gap-4">
-          {projects.length > 6 && (
-            <Button
-              onClick={() => setShowAll(!showAll)}
-              variant="secondary"
-              size="md"
-            >
-              {showAll ? t("projects.showLess") : t("projects.showMore")}
-            </Button>
-          )}
-          <Button
-            onClick={() => window.location.href = '/projects'}
-            variant="primary"
-            size="md"
-          >
-            {language === 'en' ? 'View All Projects' : 'Ver Todos os Projetos'}
-          </Button>
-        </div>
-      </SectionBody>
-    </DefaultSection>
+    <section id={`${id}`} className="relative py-16 md:py-20">
+      <SiaContainer>
+        <ColumnGrid>
+          {/* Coluna texto */}
+          <Reveal className="md:col-span-2 border-b md:border-b-0 md:border-r border-hairline p-10 md:p-12 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-3">
+                <FiFolder size={20} className="text-accent" />
+                <h2 className="text-2xl font-bold text-accent">{t("projects.title")}</h2>
+              </div>
+              <p className="text-tertiary/70 leading-relaxed mt-6 max-w-md">
+                {t("projects.subtitle")}
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3 mt-10">
+              <Link
+                href="/projects"
+                className="inline-flex items-center gap-2 border-2 border-accent px-5 py-2.5 text-accent rounded-full font-bold hover:bg-accent hover:text-primary transition-all text-sm"
+              >
+                {language === "en" ? "View All Projects" : "Ver Todos os Projetos"}
+                <FiArrowRight size={14} />
+              </Link>
+              <a
+                href="https://github.com/alexand7e"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-tertiary/80 rounded-full font-bold border border-hairline-strong hover:border-accent hover:text-accent transition-all text-sm"
+              >
+                <FiGithub size={14} />
+                GitHub
+              </a>
+            </div>
+          </Reveal>
+
+          {/* Coluna cards */}
+          <div className="md:col-span-2 p-10 md:p-12">
+            {loading ? (
+              <div className="grid sm:grid-cols-2 gap-4">
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="h-40 bg-secondary rounded-lg animate-pulse" />
+                ))}
+              </div>
+            ) : displayed.length === 0 ? (
+              <p className="text-tertiary/50 text-sm">—</p>
+            ) : (
+              <div className="grid sm:grid-cols-2 gap-4">
+                {displayed.map((project, i) => (
+                  <Reveal
+                    key={project.id}
+                    delay={0.08 + i * 0.06}
+                    className="flex flex-col gap-2 border border-hairline rounded-lg p-5 hover:border-accent/40 transition-colors"
+                  >
+                    <h3 className="text-base font-bold text-tertiary">
+                      {language === "en" && project.titleEn ? project.titleEn : project.title}
+                    </h3>
+                    <p className="text-xs text-tertiary/70 leading-relaxed line-clamp-3">
+                      {language === "en" && project.descriptionEn ? project.descriptionEn : project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 mt-auto pt-3">
+                      {project.technologies.slice(0, 4).map((tech) => (
+                        <span key={tech} className="text-[10px] px-2 py-0.5 rounded-full border border-hairline-strong text-tertiary/70">
+                          {tech}
+                        </span>
+                      ))}
+                     </div>
+                  </Reveal>
+                ))}
+              </div>
+            )}
+          </div>
+        </ColumnGrid>
+      </SiaContainer>
+    </section>
   );
 }

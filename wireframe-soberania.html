@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wireframe fiel — SoberanIA (grids expostos)</title>
+<style>
+  :root {
+    --line: #c4c4c4;        /* borda fina entre colunas */
+    --line-strong: #7a7a7a;
+    --fill: #e9e9e9;        /* bloco wireframe */
+    --fill-dark: #d7d7d7;
+    --accent: #f5b07f;      /* laranja soberania */
+    --green: #405a58;       /* verde footer */
+    --text: #555;
+    --bg: #fcfaf9;
+    --guide: #ff5a5a;       /* linha de grid exposta */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  /* ===== GRADE MESTRA (4 colunas, 64px de margem) ===== */
+  .container {
+    position: relative;
+    margin: 0 64px;
+  }
+  .guide-4 {
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .guide-4 > span {
+    border-right: 1px dashed var(--guide);
+  }
+  .guide-4 > span:last-child { border-right: none; }
+
+  section { position: relative; }
+  .sec-label {
+    position: absolute;
+    top: -1.4em; left: 0;
+    z-index: 5;
+    font-size: 9px; letter-spacing: .12em; text-transform: uppercase;
+    color: #b97a00; font-weight: 700;
+    background: #fff3e0;
+    padding: 1px 6px; border: 1px solid #ffd591; border-radius: 3px;
+  }
+  .divider { height: 1px; background: var(--line); margin: 0 64px; }
+
+  .box {
+    border: 1.5px dashed var(--line);
+    background: var(--fill);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 10px; min-height: 40px;
+  }
+  .box.dark { background: var(--fill-dark); border-style: solid; }
+  .box.accent { border-color: var(--accent); border-style: solid; background: #fdeadd; }
+  .label { text-transform: uppercase; letter-spacing: .06em; font-size: 9px; color: #999; }
+
+  /* ===== NAVBAR ===== */
+  .navbar {
+    position: sticky; top: 0; z-index: 50;
+    margin: 16px 64px 0;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 14px;
+  }
+  .navbar .brand { font-weight: 700; }
+  .navbar .menu { display: flex; gap: 14px; }
+  .navbar .menu span { border: 1px dashed var(--line); padding: 3px 12px; border-radius: 4px; }
+
+  /* ===== HERO ===== */
+  .hero { text-align: center; padding: 70px 0 0; }
+  .hero .h1 { font-size: 24px; font-weight: 700; color: #333; max-width: 720px; margin: 0 auto 12px; }
+  .hero .sub { max-width: 720px; margin: 0 auto 20px; }
+  .hero .cta-row { display: flex; gap: 12px; justify-content: center; }
+  .btn { padding: 10px 22px; border-radius: 6px; font-weight: 600; }
+  .btn.primary { background: var(--fill-dark); border: 1.5px solid var(--line-strong); }
+  .btn.secondary { border: 1.5px dashed var(--line-strong); background: #fff; }
+  .snippet { display: flex; align-items: center; gap: 10px; max-width: 560px; margin: 22px auto 0;
+             border: 1px solid var(--line); padding: 8px 14px; border-radius: 6px; }
+  .snippet .thumb { width: 56px; height: 40px; background: var(--fill-dark); border-radius: 4px; flex: none; }
+
+  /* Grid 13 colunas decorativo do hero */
+  .grid13 {
+    display: grid; grid-template-columns: repeat(13, 1fr);
+    margin-top: 34px; opacity: .7;
+  }
+  .grid13 .cell {
+    aspect-ratio: 1 / 1;
+    border-top: 1px dashed var(--guide);
+    border-right: 1px dashed var(--guide);
+    background: #fff;
+  }
+  .grid13 .cell.blank { border-color: transparent; }
+  .grid13 .cell.fill { background: var(--fill); }
+  .hero-info {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    margin-top: -34px;
+    background: var(--bg); border: 1px solid var(--line);
+    padding: 8px 16px; border-radius: 6px;
+    display: flex; align-items: center; gap: 8px; font-weight: 600;
+  }
+  .hero-info .shield { width: 16px; height: 16px; border: 1.5px solid var(--line-strong); border-radius: 3px; }
+
+  /* ===== SYSTEM RESUME (tabs) ===== */
+  .resume { position: relative; padding: 30px 0 10px; }
+  .tabs { display: flex; justify-content: center; gap: 60px; padding: 20px 0; }
+  .tab { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .tab .ic { width: 34px; height: 34px; border: 1.5px solid var(--line-strong); border-radius: 8px; }
+
+  /* ===== GRID 4 COLUNAS GENÉRICO ===== */
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .col { border-right: 1px solid var(--line); padding: 30px; min-height: 140px; position: relative; }
+  .col:last-child { border-right: none; }
+
+  /* cards diferenciais */
+  .card { flex-direction: column; align-items: flex-start; gap: 10px; text-align: left; }
+  .card .ic { width: 30px; height: 30px; border: 1.5px solid var(--line-strong); border-radius: 6px; }
+
+  /* Dataset */
+  .dataset-left { grid-column: span 3; border-right: 1px solid var(--line); padding: 30px; }
+  .dataset-right { padding: 30px; position: relative; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .chip { border: 1px solid var(--line-strong); border-radius: 20px; padding: 6px 14px; font-size: 11px; }
+  .chip.alt { border-style: dashed; background: var(--fill-dark); }
+  .stat-big { font-size: 26px; font-weight: 700; color: #333; }
+
+  /* LLM */
+  .llm-left { border-right: 1px solid var(--line); padding: 30px; min-height: 320px; }
+  .llm-grid { grid-column: span 3; display: grid; grid-template-columns: repeat(3, 1fr); }
+  .llm-item { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 30px; min-height: 160px; }
+  .llm-item:nth-child(3n) { border-right: none; }
+  .llm-item:nth-child(n+4) { border-bottom: none; }
+  .pill { border: 1.5px solid var(--line-strong); border-radius: 20px; padding: 6px 12px; font-weight: 600; background: #3a3939; color: #fff; display: inline-block; }
+  .pill.gov { background: var(--fill-dark); color: #333; border-style: dashed; }
+
+  /* API / Chat (flex 2 áreas) */
+  .split { display: flex; padding: 30px; gap: 30px; align-items: center; }
+  .split .left { flex: 1.2; }
+  .split .right { flex: 1; }
+  .graph { border: 1.5px dashed var(--line-strong); background: var(--fill-dark); display: flex; align-items: center; justify-content: center; }
+
+  /* overview */
+  .overview { text-align: center; padding: 70px 0; }
+  .overview .icons { display: flex; justify-content: center; gap: 12px; margin-bottom: 14px; }
+  .overview .icons span { width: 34px; height: 34px; border: 1.5px solid var(--line-strong); border-radius: 8px; }
+  .overview h2 { font-size: 22px; font-weight: 600; color: #333; }
+
+  /* who */
+  .who-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .who-card { flex-direction: column; align-items: flex-start; gap: 12px; text-align: left; padding: 30px; border-right: 1px solid var(--line); min-height: 200px; }
+  .who-card:last-child { border-right: none; }
+
+  /* team intro */
+  .team-intro { text-align: center; padding: 70px 0; }
+  .team-intro h2 { max-width: 900px; margin: 0 auto; font-size: 20px; font-weight: 500; color: #333; }
+
+  /* team */
+  .team-grid { display: grid; grid-template-columns: 1fr 1fr 2fr; }
+  .team-card { flex-direction: column; align-items: flex-start; gap: 10px; text-align: left; padding: 30px; border-right: 1px solid var(--line); }
+  .articles { grid-column: span 2; padding: 30px; display: flex; flex-direction: column; gap: 14px; }
+  .article { flex-direction: column; align-items: flex-start; gap: 6px; text-align: left; }
+  .article .tag { font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: #b97a00; }
+
+  /* ===== FOOTER ===== */
+  footer { background: #2c3c3a; color: #d8e2e0; margin-top: 10px; }
+  footer .box { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.3); color: #d8e2e0; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr; }
+  .footer-left { padding: 50px 30px; border-right: 1px solid var(--green); }
+  .footer-right { padding: 50px 30px; }
+  .newsletter-form { display: flex; gap: 10px; margin-top: 16px; max-width: 420px; }
+  .newsletter-form .input { flex: 1; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.3); border-radius: 4px; padding: 10px; }
+  .sitemap { display: flex; gap: 30px; }
+  .sitemap ul { list-style: none; margin-top: 8px; }
+  .sitemap li { padding: 2px 0; opacity: .8; }
+  .partners { display: flex; gap: 14px; flex-wrap: wrap; padding: 20px 30px; border-top: 1px solid var(--green); }
+  .partner { width: 90px; height: 38px; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; border-top: 1px solid var(--green); }
+  .top-btn { border: 1px solid rgba(255,255,255,.4); padding: 6px 14px; border-radius: 6px; }
+</style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <div class="brand">⌂ LOGO SoberanIA</div>
+    <div class="menu"><span>Equipe</span><span>Contato</span></div>
+  </div>
+
+  <!-- HERO -->
+  <div class="container">
+    <section class="hero">
+      <span class="sec-label">Hero</span>
+      <div class="h1">SoberanIA é a IA para a gestão pública do Brasil</div>
+      <div class="box sub" style="min-height:50px;">Parágrafo — tecnologia com profunda compreensão da língua portuguesa, criada por pesquisadores brasileiros…</div>
+      <div class="cta-row">
+        <div class="box btn primary">Requisite uma Demo →</div>
+        <div class="box btn secondary">Conheça o Docs →</div>
+      </div>
+      <div class="snippet">
+        <div class="thumb"></div>
+        <div style="text-align:left;">Veja como foi o <b>Lançamento Comercial do Ecossistema SoberanIA</b> <span style="float:right;">→</span></div>
+      </div>
+
+      <!-- grid decorativo 13 colunas -->
+      <div class="grid13">
+        <div class="cell fill"></div><div class="cell blank"></div><div class="cell blank"></div><div class="cell blank"></div><div class="cell blank"></div><div class="cell blank"></div><div class="cell fill"></div><div class="cell blank"></div><div class="cell blank"></div><div class="cell blank"></div><div class="cell blank"></div><div class="cell blank"></div><div class="cell fill"></div>
+        <div class="cell"></div><div class="cell"></div><div class="cell blank"></div><div class="cell fill"></div><div class="cell blank"></div><div class="cell fill"></div><div class="cell"></div><div class="cell"></div><div class="cell blank"></div><div class="cell fill"></div><div class="cell blank"></div><div class="cell fill"></div><div class="cell"></div>
+      </div>
+      <div class="hero-info"><span class="shield"></span> IA Soberana — Processada e Armazenada no Brasil</div>
+    </section>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SYSTEM RESUME -->
+  <div class="container">
+    <section class="resume">
+      <span class="sec-label">Resumo do sistema (tabs)</span>
+      <div class="grid13" style="margin-top:20px;">
+        <div class="cell blank"></div><div class="cell blank"></div><div class="cell blank"></div><div class="cell blank"></div><div class="cell blank"></div><div class="cell blank"></div><div class="cell blank"></div><div class="cell blank"></div><div class="cell blank"></div><div class="cell blank"></div><div class="cell blank"></div><div class="cell blank"></div><div class="cell blank"></div>
+      </div>
+      <div class="tabs">
+        <div class="tab"><div class="ic"></div>Dataset</div>
+        <div class="tab"><div class="ic"></div>LLM</div>
+        <div class="tab"><div class="ic"></div>API</div>
+        <div class="tab"><div class="ic"></div>Chat</div>
+      </div>
+    </section>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- DIFERENCIAIS -->
+  <div class="container">
+    <section>
+      <span class="sec-label">Diferenciais — 4 cards (grid 4 col)</span>
+      <div class="guide-4"><span></span><span></span><span></span><span></span></div>
+      <div class="grid4">
+        <div class="col card"><div class="ic"></div><b>Amplo domínio da língua portuguesa</b><span>Texto descritivo…</span></div>
+        <div class="col card"><div class="ic"></div><b>Independência tecnológica</b><span>Texto descritivo…</span></div>
+        <div class="col card"><div class="ic"></div><b>Segurança e controle de dados</b><span>Texto descritivo…</span></div>
+        <div class="col card"><div class="ic"></div><b>Conformidade jurídica e regulatória</b><span>Texto descritivo…</span></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- DATASET -->
+  <div class="container">
+    <section>
+      <span class="sec-label">Dataset — 3/4 + 1/4</span>
+      <div class="guide-4"><span></span><span></span><span></span><span></span></div>
+      <div class="grid4">
+        <div class="dataset-left">
+          <div class="label">H2 — Dataset</div>
+          <div class="stat-big" style="margin-top:20px;">500 bilhões</div>
+          <div style="margin:8px 0;">de tokens em datasets 100% em português</div>
+          <div class="chips">
+            <span class="chip">Dados públicos</span><span class="chip">Governamentais</span><span class="chip">Jurídicos</span>
+          </div>
+          <div class="chips">
+            <span class="chip alt">Enciclopédias</span><span class="chip alt">Jornalismo</span><span class="chip alt">Literatura</span><span class="chip alt">Poesia</span><span class="chip alt">Música</span>
+          </div>
+        </div>
+        <div class="dataset-right">
+          <div class="graph" style="width:60px;height:60px;margin:0 auto;">▣</div>
+          <div class="stat-big" style="font-size:20px;">+70 bilhões</div>
+          <div>de tokens do SEI — Sistema Eletrônico de Informações</div>
+          <div class="box" style="min-height:50px;">Parágrafo — maior compreensão de processos administrativos…</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- LLM -->
+  <div class="container">
+    <section>
+      <span class="sec-label">LLM — 1/4 + 3/4 (2×3)</span>
+      <div class="guide-4"><span></span><span></span><span></span><span></span></div>
+      <div class="grid4">
+        <div class="llm-left">
+          <div class="label">H2 — LLM</div>
+          <div class="graph" style="width:120px;height:40px;margin-top:30px;">∿ logo</div>
+          <div style="margin-top:20px;">O LLM do SoberanIA com <b>30 bilhões de parâmetros</b></div>
+        </div>
+        <div class="llm-grid">
+          <div class="llm-item"><span class="pill">✓ Raciocínio em português</span><span>Texto…</span></div>
+          <div class="llm-item"><span class="pill">✓ Pipeline no estado da arte</span><span>Texto…</span></div>
+          <div class="llm-item"><span class="pill">✓ Transcrição de áudio</span><span>Texto…</span></div>
+          <div class="llm-item"><span class="pill">✓ Filtros de moralidade</span><span>Texto…</span></div>
+          <div class="llm-item"><span class="pill">✓ Neutralidade política</span><span>Texto…</span></div>
+          <div class="llm-item"><span class="pill">✓ Eficiência computacional</span><span>Texto…</span></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- API -->
+  <div class="container">
+    <section>
+      <span class="sec-label">API — 2 áreas</span>
+      <div class="guide-4"><span></span><span></span><span></span><span></span></div>
+      <div class="split">
+        <div class="left">
+          <div class="label">H2 — API</div>
+          <div style="font-size:18px;font-weight:600;margin:10px 0;">Conecte a sua aplicação para o setor público</div>
+          <div class="box" style="min-height:50px;">Integre a IA do SoberanIA nas funcionalidades de suas soluções…</div>
+          <div class="box btn primary" style="margin-top:16px;">Requisite um contato comercial →</div>
+        </div>
+        <div class="right">
+          <div class="graph" style="min-height:180px;">📊 gráfico de casos de uso</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CHAT -->
+  <div class="container">
+    <section>
+      <span class="sec-label">Chat — 2 áreas</span>
+      <div class="guide-4"><span></span><span></span><span></span><span></span></div>
+      <div class="split">
+        <div class="left">
+          <div class="label">H2 — Chat</div>
+          <div style="font-size:18px;font-weight:600;margin:10px 0;">Adote a ferramenta de Chat para o setor público</div>
+          <div class="box" style="min-height:50px;">Sem comprometer compliance ou expor a área a risco…</div>
+          <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;">
+            <span class="pill gov">Login social via GOV.BR</span>
+            <span class="pill">✓ Processamento de Arquivos</span>
+            <span class="pill">✓ Chat conversacional (texto/áudio)</span>
+          </div>
+        </div>
+        <div class="right">
+          <div class="graph" style="min-height:200px;">💬 screenshot chat</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- OVERVIEW -->
+  <div class="container">
+    <section class="overview">
+      <span class="sec-label">Cabeçalho — Para quem é</span>
+      <div class="icons"><span></span><span></span><span></span><span></span></div>
+      <h2>Para quem é o SoberanIA</h2>
+    </section>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- WHO -->
+  <div class="container">
+    <section>
+      <span class="sec-label">Públicos — 2 cards</span>
+      <div class="guide-4"><span></span><span></span><span></span><span></span></div>
+      <div class="who-grid">
+        <div class="who-card box" style="justify-content:flex-start;">
+          <div class="ic" style="width:26px;height:26px;border:1.5px solid var(--line-strong);border-radius:6px;"></div>
+          <b>Governos e órgãos públicos das 3 esferas</b>
+          <span>federal, estadual e municipal — texto…</span>
+          <div class="box btn primary">Entre em contato →</div>
+        </div>
+        <div class="who-card box" style="justify-content:flex-start;">
+          <div class="ic" style="width:26px;height:26px;border:1.5px solid var(--line-strong);border-radius:6px;"></div>
+          <b>Startups e desenvolvedores de soluções de TI</b>
+          <span>para o setor público — texto…</span>
+          <div class="box btn primary">Entre em contato →</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- TEAM INTRO -->
+  <div class="container">
+    <section class="team-intro">
+      <span class="sec-label">Introdução equipe</span>
+      <h2>O SoberanIA está sendo construído por profissionais que contribuem ativamente para o avanço da IA no Brasil.</h2>
+    </section>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- TEAM -->
+  <div class="container">
+    <section>
+      <span class="sec-label">Equipe — 1 + 1 + artigos(2 col)</span>
+      <div class="guide-4"><span></span><span></span><span></span><span></span></div>
+      <div class="team-grid">
+        <div class="team-card box" style="justify-content:flex-start;">
+          <div class="ic" style="width:26px;height:26px;border:1.5px solid var(--line-strong);border-radius:6px;"></div>
+          <b>50% do corpo técnico com mestres e doutores</b>
+          <span>Texto…</span>
+          <div class="box btn secondary">Conheça a equipe →</div>
+        </div>
+        <div class="team-card box" style="justify-content:flex-start;border-right:none;">
+          <div class="ic" style="width:26px;height:26px;border:1.5px solid var(--line-strong);border-radius:6px;"></div>
+          <b>Equipe altamente qualificada, produção científica ativa</b>
+          <span>Texto…</span>
+        </div>
+        <div class="articles box" style="justify-content:flex-start;">
+          <div class="label" style="margin-bottom:4px;">Artigos publicados</div>
+          <div class="article"><span class="tag">Large Language Models</span><b>Cronologia dos LLMs em português e a evolução da IA no Brasil</b><span>→</span></div>
+          <div class="article"><span class="tag">Large Language Models</span><b>A ilusão de rigor de LLMs…</b><span>→</span></div>
+          <div class="article"><span class="tag">Datasets em pt-br</span><b>Jabuticaba: um marco da inovação em IA em português</b><span>→</span></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-left">
+        <div class="label" style="color:#9fb3ae;">Faça parte da rede</div>
+        <h3 style="margin:10px 0;">Inscreva-se em nossa newsletter</h3>
+        <div class="newsletter-form">
+          <div class="input">Seu e-mail</div>
+          <div class="box" style="min-height:0;">Inscreva-se</div>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="sitemap">
+          <div><b>Páginas</b><ul><li>Home</li><li>Ecossistema</li><li>Pesquisa</li><li>Time</li></ul></div>
+          <div><b>Documentação</b><ul><li>Termos</li><li>Privacidade</li><li>Cookies</li></ul></div>
+        </div>
+      </div>
+    </div>
+    <div class="partners">
+      <div class="box partner">PIT</div><div class="box partner">Investe Piauí</div><div class="box partner">ETIPI</div>
+      <div class="box partner">SIA</div><div class="box partner">GovPI</div><div class="box partner">MCTI</div>
+    </div>
+    <div class="footer-bottom">
+      <span>Todos os direitos reservados © 2026 SoberanIA™</span>
+      <div class="top-btn">↑ Ir para o topo</div>
+    </div>
+  </footer>
+
+</body>
+</html>

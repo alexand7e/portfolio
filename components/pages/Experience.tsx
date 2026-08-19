@@ -1,10 +1,10 @@
 "use client";
-import SectionBody from "@/components/ui/SectionBody";
-import DefaultSection from "@/components/ui/Section";
 import React, { useState, useEffect } from "react";
-import SectionTitle from "@/components/ui/SectionTitle";
-import ExperienceCard from "@/components/ui/ExperienceCard";
+import SiaContainer from "@/components/ui/SiaContainer";
+import ColumnGrid from "@/components/ui/ColumnGrid";
+import Reveal from "@/components/animations/Reveal";
 import { useLanguage } from "@/lib/useLanguage";
+import { FiBriefcase } from "react-icons/fi";
 
 interface Experience {
   id: string;
@@ -17,10 +17,7 @@ interface Experience {
   startDate: string;
   endDate: string | null;
   current: boolean;
-  location: string | null;
-  locationEn: string | null;
   technologies: string[];
-  order: number;
 }
 
 interface ExperienceCardData {
@@ -31,10 +28,9 @@ interface ExperienceCardData {
 }
 
 export default function Experience({
-  className = "",
+  id
 }: {
-  className?: string;
-  id?: string;
+  id?: string
 }) {
   const { language, t } = useLanguage();
   const [experiences, setExperiences] = useState<ExperienceCardData[]>([]);
@@ -46,13 +42,12 @@ export default function Experience({
         const response = await fetch('/api/experiences');
         if (response.ok) {
           const data: Experience[] = await response.json();
-          
-          // Transform database data to component format
-          const transformedExperiences: ExperienceCardData[] = data.map((exp) => {
+
+          const transformed: ExperienceCardData[] = data.map((exp) => {
             const startYear = new Date(exp.startDate).getFullYear();
             const endYear = exp.current ? 'Presente' : (exp.endDate ? new Date(exp.endDate).getFullYear() : '');
             const period = exp.current ? `${startYear} - Presente` : `${startYear}${endYear ? ` - ${endYear}` : ''}`;
-            
+
             return {
               title: language === 'en' && exp.positionEn ? exp.positionEn : exp.position,
               company: language === 'en' && exp.companyEn ? exp.companyEn : exp.company,
@@ -60,8 +55,8 @@ export default function Experience({
               description: language === 'en' && exp.descriptionEn ? exp.descriptionEn : (exp.description || '')
             };
           });
-          
-          setExperiences(transformedExperiences);
+
+          setExperiences(transformed);
         }
       } catch (error) {
         console.error('Error fetching experiences:', error);
@@ -73,43 +68,59 @@ export default function Experience({
     fetchExperiences();
   }, [language]);
 
-  if (loading) {
-    return (
-      <DefaultSection id="experience" className={className}>
-        <SectionTitle
-          title={t("experience.title")}
-          subtitle={t("experience.subtitle")}
-        />
-        <SectionBody>
-          <div className="grid gap-6">
-            <div className="animate-pulse">
-              <div className="h-32 bg-secondary rounded-lg mb-4"></div>
-              <div className="h-32 bg-secondary rounded-lg mb-4"></div>
-              <div className="h-32 bg-secondary rounded-lg"></div>
-            </div>
-          </div>
-        </SectionBody>
-      </DefaultSection>
-    );
-  }
-
   return (
-    <DefaultSection id="experience" className={className}>
-      <SectionTitle
-        title={t("experience.title")}
-        subtitle={t("experience.subtitle")}
-      />
-      <SectionBody>
-        <div className="grid gap-6">
-          {experiences.map((experience, index) => (
-            <ExperienceCard
-              key={index}
-              experience={experience}
-              index={index}
-            />
-          ))}
-        </div>
-      </SectionBody>
-    </DefaultSection>
+    <section id={`${id}`} className="relative py-16 md:py-20">
+      <SiaContainer>
+        <ColumnGrid>
+          {/* Coluna título (1/4) */}
+          <Reveal className="md:col-span-1 border-b md:border-b-0 md:border-r border-hairline p-10 md:p-12 flex flex-col justify-between min-h-[16rem]">
+            <div className="flex items-center gap-3">
+              <FiBriefcase size={20} className="text-accent" />
+              <h2 className="text-2xl font-bold text-accent">{t("experience.title")}</h2>
+            </div>
+            <div className="mt-10">
+              <p className="text-2xl md:text-3xl font-bold text-tertiary">
+                {language === "en" ? "Since" : "Desde"} <span className="text-accent">2022</span>
+              </p>
+              <p className="text-sm text-tertiary/70 mt-2">
+                {language === "en"
+                  ? "building with data, AI and full-stack"
+                  : "construindo com dados, IA e full-stack"}
+              </p>
+            </div>
+          </Reveal>
+
+          {/* Coluna conteúdo (3/4) */}
+          <div className="md:col-span-3 p-10 md:p-12">
+            {loading ? (
+              <div className="grid md:grid-cols-2 gap-6">
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="h-32 bg-secondary rounded-lg animate-pulse" />
+                ))}
+              </div>
+            ) : experiences.length === 0 ? (
+              <p className="text-tertiary/50 text-sm">—</p>
+            ) : (
+              <div className="grid md:grid-cols-2 gap-6">
+                {experiences.map((exp, index) => (
+                  <Reveal
+                    key={index}
+                    delay={0.08 + index * 0.06}
+                    className="flex flex-col gap-2 border border-hairline rounded-lg p-6"
+                  >
+                    <span className="text-xs text-accent font-semibold uppercase tracking-widest">
+                      {exp.period}
+                    </span>
+                    <h3 className="text-lg font-bold text-tertiary">{exp.title}</h3>
+                    <p className="text-sm text-accent/80">{exp.company}</p>
+                    <p className="text-sm text-tertiary/70 leading-relaxed">{exp.description}</p>
+                  </Reveal>
+                ))}
+              </div>
+            )}
+          </div>
+        </ColumnGrid>
+      </SiaContainer>
+    </section>
   );
 }
