@@ -2,6 +2,12 @@
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
+  // O tracing do standalone não segue o require dinâmico que next faz para
+  // @swc/helpers sob layout pnpm: sem isto, server.js quebra em runtime
+  // (MODULE_NOT_FOUND _interop_require_default.js) dentro do container.
+  outputFileTracingIncludes: {
+    '/**': ['./node_modules/@swc/helpers/**'],
+  },
   // Removendo i18n para usar implementação customizada
   // i18n: {
   //   locales: ['pt', 'en'],
