@@ -14,6 +14,11 @@ import PageGridFrame from "@/components/ui/PageGridFrame";
 import LanguageTest from "@/components/ui/LanguageTest";
 import Footer from "@/components/ui/Footer";
 
+// A Trilha consulta o banco. Sem isto o Next pre-renderiza a home no build:
+// o CI passaria a exigir DATABASE_URL e as aulas ficariam congeladas no HTML
+// ate o proximo build.
+export const dynamic = "force-dynamic";
+
 function Home () {
     return (
         <main className={"w-full h-full relative overflow-x-hidden"}>

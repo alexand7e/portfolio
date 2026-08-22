@@ -6,10 +6,10 @@ import { googleFileId } from "@/lib/slides";
 // que e client por causa da interacao. Se nao houver aula publicada, a
 // secao inteira some da home em vez de aparecer vazia.
 export default async function Trilha({ id }: { id?: string }) {
-  const talks = await prisma.talk.findMany({
-    where: { published: true },
-    orderBy: { date: "desc" },
-  });
+  // Banco fora do ar derruba so esta secao, nao a home inteira.
+  const talks = await prisma.talk
+    .findMany({ where: { published: true }, orderBy: { date: "desc" } })
+    .catch(() => []);
 
   if (talks.length === 0) return null;
 

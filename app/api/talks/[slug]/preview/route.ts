@@ -3,7 +3,9 @@ import { googleFileId, thumbnailUrl } from "@/lib/slides";
 
 // Um dia de cache na borda; uma semana servindo o antigo enquanto revalida.
 const DAY = 60 * 60 * 24;
-export const revalidate = DAY;
+// Precisa ser literal: o Next analisa este export estaticamente e rejeita
+// referencia a outra constante.
+export const revalidate = 86400;
 
 const MAX_BYTES = 5 * 1024 * 1024;
 
