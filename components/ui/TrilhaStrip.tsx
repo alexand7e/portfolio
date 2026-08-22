@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { useLanguage } from "@/lib/useLanguage";
 import SiaContainer from "@/components/ui/SiaContainer";
@@ -28,6 +29,7 @@ export type TrilhaItem = {
   tags: string[];
   slidesUrl: string | null;
   repos: string[];
+  hasPreview: boolean;
 };
 
 type Totals = { talks: number; events: number; repos: number };
@@ -63,6 +65,9 @@ export default function TrilhaStrip({
   const [topic, setTopic] = useState<string | null>(null);
   const [stopped, setStopped] = useState(false);
   const [engaged, setEngaged] = useState(false);
+  // Preview que o Google recusar (arquivo restrito) sai de cena e o card
+  // volta a ser so texto, sem moldura quebrada.
+  const [semPreview, setSemPreview] = useState<string[]>([]);
 
   // Os temas vem das tags reais, pelos mais frequentes — nada fixo no codigo.
   const topics = useMemo(() => {
@@ -232,6 +237,20 @@ export default function TrilhaStrip({
               transition={{ duration: 0.35, ease: [0.21, 0.47, 0.32, 0.98] }}
               className="group relative shrink-0 w-[300px] md:w-[340px] bg-primary flex flex-col p-7"
             >
+              {item.hasPreview && !semPreview.includes(item.slug) && (
+                <div className="relative w-full aspect-[16/10] mb-4 overflow-hidden border border-hairline bg-secondary">
+                  <Image
+                    src={`/api/talks/${item.slug}/preview`}
+                    alt=""
+                    fill
+                    sizes="340px"
+                    loading="lazy"
+                    onError={() => setSemPreview((s) => [...s, item.slug])}
+                    className="object-cover object-top grayscale contrast-[1.05] transition-[filter,transform] duration-500 group-hover:grayscale-0 group-hover:scale-[1.02]"
+                  />
+                </div>
+              )}
+
               <div className="flex items-center gap-2 text-[11px] uppercase tracking-widest text-tertiary/45">
                 <time dateTime={item.date}>{formatDate(item.date)}</time>
                 <span aria-hidden>·</span>

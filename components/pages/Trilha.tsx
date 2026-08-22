@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import TrilhaStrip from "@/components/ui/TrilhaStrip";
+import { googleFileId } from "@/lib/slides";
 
 // Server component: busca as aulas e entrega ja serializado para a faixa,
 // que e client por causa da interacao. Se nao houver aula publicada, a
@@ -41,6 +42,8 @@ export default async function Trilha({ id }: { id?: string }) {
     tags: t.tags,
     slidesUrl: t.slidesUrl,
     repos: t.repos,
+    // So oferece preview quando ha arquivo do Google de onde extrair.
+    hasPreview: googleFileId(t.slidesUrl) !== null,
   }));
 
   return <TrilhaStrip id={id} items={items} totals={totals} />;
