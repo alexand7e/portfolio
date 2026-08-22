@@ -1,0 +1,218 @@
+name: verify e publicar imagem
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: verify-portfolio-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      # O client precisa existir antes do tsc: os tipos do Prisma sao gerados.
+      - run: pnpm exec prisma generate
+      - name: typecheck
+        run: pnpm exec tsc --noEmit
+      # Nao bloqueia: o eslint-plugin-react-hooks 7 acusa erros preexistentes
+      # no codigo da aplicacao. Tirar o continue-on-error assim que a divida
+      # for paga — ate la, o passo serve so como relatorio.
+      - run: pnpm lint
+        continue-on-error: true
+      - run: pnpm test
+      # Sem DATABASE_URL de proposito: a home e' dinamica, entao o build nao
+      # abre conexao. Se isto voltar a falhar, alguma pagina passou a consultar
+      # o banco em tempo de build.
+      - run: pnpm build
+
+  publish:
+    if: github.event_name != 'pull_request'
+    needs: verify
+    runs-on: ubuntu-latest
+    concurrency:
+      group: publish-portfolio-${{ github.ref }}
+      cancel-in-progress: true
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image: ${{ steps.meta.outputs.image }}
+      tag: ${{ steps.meta.outputs.tag }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: montar tag imutável
+        id: meta
+        run: |
+          echo "tag=$(date -u +%Y-%m-%d)-$(git rev-parse --short=7 HEAD)" >> "$GITHUB_OUTPUT"
+          echo "image=ghcr.io/$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.image }}:${{ steps.meta.outputs.tag }}
+          # NEXT_PUBLIC_* sao inlinados no bundle: so valem se entrarem aqui.
+          build-args: |
+            NEXT_PUBLIC_GA_ID=${{ vars.NEXT_PUBLIC_GA_ID }}
+            NEXT_PUBLIC_SITE_URL=${{ vars.SITE_URL }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: publish
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-portfolio-${{ github.ref }}
+      cancel-in-progress: false
+    # Explícito porque o nó faz `docker login ghcr.io` com este token: sem
+    # packages:read o pull da imagem privada falha no manager, não aqui.
+    permissions:
+      contents: read
+      packages: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Conectar Tailscale
+        uses: tailscale/github-action@v2
+        with:
+          # Auth key, não OAuth. As tags vêm carimbadas na própria chave, e por
+          # isso `tags:` NÃO entra aqui: qualquer valor nesse input faz a action
+          # tentar o caminho de OAuth e falhar com "OAuth identity empty".
+          #
+          # Auth key expira (90 dias por padrão). Quando o deploy voltar a
+          # falhar na conexão, é isto: gere outra em Settings > Keys do tailnet
+          # e atualize o secret TS_AUTHKEY.
+          authkey: ${{ secrets.TS_AUTHKEY }}
+
+      # O nó roda OpenSSH comum, não Tailscale SSH — sem chave carregada aqui,
+      # o `ssh` cai em "Permission denied (publickey)".
+      - name: Carregar chave de deploy
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+      # Duas validações antes de qualquer escrita no nó. Variável não definida
+      # vira string vazia e o passo só falharia lá na frente, com um erro que
+      # não diz o que faltou.
+      - name: Validar configuração e acesso
+        env:
+          HOST: ${{ vars.SWARM_MANAGER_HOST }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          NEXTAUTH_URL: ${{ vars.NEXTAUTH_URL }}
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: |
+          faltando=""
+          [ -n "$HOST" ] || faltando="$faltando vars.SWARM_MANAGER_HOST"
+          [ -n "$SSH_PRIVATE_KEY" ] || faltando="$faltando secrets.SSH_PRIVATE_KEY"
+          [ -n "$DATABASE_URL" ] || faltando="$faltando secrets.DATABASE_URL"
+          [ -n "$NEXTAUTH_SECRET" ] || faltando="$faltando secrets.NEXTAUTH_SECRET"
+          [ -n "$NEXTAUTH_URL" ] || faltando="$faltando vars.NEXTAUTH_URL"
+          [ -n "$ADMIN_EMAIL" ] || faltando="$faltando secrets.ADMIN_EMAIL"
+          [ -n "$SITE_URL" ] || faltando="$faltando vars.SITE_URL"
+          if [ -n "$faltando" ]; then
+            echo "::error::Deploy abortado, configuração ausente:$faltando"
+            exit 1
+          fi
+
+          if ! ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes -o ConnectTimeout=15 \
+                 "teaser@$HOST" "docker node ls --format '{{.Hostname}} {{.ManagerStatus}}'" \
+                 | grep -q Leader; then
+            echo "::error::Sem acesso SSH ao manager ($HOST) ou o nó não é Leader do swarm."
+            exit 1
+          fi
+          echo "Manager alcançado e é Leader: $HOST"
+
+      # O .env vai por scp com permissão 600, e não na linha de comando do
+      # `docker stack deploy`: assim os segredos não aparecem no `ps` do nó.
+      - name: Enviar stack e configuração
+        env:
+          HOST: ${{ vars.SWARM_MANAGER_HOST }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          NEXTAUTH_URL: ${{ vars.NEXTAUTH_URL }}
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+          SITE_URL: ${{ vars.SITE_URL }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
+        run: |
+          umask 077
+          cat > /tmp/portfolio.env <<ENVEOF
+          DATABASE_URL=$DATABASE_URL
+          NEXTAUTH_SECRET=$NEXTAUTH_SECRET
+          NEXTAUTH_URL=$NEXTAUTH_URL
+          ADMIN_EMAIL=$ADMIN_EMAIL
+          SITE_URL=$SITE_URL
+          GMAIL_USER=$GMAIL_USER
+          GMAIL_APP_PASSWORD=$GMAIL_APP_PASSWORD
+          INDEXNOW_KEY=$INDEXNOW_KEY
+          GOOGLE_SITE_VERIFICATION=$GOOGLE_SITE_VERIFICATION
+          ENVEOF
+
+          ssh -o BatchMode=yes "teaser@$HOST" "mkdir -p /tmp/portfolio-deploy && chmod 700 /tmp/portfolio-deploy"
+          scp -o BatchMode=yes deploy/stack.yml "teaser@$HOST:/tmp/portfolio-deploy/stack.yml"
+          scp -o BatchMode=yes /tmp/portfolio.env "teaser@$HOST:/tmp/portfolio-deploy/.env"
+          ssh -o BatchMode=yes "teaser@$HOST" "chmod 600 /tmp/portfolio-deploy/.env"
+
+      - name: Deploy
+        env:
+          HOST: ${{ vars.SWARM_MANAGER_HOST }}
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | ssh -o BatchMode=yes "teaser@$HOST" \
+            "docker login ghcr.io -u ${{ github.actor }} --password-stdin"
+          ssh -o BatchMode=yes "teaser@$HOST" \
+            "set -a; . /tmp/portfolio-deploy/.env; set +a; \
+             IMAGE_TAG=${{ needs.publish.outputs.image }}:${{ needs.publish.outputs.tag }} \
+             docker stack deploy --with-registry-auth --detach=false -c /tmp/portfolio-deploy/stack.yml portfolio"
+
+      # `--detach=false` acima já espera a convergência, mas o exit code do
+      # stack deploy não reflete rollback. Isto confirma qual imagem ficou.
+      - name: Confirmar imagem em produção
+        env:
+          HOST: ${{ vars.SWARM_MANAGER_HOST }}
+        run: |
+          ssh -o BatchMode=yes "teaser@$HOST" \
+            "docker service inspect portfolio_portfolio --format '{{.Spec.TaskTemplate.ContainerSpec.Image}}'" | tee /tmp/rodando.txt
+          esperado="${{ needs.publish.outputs.image }}:${{ needs.publish.outputs.tag }}"
+          if ! grep -q "$esperado" /tmp/rodando.txt; then
+            echo "::error::Serviço não subiu com $esperado — verifique rollback."
+            exit 1
+          fi
+
+      # Roda mesmo se o deploy falhar: o .env não fica no nó depois do job.
+      - name: Remover configuração do nó
+        if: always()
+        env:
+          HOST: ${{ vars.SWARM_MANAGER_HOST }}
+        run: |
+          rm -f /tmp/portfolio.env
+          ssh -o BatchMode=yes "teaser@$HOST" "rm -f /tmp/portfolio-deploy/.env" || true
