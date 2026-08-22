@@ -57,10 +57,31 @@ services:
         - "traefik.enable=true"
         - "traefik.docker.network=frontend_net"
 
-        - "traefik.http.routers.portfolio.rule=Host(`alexand7e.dev.br`) || Host(`www.alexand7e.dev.br`)"
+        # HTTP: um salto direto para https://www, sem cadeia dupla p/ SEO
+        # (mesmo comportamento do stack legado em teaser-stack-swarm).
+        - "traefik.http.routers.portfolio-http.rule=Host(`alexand7e.dev.br`) || Host(`www.alexand7e.dev.br`)"
+        - "traefik.http.routers.portfolio-http.entrypoints=web"
+        - "traefik.http.routers.portfolio-http.middlewares=redirect-to-www-https-portfolio"
+        - "traefik.http.middlewares.redirect-to-www-https-portfolio.redirectregex.regex=^https?://(?:www\\.)?alexand7e\\.dev\\.br/(.*)"
+        - "traefik.http.middlewares.redirect-to-www-https-portfolio.redirectregex.replacement=https://www.alexand7e.dev.br/$${1}"
+        - "traefik.http.middlewares.redirect-to-www-https-portfolio.redirectregex.permanent=true"
+
+        # HTTPS principal: www e dono do conteudo.
+        - "traefik.http.routers.portfolio.rule=Host(`www.alexand7e.dev.br`)"
         - "traefik.http.routers.portfolio.entrypoints=websecure"
         - "traefik.http.routers.portfolio.tls=true"
         - "traefik.http.routers.portfolio.tls.certresolver=le"
+
+        # Apex https redireciona para www: mesmo conteudo em dois hosts
+        # divide autoridade de busca e duplica cache.
+        - "traefik.http.routers.portfolio-nowww.rule=Host(`alexand7e.dev.br`)"
+        - "traefik.http.routers.portfolio-nowww.entrypoints=websecure"
+        - "traefik.http.routers.portfolio-nowww.tls=true"
+        - "traefik.http.routers.portfolio-nowww.tls.certresolver=le"
+        - "traefik.http.routers.portfolio-nowww.middlewares=redirect-to-www-portfolio"
+        - "traefik.http.middlewares.redirect-to-www-portfolio.redirectregex.regex=^https://alexand7e\\.dev\\.br/(.*)"
+        - "traefik.http.middlewares.redirect-to-www-portfolio.redirectregex.replacement=https://www.alexand7e.dev.br/$${1}"
+        - "traefik.http.middlewares.redirect-to-www-portfolio.redirectregex.permanent=true"
 
         # HSTS tambem na borda: garante o header em resposta que o app nunca
         # gera (502 quando o container esta fora, por exemplo).
