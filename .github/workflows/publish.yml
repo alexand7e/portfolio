@@ -166,17 +166,18 @@ jobs:
           GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
         run: |
           umask 077
-          cat > /tmp/portfolio.env <<ENVEOF
-          DATABASE_URL=$DATABASE_URL
-          NEXTAUTH_SECRET=$NEXTAUTH_SECRET
-          NEXTAUTH_URL=$NEXTAUTH_URL
-          ADMIN_EMAIL=$ADMIN_EMAIL
-          SITE_URL=$SITE_URL
-          GMAIL_USER=$GMAIL_USER
-          GMAIL_APP_PASSWORD=$GMAIL_APP_PASSWORD
-          INDEXNOW_KEY=$INDEXNOW_KEY
-          GOOGLE_SITE_VERIFICATION=$GOOGLE_SITE_VERIFICATION
-          ENVEOF
+          : > /tmp/portfolio.env
+          # %q escapa o valor para o `source` do no: segredos com espaco,
+          # $, aspas ou backtick chegam integros em vez de virarem comando.
+          printf 'DATABASE_URL=%q\n' "$DATABASE_URL" >> /tmp/portfolio.env
+          printf 'NEXTAUTH_SECRET=%q\n' "$NEXTAUTH_SECRET" >> /tmp/portfolio.env
+          printf 'NEXTAUTH_URL=%q\n' "$NEXTAUTH_URL" >> /tmp/portfolio.env
+          printf 'ADMIN_EMAIL=%q\n' "$ADMIN_EMAIL" >> /tmp/portfolio.env
+          printf 'SITE_URL=%q\n' "$SITE_URL" >> /tmp/portfolio.env
+          printf 'GMAIL_USER=%q\n' "$GMAIL_USER" >> /tmp/portfolio.env
+          printf 'GMAIL_APP_PASSWORD=%q\n' "$GMAIL_APP_PASSWORD" >> /tmp/portfolio.env
+          printf 'INDEXNOW_KEY=%q\n' "$INDEXNOW_KEY" >> /tmp/portfolio.env
+          printf 'GOOGLE_SITE_VERIFICATION=%q\n' "$GOOGLE_SITE_VERIFICATION" >> /tmp/portfolio.env
 
           ssh -o BatchMode=yes "teaser@$HOST" "mkdir -p /tmp/portfolio-deploy && chmod 700 /tmp/portfolio-deploy"
           scp -o BatchMode=yes deploy/stack.yml "teaser@$HOST:/tmp/portfolio-deploy/stack.yml"
