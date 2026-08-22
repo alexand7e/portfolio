@@ -22,8 +22,6 @@ function Home () {
                 <Suspense fallback={null}><Header/></Suspense>
                 <Suspense fallback={null}><HomePage id={"home"}/></Suspense>
                 <Divider />
-                <Suspense fallback={null}><Trilha id={"trilha"}/></Suspense>
-                <Divider />
                 <Suspense fallback={null}><Services /></Suspense>
                 <Divider />
                 <Suspense fallback={null}><Skills id={"skills"}/></Suspense>
@@ -35,6 +33,8 @@ function Home () {
                 <Suspense fallback={null}><Testimonials /></Suspense>
                 <Divider />
                 <Suspense fallback={null}><Articles /></Suspense>
+                <Divider />
+                <Suspense fallback={null}><Trilha id={"trilha"}/></Suspense>
                 <Divider />
                 <Suspense fallback={null}><Contact id={"contact"}/></Suspense>
                 <Suspense fallback={null}><LanguageTest /></Suspense>
