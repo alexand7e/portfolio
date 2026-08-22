@@ -123,7 +123,7 @@ export const MobileNav = () => {
                 className={"text-accent text-2xl z-30 relative"}
                 onClick={() => setIsMenuOpen(true)}
             >
-                <CiMenuFries size={38} />
+                <CiMenuFries size={30} />
             </button>
             
             <AnimatePresence>

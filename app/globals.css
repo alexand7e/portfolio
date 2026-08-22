@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Tokens de tema (canais RGB) ───────────────────────────
+   dark = padrão | html.light = tema claro (estilo soberania) */
+:root {
+    color-scheme: dark;
+    --c-primary: 28 28 34;        /* #1c1c22 */
+    --c-secondary: 28 32 38;      /* #1C2026 */
+    --c-tertiary: 224 225 221;    /* #E0E1DD */
+    --c-accent: 0 255 153;        /* #00ff99 */
+    --c-hairline: 224 225 221 / 0.12;
+    --c-hairline-strong: 224 225 221 / 0.22;
+}
+
+html.light {
+    color-scheme: light;
+    --c-primary: 252 250 249;     /* #fcfaf9 */
+    --c-secondary: 238 238 238;   /* #eeeeee */
+    --c-tertiary: 58 57 57;       /* #3a3939 */
+    --c-accent: 0 158 100;        /* #009e64 */
+    --c-hairline: 219 219 219 / 1;      /* #dbdbdb */
+    --c-hairline-strong: 201 201 201 / 1; /* #c9c9c9 */
+}
+
 html {
     scroll-behavior: smooth;
 }

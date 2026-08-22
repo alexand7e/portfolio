@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { sendNewsletterForTutorial } from '@/lib/newsletter'
+import { notifyIndexNow } from '@/lib/indexnow'
 
 export async function GET(_: NextRequest, props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
@@ -40,6 +41,10 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
     sendNewsletterForTutorial(tutorial).catch((err) =>
       console.error('Newsletter dispatch error:', err)
     )
+  }
+
+  if (tutorial.published) {
+    notifyIndexNow(['/tutoriais', `/tutoriais/${tutorial.slug}`])
   }
 
   return NextResponse.json(tutorial)

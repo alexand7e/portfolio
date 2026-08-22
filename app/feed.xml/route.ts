@@ -1,9 +1,10 @@
 import { prisma } from '@/lib/prisma'
 import { NextResponse } from 'next/server'
+import { getBaseUrl } from '@/lib/seo'
 
 export const dynamic = 'force-dynamic'
 
-const BASE_URL = 'https://www.alexand7e.dev.br'
+const BASE_URL = getBaseUrl()
 
 export async function GET() {
   const [posts, tutorials] = await Promise.all([

@@ -8,7 +8,7 @@ export default function LanguageSelector() {
   return (
     <div className="relative group">
       <button
-        className="flex items-center gap-2 px-3 py-2 text-tertiary hover:text-accent transition-colors"
+        className="flex items-center gap-2 px-2.5 md:px-3 py-2 text-tertiary hover:text-accent transition-colors"
         onClick={() => changeLanguage(isEnglish ? 'pt' : 'en')}
         title={isEnglish ? 'Mudar para Português' : 'Change to English'}
       >

@@ -1,13 +1,14 @@
 import { MetadataRoute } from 'next'
 import { prisma } from '@/lib/prisma'
+import { getBaseUrl } from '@/lib/seo'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 3600
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://www.alexand7e.dev.br'
-  
-  // URLs estáticas principais
+  const baseUrl = getBaseUrl()
+
+  // URLs estáticas principais (abas)
   const now = new Date()
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: now, changeFrequency: 'monthly', priority: 1 },
@@ -22,6 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   let blogRoutes: MetadataRoute.Sitemap = []
   let tutorialRoutes: MetadataRoute.Sitemap = []
+  let tagRoutes: MetadataRoute.Sitemap = []
 
   try {
     const posts = await prisma.blog.findMany({
@@ -55,5 +57,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('Error fetching tutorials for sitemap:', error)
   }
 
-  return [...staticRoutes, ...blogRoutes, ...tutorialRoutes]
+  // Tags distintas (blog + tutoriais) — indexadas automaticamente
+  try {
+    const [blogTags, tutorialTags] = await Promise.all([
+      prisma.blog.findMany({ where: { published: true }, select: { tags: true } }),
+      prisma.tutorial.findMany({ where: { published: true }, select: { tags: true } }),
+    ])
+    const tags = [...new Set([...blogTags, ...tutorialTags].flatMap((r) => r.tags))].sort()
+    tagRoutes = tags.map((tag) => ({
+      url: `${baseUrl}/tags/${encodeURIComponent(tag)}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.4,
+    }))
+  } catch (error) {
+    console.error('Error fetching tags for sitemap:', error)
+  }
+
+  return [...staticRoutes, ...blogRoutes, ...tutorialRoutes, ...tagRoutes]
 }

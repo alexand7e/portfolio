@@ -1,0 +1,146 @@
+version: "3.9"
+
+# Deploy:
+#   docker stack deploy -c deploy/stack.yml portfolio
+#
+# PRE-REQUISITO: alexand7e.dev.br e www.alexand7e.dev.br precisam apontar (A)
+# para o IP do no antes do primeiro deploy. O resolver `le` usa tlschallenge;
+# sem DNS resolvendo, o certificado nao e' emitido e a rota responde erro TLS.
+#
+# As variaveis abaixo vem do .env que o CI envia para /tmp/portfolio-deploy e
+# carrega antes do stack deploy. `:?` faz o deploy abortar se faltar alguma,
+# em vez de subir o container com string vazia e quebrar so em runtime.
+
+services:
+  portfolio:
+    # IMAGE_TAG e' injetado pelo job deploy do CI. Falha se ausente.
+    image: ${IMAGE_TAG:?}
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOSTNAME: 0.0.0.0
+      TZ: America/Sao_Paulo
+
+      # Banco (Neon, externo): por isso este servico nao entra em rede de dados.
+      DATABASE_URL: ${DATABASE_URL:?}
+
+      # Sessao do admin. NEXTAUTH_URL precisa bater com o dominio publico,
+      # senao o callback de login redireciona para o lugar errado.
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:?}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:?}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:?}
+
+      SITE_URL: ${SITE_URL:?}
+
+      # Newsletter. Opcionais: sem eles o envio falha, o resto do site nao.
+      GMAIL_USER: ${GMAIL_USER:-}
+      GMAIL_APP_PASSWORD: ${GMAIL_APP_PASSWORD:-}
+      INDEXNOW_KEY: ${INDEXNOW_KEY:-}
+      GOOGLE_SITE_VERIFICATION: ${GOOGLE_SITE_VERIFICATION:-}
+      # NEXT_PUBLIC_GA_ID e NEXT_PUBLIC_SITE_URL NAO entram aqui: sao assados
+      # no build. Va nos build-args do Dockerfile / vars do Actions.
+
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 20s
+
+    networks:
+      - frontend_net
+
+    deploy:
+      replicas: 1
+
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=frontend_net"
+
+        # HTTP: um salto direto para https://www, sem cadeia dupla p/ SEO
+        # (mesmo comportamento do stack legado em teaser-stack-swarm).
+        - "traefik.http.routers.portfolio-http.rule=Host(`alexand7e.dev.br`) || Host(`www.alexand7e.dev.br`)"
+        - "traefik.http.routers.portfolio-http.entrypoints=web"
+        - "traefik.http.routers.portfolio-http.middlewares=redirect-to-www-https-portfolio"
+        - "traefik.http.middlewares.redirect-to-www-https-portfolio.redirectregex.regex=^https?://(?:www\\.)?alexand7e\\.dev\\.br/(.*)"
+        - "traefik.http.middlewares.redirect-to-www-https-portfolio.redirectregex.replacement=https://www.alexand7e.dev.br/$${1}"
+        - "traefik.http.middlewares.redirect-to-www-https-portfolio.redirectregex.permanent=true"
+
+        # HTTPS principal: www e dono do conteudo.
+        - "traefik.http.routers.portfolio.rule=Host(`www.alexand7e.dev.br`)"
+        - "traefik.http.routers.portfolio.entrypoints=websecure"
+        - "traefik.http.routers.portfolio.tls=true"
+        - "traefik.http.routers.portfolio.tls.certresolver=le"
+
+        # Apex https redireciona para www: mesmo conteudo em dois hosts
+        # divide autoridade de busca e duplica cache.
+        - "traefik.http.routers.portfolio-nowww.rule=Host(`alexand7e.dev.br`)"
+        - "traefik.http.routers.portfolio-nowww.entrypoints=websecure"
+        - "traefik.http.routers.portfolio-nowww.tls=true"
+        - "traefik.http.routers.portfolio-nowww.tls.certresolver=le"
+        - "traefik.http.routers.portfolio-nowww.middlewares=redirect-to-www-portfolio"
+        - "traefik.http.middlewares.redirect-to-www-portfolio.redirectregex.regex=^https://alexand7e\\.dev\\.br/(.*)"
+        - "traefik.http.middlewares.redirect-to-www-portfolio.redirectregex.replacement=https://www.alexand7e.dev.br/$${1}"
+        - "traefik.http.middlewares.redirect-to-www-portfolio.redirectregex.permanent=true"
+
+        # HSTS tambem na borda: garante o header em resposta que o app nunca
+        # gera (502 quando o container esta fora, por exemplo).
+        - "traefik.http.routers.portfolio.middlewares=portfolio-hsts"
+        - "traefik.http.middlewares.portfolio-hsts.headers.stsSeconds=31536000"
+        - "traefik.http.middlewares.portfolio-hsts.headers.stsIncludeSubdomains=true"
+
+        - "traefik.http.services.portfolio.loadbalancer.server.port=3000"
+        - "traefik.http.services.portfolio.loadbalancer.passHostHeader=true"
+        - "traefik.http.services.portfolio.loadbalancer.healthcheck.path=/api/health"
+        - "traefik.http.services.portfolio.loadbalancer.healthcheck.interval=30s"
+        - "traefik.http.services.portfolio.loadbalancer.healthcheck.timeout=10s"
+
+        # --- Metadados ---
+        - "app.name=portfolio"
+        - "app.environment=production"
+        - "app.tier=frontend"
+        - "service.type=web"
+        - "service.category=personal"
+
+      resources:
+        limits:
+          # Teto mais alto que o do curso: aqui ha SSR a cada request (a home
+          # e' dinamica por causa da Trilha) e o sharp otimiza imagem.
+          memory: 512M
+          cpus: "0.5"
+        reservations:
+          # Reserva baixa de proposito: o no ja opera perto do limite de CPU
+          # reservada, e reserva alta deixa a task "Pending - no suitable node"
+          # para sempre, sem falhar e sem rollback.
+          memory: 192M
+          cpus: "0.1"
+
+      restart_policy:
+        # 'any', nao 'on-failure': shutdown limpo do daemon Docker sai com
+        # codigo 0, que 'on-failure' nao considera falha e nunca reagenda.
+        condition: any
+        delay: 10s
+        max_attempts: 5
+        window: 300s
+
+      update_config:
+        parallelism: 1
+        delay: 20s
+        failure_action: rollback
+        monitor: 60s
+        max_failure_ratio: 0.2
+        # stop-first: sem CPU livre, start-first nunca consegue colocar a
+        # replica nova antes de derrubar a antiga. Com 1 replica isso significa
+        # alguns segundos de indisponibilidade no deploy.
+        order: stop-first
+
+      rollback_config:
+        parallelism: 1
+        delay: 10s
+        monitor: 60s
+        max_failure_ratio: 0.2
+        order: stop-first
+
+networks:
+  frontend_net:
+    external: true

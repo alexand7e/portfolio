@@ -1,261 +1,178 @@
-# Portfolio - Alexandre Barros dos Santos
+Portfólio - Alexandre Barros dos Santos
+=======================================
 
-Portfolio pessoal de **Alexandre Barros dos Santos**, Engenheiro e Cientista de Dados, desenvolvido com Next.js, TypeScript e Prisma.
+Isto é um site de portfólio pessoal. Não é um framework, não é uma
+biblioteca e não é um template que você deva sair copiando. É o site de
+uma pessoa só, com um painel administrativo atrás de autenticação, e foi
+escrito para resolver o problema dessa pessoa.
 
-## 👨‍💼 Sobre
+Se mesmo assim você quiser rodá-lo, leia o resto deste arquivo. Ele diz
+tudo que você precisa saber. Se algo aqui não funcionar, provavelmente
+você pulou um passo.
 
-Alexandre é Economista formado pela UFPI e especialista em Ciência da Computação. Atualmente atua como **Gerente de Programas em IA** na Secretaria de Inteligência Artificial, Economia Digital, Ciência, Tecnologia e Inovação (SIA) do Estado do Piauí.
 
-## 🚀 Tecnologias Utilizadas
+O QUE ESTÁ AQUI DENTRO
+----------------------
 
-- **Frontend**: Next.js 14, React 18, TypeScript, Tailwind CSS
-- **Backend**: Next.js API Routes, Prisma ORM
-- **Banco de Dados**: PostgreSQL (Neon)
-- **Autenticação**: NextAuth.js
-- **Animações**: Framer Motion
-- **Deploy**: Docker + GitHub Container Registry (GHCR)
-- **Email**: EmailJS
+Next.js 16 no App Router, React 18, TypeScript e Prisma sobre PostgreSQL.
+Autenticação com NextAuth, apenas com provider de credenciais.
+Estilização com Tailwind. Animações com Framer Motion. E-mail via
+nodemailer no servidor e EmailJS no formulário de contato do cliente.
 
-## 🛠️ Como Executar
+A escolha de tecnologia não é interessante e não vale discussão.
+Funciona.
 
-### Pré-requisitos
-- Node.js 18+ 
-- Docker (opcional)
-- PostgreSQL (ou use Neon para desenvolvimento)
-
-### Instalação Local
-
-```bash
-# Clone o repositório
-git clone https://github.com/alexand7e/portfolio.git
-
-# Entre na pasta
-cd portfolio
-
-# Instale as dependências
-npm install
-
-# Configure as variáveis de ambiente
-cp env.example .env.local
-# Edite o arquivo .env.local com suas configurações
-
-# Execute as migrações do banco
-npx prisma migrate dev
-
-# Gere o Prisma Client
-npx prisma generate
-
-# Execute em desenvolvimento
-npm run dev
-```
-
-O projeto estará disponível em [http://localhost:7000](http://localhost:7000)
-
-### Executar com Docker
-
-```bash
-# Build da imagem
-docker build -t portfolio .
-
-# Executar container
-docker run -e DATABASE_URL="sua_url_do_banco" \
-  -e NEXTAUTH_SECRET="seu_secret" \
-  -e NEXTAUTH_URL="http://localhost:7000" \
-  -e ADMIN_EMAIL="admin@exemplo.com" \
-  -e NEXT_PUBLIC_EMAILJS_SERVICE_ID="seu_service_id" \
-  -e NEXT_PUBLIC_EMAILJS_TEMPLATE_ID="seu_template_id" \
-  -e NEXT_PUBLIC_EMAILJS_PUBLIC_KEY="sua_public_key" \
-  -p 7000:7000 portfolio
-```
-
-### Usar Imagem do GHCR
-
-```bash
-# Executar imagem pré-construída
-docker run -e DATABASE_URL="sua_url_do_banco" \
-  -e NEXTAUTH_SECRET="seu_secret" \
-  -e NEXTAUTH_URL="http://localhost:7000" \
-  -e ADMIN_EMAIL="admin@exemplo.com" \
-  -e NEXT_PUBLIC_EMAILJS_SERVICE_ID="seu_service_id" \
-  -e NEXT_PUBLIC_EMAILJS_TEMPLATE_ID="seu_template_id" \
-  -e NEXT_PUBLIC_EMAILJS_PUBLIC_KEY="sua_public_key" \
-  -p 7000:7000 ghcr.io/alexand7e/portfolio:latest
-```
-
-## 🔧 Variáveis de Ambiente
-
-⚠️ **IMPORTANTE**: NUNCA commite credenciais reais no repositório!
-
-Crie um arquivo `.env.local` baseado no `env.example`:
-
-```env
-# Database
-DATABASE_URL="postgresql://username:password@host:port/database?sslmode=require"
-
-# NextAuth
-NEXTAUTH_SECRET="your-secret-key-here-change-in-production"
-NEXTAUTH_URL="http://localhost:7000"
-
-# Admin credentials
-ADMIN_EMAIL="admin@portfolio.com"
-ADMIN_PASSWORD="admin123"
-
-# EmailJS (for contact form)
-NEXT_PUBLIC_EMAILJS_SERVICE_ID="your_service_id"
-NEXT_PUBLIC_EMAILJS_TEMPLATE_ID="your_template_id"
-NEXT_PUBLIC_EMAILJS_PUBLIC_KEY="your_public_key"
-```
-
-## 📁 Estrutura do Projeto
-
-```
-portfolio/
-├── app/                    # Páginas principais (Next.js 13+)
-│   ├── admin/             # Painel administrativo
-│   ├── api/               # API Routes
-│   ├── blog/              # Páginas do blog
-│   └── projects/          # Páginas de projetos
-├── components/            # Componentes React
-│   ├── admin/            # Componentes do admin
-│   ├── animations/       # Animações e transições
-│   ├── pages/            # Páginas do portfolio
-│   └── ui/               # Componentes de interface
-├── lib/                  # Utilitários e configurações
-├── prisma/               # Schema e migrações do banco
-├── public/               # Assets estáticos
-├── scripts/              # Scripts de automação
-└── types/                # Definições de tipos TypeScript
-```
-
-## 🎯 Funcionalidades
-
-### Públicas
-- **Página Inicial**: Apresentação pessoal e estatísticas do GitHub
-- **Habilidades**: Competências técnicas organizadas por categoria
-- **Experiência**: Trajetória profissional e acadêmica
-- **Projetos**: Portfólio de trabalhos e pesquisas com filtros
-- **Blog**: Artigos e posts técnicos
-- **Contato**: Formulário de contato com EmailJS
-
-### Administrativas
-- **Painel Admin**: Gerenciamento completo de conteúdo
-- **CRUD de Projetos**: Criar, editar e gerenciar projetos
-- **CRUD de Experiências**: Gerenciar histórico profissional
-- **CRUD de Blog**: Sistema de posts e artigos
-- **Upload de Imagens**: Sistema de upload para assets
-- **Estatísticas**: Dashboard com métricas do site
 
-## 🗄️ Banco de Dados
+REQUISITOS
+----------
 
-O projeto usa PostgreSQL com Prisma ORM. As principais entidades são:
+  - Node.js 20.9 ou superior. O Next 16 não roda em menos que isso, e
+    não adianta insistir.
+  - PostgreSQL. Qualquer instância serve; em desenvolvimento o Neon
+    resolve sem você instalar nada localmente.
+  - Docker, se você preferir esse caminho. É opcional.
 
-- **Projects**: Projetos do portfólio
-- **Experiences**: Experiências profissionais
-- **Blog**: Posts e artigos
-- **Users**: Usuários administrativos
 
-### Comandos do Prisma
+COMPILANDO E RODANDO
+--------------------
 
-```bash
-# Visualizar banco
-npx prisma studio
+	git clone https://github.com/alexand7e/portfolio.git
+	cd portfolio
+	npm install --legacy-peer-deps
+	cp .env.example .env.local
+	# edite .env.local antes de continuar
+	npx prisma migrate dev
+	npx prisma generate
+	npm run dev
 
-# Executar migrações
-npx prisma migrate dev
+O site sobe em http://localhost:7000.
 
-# Reset do banco
-npx prisma migrate reset
+O `--legacy-peer-deps` não é preguiça. O next-auth declara nodemailer 7
+como peer *opcional* e este projeto usa a 9, que é a primeira versão sem
+o GHSA-p6gq-j5cr-w38f. Como o único provider em uso é o de credenciais,
+o nodemailer do next-auth nunca é carregado e o conflito é decorativo.
+Não "conserte" isso rebaixando o nodemailer.
 
-# Gerar client
-npx prisma generate
-```
 
-## 🚀 Deploy
+CONFIGURAÇÃO
+------------
 
-### Deploy com Docker
+Toda a configuração vem de variáveis de ambiente. Use `.env.example`
+como ponto de partida:
 
-```bash
-# Build para produção
-docker build -t portfolio .
+	DATABASE_URL="postgresql://usuario:senha@host:porta/banco?sslmode=require"
 
-# Executar em produção
-docker run -d --name portfolio \
-  -e DATABASE_URL="sua_url_producao" \
-  -e NEXTAUTH_SECRET="seu_secret_producao" \
-  -e NEXTAUTH_URL="https://seudominio.com" \
-  -p 7000:7000 portfolio
-```
+	NEXTAUTH_SECRET="troque-isto-em-producao"
+	NEXTAUTH_URL="http://localhost:7000"
 
-### Deploy na Vercel
+	ADMIN_EMAIL="admin@exemplo.com"
+	ADMIN_PASSWORD="troque-isto-tambem"
 
-```bash
-# Build
-npm run build
+	NEXT_PUBLIC_EMAILJS_SERVICE_ID="..."
+	NEXT_PUBLIC_EMAILJS_TEMPLATE_ID="..."
+	NEXT_PUBLIC_EMAILJS_PUBLIC_KEY="..."
 
-# Deploy
-vercel --prod
-```
+Credencial real não entra em commit. Nunca. Se você commitar uma, ela
+vazou: não basta apagar no commit seguinte, você precisa rotacionar o
+segredo. Tudo que começa com NEXT_PUBLIC_ vai embutido no bundle do
+cliente e é público por construção — não coloque nada sensível ali.
 
-## 🔗 Links Importantes
+Para criar o usuário administrativo:
 
-- **LinkedIn**: [Alexandre Barros dos Santos](https://www.linkedin.com/in/alexandre-barros-dos-santos-4b67a9233/)
-- **GitHub**: [@alexand7e](https://github.com/alexand7e/)
-- **Email**: alexand7e@gmail.com
-- **Telefone**: (86) 98181-3317
+	npm run create-admin
 
-## 📊 Principais Projetos
 
-- **Microdados-CAGED**: Análise de dados do mercado de trabalho
-- **Dataset-PI**: Compilação de dados do Estado do Piauí
-- **R-Reps**: Análises estatísticas e econométricas
-- **Engenharia-de-Prompt-PIT**: Pesquisa em IA e prompts
+DOCKER
+------
 
-## 🐳 Docker
+Construindo localmente:
 
-A imagem Docker está disponível no GitHub Container Registry:
+	docker build -t portfolio .
+	docker run -p 7000:7000 \
+	  -e DATABASE_URL="..." \
+	  -e NEXTAUTH_SECRET="..." \
+	  -e NEXTAUTH_URL="http://localhost:7000" \
+	  -e ADMIN_EMAIL="..." \
+	  portfolio
 
-```bash
-# Pull da imagem
-docker pull ghcr.io/alexand7e/portfolio:latest
+Ou use a imagem já publicada no GitHub Container Registry, que é o mesmo
+com menos espera:
 
-# Executar
-docker run -p 7000:7000 ghcr.io/alexand7e/portfolio:latest
-```
+	docker pull ghcr.io/alexand7e/portfolio:latest
+	docker run -p 7000:7000 -e DATABASE_URL="..." \
+	  ghcr.io/alexand7e/portfolio:latest
 
-## 📝 Scripts Disponíveis
+Os arquivos de compose estão em docker/.
 
-```bash
-# Desenvolvimento
-npm run dev
 
-# Build
-npm run build
+ESTRUTURA DO CÓDIGO
+-------------------
 
-# Start produção
-npm run start
+	app/            rotas do App Router
+	  admin/        painel administrativo, atrás de autenticação
+	  api/          route handlers
+	components/     componentes React, separados por área
+	lib/            autenticação, prisma, markdown, utilitários
+	prisma/         schema e migrações
+	scripts/        automações avulsas
+	types/          declarações de tipo
 
-# Lint
-npm run lint
+Se você for adicionar uma rota dinâmica, note que `params` é uma Promise
+e precisa de `await`. Isso é exigência do Next desde a versão 15 e não é
+negociável.
 
-# Criar usuário admin
-npm run create-admin
 
-# Popular banco com dados de exemplo
-npm run populate-db
-```
+BANCO DE DADOS
+--------------
 
-## 🔒 Segurança
+PostgreSQL com Prisma. As entidades que importam são Projects,
+Experiences, Blog e Users.
 
-- Autenticação com NextAuth.js
-- Senhas hasheadas com bcrypt
-- Validação de tipos com TypeScript
-- Sanitização de dados de entrada
-- Headers de segurança configurados
+	npx prisma studio          # inspecionar os dados
+	npx prisma migrate dev     # aplicar migrações
+	npx prisma generate        # regerar o client
+	npx prisma migrate reset   # apaga tudo, sem perguntar duas vezes
 
-## 📝 Licença
+O último comando faz exatamente o que o nome diz. Se você rodá-lo contra
+produção, o problema é seu.
 
-Este projeto é de uso pessoal e educacional.
 
----
+TESTES E LINT
+-------------
 
-**Desenvolvido com ❤️ por Alexandre Barros dos Santos**
+	npm test
+	npm run lint
+
+O lint chama o ESLint diretamente. O `next lint` foi removido no Next 16
+e a configuração vive em `eslint.config.mjs`, no formato flat — não
+procure por `.eslintrc.json`, ele não existe mais.
+
+O lint hoje acusa erros preexistentes das regras novas do
+eslint-plugin-react-hooks 7. São reais e estão na fila. Não são
+regressões, e não é motivo para abrir issue.
+
+
+SEGURANÇA
+---------
+
+Senhas passam por bcrypt. As rotas administrativas verificam a sessão do
+NextAuth no servidor, não no cliente. As dependências são acompanhadas
+pelo Dependabot e as correções entram sem cerimônia — inclusive quando
+exigem major, porque na prática elas sempre exigem.
+
+Achou uma falha de verdade? Mande e-mail. Não abra issue pública.
+
+
+CONTATO
+-------
+
+	Alexandre Barros dos Santos
+	https://github.com/alexand7e
+	https://www.linkedin.com/in/alexand7e/
+	alexand7e@gmail.com
+
+
+LICENÇA
+-------
+
+Ver LICENSE.

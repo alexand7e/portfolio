@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { FiArrowLeft, FiFileText, FiBook, FiTag } from 'react-icons/fi'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
+import { getBaseUrl } from '@/lib/seo'
 
 interface Props {
   params: Promise<{ tag: string }>
@@ -13,10 +14,29 @@ export const dynamic = 'force-dynamic'
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
   const tag = decodeURIComponent(params.tag)
+
+  const [postCount, tutorialCount] = await Promise.all([
+    prisma.blog.count({ where: { published: true, tags: { has: tag } } }),
+    prisma.tutorial.count({ where: { published: true, tags: { has: tag } } }),
+  ])
+  const total = postCount + tutorialCount
+  if (total === 0) return { title: `#${tag}` }
+
+  const parts: string[] = []
+  if (postCount > 0) parts.push(`${postCount} post${postCount !== 1 ? 's' : ''}`)
+  if (tutorialCount > 0) parts.push(`${tutorialCount} tutorial${tutorialCount !== 1 ? 'is' : ''}`)
+  const description = `Conteúdo sobre "${tag}" — ${parts.join(' e ')} publicados por Alexandre Barros (SIA-PI, UFPI) sobre IA, dados e tecnologia.`
+
   return {
-    title: `#${tag}`,
-    description: `Posts, tutoriais e conteúdo com a tag "${tag}" por Alexandre Barros (SIA-PI, UFPI).`,
-    alternates: { canonical: `https://www.alexand7e.dev.br/tags/${tag}` },
+    title: `#${tag} — Conteúdo sobre ${tag}`,
+    description,
+    alternates: { canonical: `${getBaseUrl()}/tags/${encodeURIComponent(tag)}` },
+    openGraph: {
+      title: `#${tag} — Alexandre Barros`,
+      description,
+      url: `${getBaseUrl()}/tags/${encodeURIComponent(tag)}`,
+      type: 'website',
+    },
   }
 }
 
@@ -66,7 +86,10 @@ export default async function TagPage(props: Props) {
           <h1 className="text-4xl md:text-5xl font-bold text-tertiary mb-2 tracking-tight">
             #{tag}
           </h1>
-          <p className="text-tertiary/50 text-sm">{total} resultado{total !== 1 ? 's' : ''}</p>
+          <p className="text-tertiary/50 text-sm max-w-2xl">
+            Todo o conteúdo publicado sobre <strong className="text-tertiary/80">{tag}</strong> —
+            {' '}{total} resultado{total !== 1 ? 's' : ''} entre posts do blog e tutoriais sobre IA, dados e tecnologia.
+          </p>
         </div>
       </div>
 

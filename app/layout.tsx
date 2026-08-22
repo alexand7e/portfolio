@@ -3,11 +3,11 @@ import { JetBrains_Mono } from "next/font/google";
 import React, { Suspense } from "react";
 import "./globals.css";
 
-import StairTransition from "@/components/animations/EnterAnimation";
 import LanguageProvider from "@/components/providers/LanguageProvider";
+import ThemeProvider from "@/components/providers/ThemeProvider";
 import StructuredData from "@/components/seo/StructuredData";
 import GoogleAnalytics from "@/components/seo/GoogleAnalytics";
-import { NeuralGrid } from "@/components/ui/NeuralGrid";
+import { getBaseUrl } from "@/lib/seo";
 
 const jMono = JetBrains_Mono({
     subsets: ["latin"],
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
         default: "Alexandre Barros — Dados, IA e Tecnologia | SIA-PI",
         template: "%s | Alexandre Barros",
     },
-    description: "Alexandre Barros dos Santos — Gerente de IA na Secretaria de Inteligência Artificial do Piauí (SIA), formado pela UFPI. Engenheiro e Cientista de Dados especialista em IA, Python e transformação digital no setor público.",
+    description: "Alexandre Barros dos Santos — Gerente de Programas em IA na Secretaria de Inteligência Artificial do Piauí (SIA). Economista pela UFPI e pós-graduado em Ciência da Computação pelo iCEV, atua com dados, IA e transformação digital no setor público.",
     keywords: [
         "Alexandre Barros", "Alexandre Barros SIA", "Alexandre Barros UFPI",
         "alexandre barros sia", "gerente de ia sia", "Sia", "SIA Piauí", "SIA-PI",
@@ -35,15 +35,14 @@ export const metadata: Metadata = {
     authors: [{ name: "Alexandre Barros dos Santos" }],
     creator: "Alexandre Barros dos Santos",
     publisher: "Alexandre Barros dos Santos",
-    metadataBase: new URL('https://www.alexand7e.dev.br'),
+    metadataBase: new URL(getBaseUrl()),
+    verification: process.env.GOOGLE_SITE_VERIFICATION
+        ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+        : undefined,
     alternates: {
         canonical: '/',
-        languages: {
-            'pt-BR': '/',
-            'en': '/en',
-        },
         types: {
-            'application/rss+xml': 'https://www.alexand7e.dev.br/feed.xml',
+            'application/rss+xml': `${getBaseUrl()}/feed.xml`,
         },
     },
     openGraph: {
@@ -90,17 +89,22 @@ export default function RootLayout({
     return (
         <html lang="pt-BR">
             <head>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: "try{if(localStorage.getItem('theme')==='light'){document.documentElement.classList.add('light')}}catch(e){}",
+                    }}
+                />
                 <GoogleAnalytics />
                 <StructuredData />
             </head>
             <body className={jMono.className}>
-                <NeuralGrid />
                 <div className="relative" style={{ zIndex: 2 }}>
-                    <StairTransition />
                     <Suspense fallback={null}>
-                        <LanguageProvider>
-                            {children}
-                        </LanguageProvider>
+                        <ThemeProvider>
+                            <LanguageProvider>
+                                {children}
+                            </LanguageProvider>
+                        </ThemeProvider>
                     </Suspense>
                 </div>
             </body>

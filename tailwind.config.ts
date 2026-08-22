@@ -9,13 +9,15 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                primary: "#1c1c22",
-                secondary: "#1C2026",
-                tertiary: "#E0E1DD",
+                primary: "rgb(var(--c-primary) / <alpha-value>)",
+                secondary: "rgb(var(--c-secondary) / <alpha-value>)",
+                tertiary: "rgb(var(--c-tertiary) / <alpha-value>)",
                 accent: {
-                    DEFAULT: "#00ff99",
-                    hover: "#00e187"
+                    DEFAULT: "rgb(var(--c-accent) / <alpha-value>)",
+                    hover: "rgb(var(--c-accent) / 0.9)"
                 },
+                hairline: "rgb(var(--c-hairline))",
+                "hairline-strong": "rgb(var(--c-hairline-strong))",
             },
         },
         screens: {
