@@ -63,7 +63,7 @@ export default function HomePage ({
                         <Reveal>
                             <div className="inline-flex items-center gap-2 border border-accent/30 rounded-full px-4 py-1.5 text-xs text-accent/80 bg-accent/5">
                                 <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                                Gerente de IA · SIA-PI
+                                Gerente de Programas em IA · SIA-PI
                             </div>
                         </Reveal>
 
@@ -118,7 +118,7 @@ export default function HomePage ({
                                    className="hover:text-accent transition-colors">
                                     <FiGithub size={18} />
                                 </a>
-                                <a href="https://linkedin.com/in/alexandrebarros" target="_blank" rel="noopener noreferrer"
+                                <a href="https://www.linkedin.com/in/alexand7e" target="_blank" rel="noopener noreferrer"
                                    className="hover:text-accent transition-colors">
                                     <FiLinkedin size={18} />
                                 </a>

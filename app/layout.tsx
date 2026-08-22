@@ -20,7 +20,7 @@ export const metadata: Metadata = {
         default: "Alexandre Barros — Dados, IA e Tecnologia | SIA-PI",
         template: "%s | Alexandre Barros",
     },
-    description: "Alexandre Barros dos Santos — Gerente de IA na Secretaria de Inteligência Artificial do Piauí (SIA), formado pela UFPI. Engenheiro e Cientista de Dados especialista em IA, Python e transformação digital no setor público.",
+    description: "Alexandre Barros dos Santos — Gerente de Programas em IA na Secretaria de Inteligência Artificial do Piauí (SIA). Economista pela UFPI e pós-graduado em Ciência da Computação pelo iCEV, atua com dados, IA e transformação digital no setor público.",
     keywords: [
         "Alexandre Barros", "Alexandre Barros SIA", "Alexandre Barros UFPI",
         "alexandre barros sia", "gerente de ia sia", "Sia", "SIA Piauí", "SIA-PI",

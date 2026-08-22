@@ -115,7 +115,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 py-8 px-10 md:px-12">
           <div className="flex items-center gap-4 text-tertiary/40">
             <a href="https://github.com/alexand7e" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors" aria-label="GitHub"><FiGithub size={18} /></a>
-            <a href="https://linkedin.com/in/alexandrebarros" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors" aria-label="LinkedIn"><FiLinkedin size={18} /></a>
+            <a href="https://www.linkedin.com/in/alexand7e" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors" aria-label="LinkedIn"><FiLinkedin size={18} /></a>
             <a href="mailto:contato@alexand7e.dev.br" className="hover:text-accent transition-colors" aria-label="E-mail"><FiMail size={18} /></a>
           </div>
           <div className="flex flex-wrap items-center gap-3 text-xs text-tertiary/40 uppercase tracking-widest">
