@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { useLanguage } from "@/lib/useLanguage";
 import SiaContainer from "@/components/ui/SiaContainer";
@@ -10,43 +9,42 @@ import {
   FiArrowRight,
   FiChevronLeft,
   FiChevronRight,
+  FiExternalLink,
   FiFileText,
-  FiMapPin,
+  FiGithub,
   FiPause,
   FiPlay,
-  FiVideo,
 } from "react-icons/fi";
 
 export type TrilhaItem = {
   slug: string;
   title: string;
   titleEn: string | null;
+  description: string | null;
+  descriptionEn: string | null;
   event: string;
   eventEn: string | null;
-  location: string | null;
   date: string;
-  coverImage: string | null;
   tags: string[];
   slidesUrl: string | null;
-  videoUrl: string | null;
+  repos: string[];
 };
 
-type Totals = { talks: number; events: number; places: number };
-
-// Hosts liberados em next.config.mjs. Capa fora dessa lista passa sem o
-// otimizador, que dispensa configuracao e evita quebrar em producao.
-const OPTIMIZED_HOSTS = ["github.com", "api.github.com"];
-
-function isOptimizable(src: string) {
-  if (!/^https?:\/\//i.test(src)) return true;
-  try {
-    return OPTIMIZED_HOSTS.includes(new URL(src).hostname);
-  } catch {
-    return false;
-  }
-}
+type Totals = { talks: number; events: number; repos: number };
 
 const DRIFT_PX_PER_SEC = 16;
+
+// github.com/dono/nome -> "nome"; com /tree/branch -> "nome@branch"
+function repoLabel(url: string) {
+  try {
+    const parts = new URL(url).pathname.split("/").filter(Boolean);
+    const name = parts[1] ?? url;
+    const branch = parts[2] === "tree" ? parts.slice(3).join("/") : null;
+    return branch ? `${name}@${branch}` : name;
+  } catch {
+    return url;
+  }
+}
 
 export default function TrilhaStrip({
   id,
@@ -120,6 +118,7 @@ export default function TrilhaStrip({
     new Date(iso).toLocaleDateString(en ? "en-US" : "pt-BR", {
       month: "short",
       year: "numeric",
+      timeZone: "UTC",
     });
 
   return (
@@ -133,26 +132,20 @@ export default function TrilhaStrip({
                   {en ? "Teaching" : "Aulas & Palestras"}
                 </span>
                 <h2 className="text-2xl md:text-3xl font-bold text-tertiary leading-snug">
-                  {en
-                    ? "What I teach, and where"
-                    : "O que eu ensino, e onde"}
+                  {en ? "What I teach, and where" : "O que eu ensino, e onde"}
                 </h2>
               </div>
 
               <dl className="flex items-center gap-6 text-tertiary/60">
                 {[
-                  { n: totals.talks, l: en ? "aulas" : "aulas" },
+                  { n: totals.talks, l: en ? "classes" : "aulas" },
                   { n: totals.events, l: en ? "events" : "eventos" },
-                  { n: totals.places, l: en ? "cities" : "cidades" },
+                  { n: totals.repos, l: en ? "repos" : "repositórios" },
                 ].map((s) => (
                   <div key={s.l} className="flex flex-col">
                     <dt className="sr-only">{s.l}</dt>
-                    <dd className="text-accent text-xl md:text-2xl font-bold">
-                      {s.n}
-                    </dd>
-                    <span className="text-[11px] uppercase tracking-widest">
-                      {s.l}
-                    </span>
+                    <dd className="text-accent text-xl md:text-2xl font-bold">{s.n}</dd>
+                    <span className="text-[11px] uppercase tracking-widest">{s.l}</span>
                   </div>
                 ))}
               </dl>
@@ -162,8 +155,11 @@ export default function TrilhaStrip({
           {/* Filtro por tema + controles da faixa */}
           <Reveal delay={0.06}>
             <div className="flex flex-wrap items-center justify-between gap-4">
-              <div className="flex flex-wrap gap-2" role="group"
-                   aria-label={en ? "Filter by topic" : "Filtrar por tema"}>
+              <div
+                className="flex flex-wrap gap-2"
+                role="group"
+                aria-label={en ? "Filter by topic" : "Filtrar por tema"}
+              >
                 <FilterChip
                   active={topic === null}
                   onClick={() => setTopic(null)}
@@ -234,65 +230,69 @@ export default function TrilhaStrip({
               key={item.slug}
               layout={!reduce}
               transition={{ duration: 0.35, ease: [0.21, 0.47, 0.32, 0.98] }}
-              className="group relative shrink-0 w-[260px] md:w-[300px] bg-primary"
+              className="group relative shrink-0 w-[300px] md:w-[340px] bg-primary flex flex-col p-7"
             >
-              <Link
-                href={`/talks#${item.slug}`}
-                className="flex flex-col h-full p-6 focus:outline-none focus-visible:ring-1 focus-visible:ring-accent"
-              >
-                <div className="relative w-full aspect-[16/10] overflow-hidden border border-hairline bg-secondary">
-                  {item.coverImage ? (
-                    <Image
-                      src={item.coverImage}
-                      alt=""
-                      fill
-                      sizes="300px"
-                      unoptimized={!isOptimizable(item.coverImage)}
-                      className="object-cover grayscale contrast-[1.05] transition-[filter,transform] duration-500 group-hover:grayscale-0 group-hover:scale-[1.03]"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 grid place-items-center text-tertiary/25 text-[11px] uppercase tracking-widest">
-                      {en ? "no photo" : "sem foto"}
-                    </div>
-                  )}
-                </div>
-
-                <div className="flex items-center gap-2 mt-4 text-[11px] uppercase tracking-widest text-tertiary/50">
-                  <time dateTime={item.date}>{formatDate(item.date)}</time>
-                  {item.location && (
-                    <>
-                      <span aria-hidden>·</span>
-                      <span className="inline-flex items-center gap-1 truncate">
-                        <FiMapPin size={10} />
-                        {item.location}
-                      </span>
-                    </>
-                  )}
-                </div>
-
-                <h3 className="mt-2 text-sm font-bold text-tertiary leading-snug line-clamp-2 group-hover:text-accent transition-colors">
-                  {en && item.titleEn ? item.titleEn : item.title}
-                </h3>
-
-                <p className="mt-1 text-xs text-tertiary/60 line-clamp-1">
+              <div className="flex items-center gap-2 text-[11px] uppercase tracking-widest text-tertiary/45">
+                <time dateTime={item.date}>{formatDate(item.date)}</time>
+                <span aria-hidden>·</span>
+                <span className="truncate">
                   {en && item.eventEn ? item.eventEn : item.event}
-                </p>
+                </span>
+              </div>
 
-                <div className="mt-auto pt-4 flex items-center gap-3 text-tertiary/40">
-                  {item.slidesUrl && (
-                    <span className="inline-flex items-center gap-1 text-[11px]">
-                      <FiFileText size={11} />
-                      {en ? "slides" : "slides"}
-                    </span>
-                  )}
-                  {item.videoUrl && (
-                    <span className="inline-flex items-center gap-1 text-[11px]">
-                      <FiVideo size={11} />
-                      {en ? "video" : "vídeo"}
-                    </span>
-                  )}
-                </div>
-              </Link>
+              <h3 className="mt-3 text-base font-bold text-tertiary leading-snug line-clamp-3">
+                <Link
+                  href={`/talks#${item.slug}`}
+                  className="hover:text-accent transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-accent"
+                >
+                  {en && item.titleEn ? item.titleEn : item.title}
+                </Link>
+              </h3>
+
+              {item.description && (
+                <p className="mt-2 text-xs text-tertiary/60 leading-relaxed line-clamp-3">
+                  {en && item.descriptionEn ? item.descriptionEn : item.description}
+                </p>
+              )}
+
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {item.tags.slice(0, 3).map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-[10px] px-2 py-0.5 rounded-full border border-hairline-strong text-tertiary/55"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-auto pt-5 flex flex-col gap-1.5">
+                {item.slidesUrl && (
+                  <a
+                    href={item.slidesUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-[11px] text-tertiary/70 hover:text-accent transition-colors"
+                  >
+                    <FiFileText size={12} className="shrink-0" />
+                    <span className="truncate">{en ? "slides" : "apresentação"}</span>
+                    <FiExternalLink size={10} className="shrink-0 opacity-50" />
+                  </a>
+                )}
+                {item.repos.map((repo) => (
+                  <a
+                    key={repo}
+                    href={repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-[11px] text-tertiary/70 hover:text-accent transition-colors"
+                  >
+                    <FiGithub size={12} className="shrink-0" />
+                    <span className="truncate font-mono">{repoLabel(repo)}</span>
+                    <FiExternalLink size={10} className="shrink-0 opacity-50" />
+                  </a>
+                ))}
+              </div>
             </motion.article>
           ))}
         </div>

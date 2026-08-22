@@ -12,24 +12,35 @@ export default async function Trilha({ id }: { id?: string }) {
 
   if (talks.length === 0) return null;
 
+  // Conta repositorios distintos, nao URLs: o mesmo repo aparece uma vez
+  // pela raiz e outra apontando para um branch.
+  const repoKey = (url: string) => {
+    try {
+      const [owner, name] = new URL(url).pathname.split("/").filter(Boolean);
+      return owner && name ? `${owner}/${name}` : url;
+    } catch {
+      return url;
+    }
+  };
+
   const totals = {
     talks: talks.length,
     events: new Set(talks.map((t) => t.event)).size,
-    places: new Set(talks.map((t) => t.location).filter(Boolean)).size,
+    repos: new Set(talks.flatMap((t) => t.repos).map(repoKey)).size,
   };
 
   const items = talks.slice(0, 24).map((t) => ({
     slug: t.slug,
     title: t.title,
     titleEn: t.titleEn,
+    description: t.description,
+    descriptionEn: t.descriptionEn,
     event: t.event,
     eventEn: t.eventEn,
-    location: t.location,
     date: t.date.toISOString(),
-    coverImage: t.coverImage,
     tags: t.tags,
     slidesUrl: t.slidesUrl,
-    videoUrl: t.videoUrl,
+    repos: t.repos,
   }));
 
   return <TrilhaStrip id={id} items={items} totals={totals} />;
