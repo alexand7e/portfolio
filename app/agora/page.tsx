@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { FiArrowLeft } from 'react-icons/fi'
 import { Metadata } from 'next'
 import { remark } from 'remark'
+import remarkGfm from 'remark-gfm'
 import remarkHtml from 'remark-html'
 import { SubpageLayout } from '@/components/ui/SubpageLayout'
 
@@ -32,7 +33,7 @@ export default async function AgoraPage() {
 
   let contentHtml = ''
   if (rawContent) {
-    const processed = await remark().use(remarkHtml).process(rawContent)
+    const processed = await remark().use(remarkGfm).use(remarkHtml).process(rawContent)
     contentHtml = processed.toString()
   }
 

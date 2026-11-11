@@ -7,7 +7,7 @@ import { IoClose } from "react-icons/io5";
 
 const options = [
     {
-        title: "home",
+        title: "início",
         href: "/"
     },
     {
@@ -19,11 +19,11 @@ const options = [
         href: "/tutoriais",
     },
     {
-        title: "projects",
+        title: "projetos",
         href: "/projects",
     },
     {
-        title: "contact",
+        title: "contato",
         href: "/#contact",
     }
 ]

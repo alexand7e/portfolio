@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import { remark } from 'remark'
+import remarkGfm from 'remark-gfm'
 import remarkHtml from 'remark-html'
 import { FiClock, FiArrowLeft, FiArrowRight, FiTag } from 'react-icons/fi'
 import Link from 'next/link'
@@ -45,7 +46,7 @@ async function getTutorial(slug: string) {
     },
   })
   if (!tutorial) return null
-  const processed = await remark().use(remarkHtml).process(tutorial.content)
+  const processed = await remark().use(remarkGfm).use(remarkHtml).process(tutorial.content)
   const { html: contentHtml, headings } = extractHeadings(processed.toString())
   return { ...tutorial, contentHtml, headings }
 }
@@ -223,6 +224,7 @@ export default async function TutorialPage(props: Props) {
                   prose-img:rounded-xl prose-img:border prose-img:border-accent/20
                   prose-ul:text-tertiary/80 prose-ol:text-tertiary/80 prose-li:text-tertiary/80
                   prose-hr:border-accent/20
+                  prose-table:block prose-table:overflow-x-auto prose-th:text-tertiary prose-th:px-3 prose-td:text-tertiary/80 prose-td:px-3 prose-thead:border-accent/30 prose-tr:border-hairline
                 "
                 dangerouslySetInnerHTML={{ __html: tutorial.contentHtml }}
               />

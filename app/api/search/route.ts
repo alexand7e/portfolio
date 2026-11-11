@@ -1,8 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { clientIp, createRateLimiter } from '@/lib/rateLimit'
+
+const MAX_QUERY = 80
+
+// A busca (⌘K e terminal da home) é pública e bate no banco: 40 consultas por minuto por IP
+// cobrem a digitação com debounce e cortam scripts em loop.
+const limiter = createRateLimiter({ limit: 40, windowMs: 60_000 })
+
+// Controles e caracteres invisíveis (zero-width, bidi) não ajudam a buscar nada.
+const INVISIBLE = new RegExp('[\\p{Cc}\\p{Cf}]', 'gu')
 
 export async function GET(req: NextRequest) {
-  const q = req.nextUrl.searchParams.get('q')?.trim()
+  const { ok, retryAfter } = limiter(clientIp(req))
+  if (!ok) {
+    return NextResponse.json(
+      { results: [], error: 'rate_limited' },
+      { status: 429, headers: { 'Retry-After': String(retryAfter) } },
+    )
+  }
+
+  const q = req.nextUrl.searchParams.get('q')
+    ?.replace(/\s+/g, ' ')
+    .replace(INVISIBLE, '')
+    .trim()
+    .slice(0, MAX_QUERY)
   if (!q || q.length < 2) {
     return NextResponse.json({ results: [] })
   }

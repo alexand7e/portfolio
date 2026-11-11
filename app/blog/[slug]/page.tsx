@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { remark } from 'remark';
+import remarkGfm from 'remark-gfm';
 import remarkHtml from 'remark-html';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
@@ -26,7 +27,7 @@ async function getPost(slug: string) {
   });
   if (!post) return null;
 
-  const processed = await remark().use(remarkHtml).process(post.content);
+  const processed = await remark().use(remarkGfm).use(remarkHtml).process(post.content);
   const { html: contentHtml, headings } = extractHeadings(processed.toString());
   return { ...post, contentHtml, headings };
 }
@@ -211,6 +212,7 @@ export default async function PostPage(props: PostPageProps) {
                 prose-ul:text-tertiary/80 prose-ol:text-tertiary/80
                 prose-li:text-tertiary/80
                 prose-hr:border-accent/20
+                prose-table:block prose-table:overflow-x-auto prose-th:text-tertiary prose-th:px-3 prose-td:text-tertiary/80 prose-td:px-3 prose-thead:border-accent/30 prose-tr:border-hairline
               "
               dangerouslySetInnerHTML={{ __html: contentHtml }}
             />
