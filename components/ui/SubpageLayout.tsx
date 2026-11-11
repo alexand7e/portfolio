@@ -6,11 +6,11 @@ import { MobileNav } from '@/components/ui/NavComponents'
 import type { ReactNode } from 'react'
 
 const links = [
-  { href: '/',          label: 'home' },
+  { href: '/',          label: 'início' },
   { href: '/blog',      label: 'blog' },
   { href: '/tutoriais', label: 'tutoriais' },
-  { href: '/projects',  label: 'projects' },
-  { href: '/#contact',  label: 'contact' },
+  { href: '/projects',  label: 'projetos' },
+  { href: '/#contact',  label: 'contato' },
 ]
 
 function SideNav() {

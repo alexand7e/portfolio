@@ -47,7 +47,7 @@ export const translations: Record<Language, Translations> = {
     home: {
       title: "Data Engineer | Full-Stack Developer | Tech Leader",
       subtitle: "Olá, eu sou",
-      description: "Dados não mentem. Pessoas interpretam, narrativas distorcem — mas os números estão lá, esperando alguém que saiba o que perguntar. Trabalho na interseção entre dados e tecnologia desde 2022, no setor público e no privado, tentando transformar o que os dados mostram em decisões que mudam alguma coisa de verdade.",
+      description: "Transformo dados e inteligência artificial em decisões estratégicas de alto impacto no setor público e privado.",
       contactButton: "Entre em Contato"
     },
     skills: {
@@ -88,7 +88,7 @@ export const translations: Record<Language, Translations> = {
     home: {
       title: "Data Engineer | Full-Stack Developer | Tech Leader",
       subtitle: "Hello, I'm",
-      description: "Data doesn't lie. People interpret, narratives distort — but the numbers are there, waiting for someone who knows what to ask. I've worked at the intersection of data and technology since 2022, in the public and private sectors, trying to turn what the data shows into decisions that actually change something.",
+      description: "I turn data and artificial intelligence into high-impact strategic decisions in the public and private sectors.",
       contactButton: "Get in Touch"
     },
     skills: {

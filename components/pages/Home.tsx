@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { useLanguage } from "@/lib/useLanguage";
-import { FiGithub, FiLinkedin, FiMail, FiArrowRight } from "react-icons/fi";
+import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
 import SiaContainer from "@/components/ui/SiaContainer";
+import AgentTerminal from "@/components/ui/AgentTerminal";
 import Reveal from "@/components/animations/Reveal";
 
 const TAGS = ["Python", "Data Science", "IA", "Next.js", "FastAPI", "Setor Público"];
@@ -56,9 +56,9 @@ export default function HomePage ({
             className="relative w-full overflow-hidden pt-14 md:pt-20"
         >
             <SiaContainer>
-                <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20 px-10 md:px-12 pb-14 md:pb-20">
+                <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-12 xl:gap-16 px-10 md:px-12 xl:px-16 pb-14 md:pb-20">
                     {/* Coluna texto */}
-                    <div className="flex flex-col gap-5 items-center lg:items-start text-center lg:text-left flex-1 min-w-0">
+                    <div className="flex flex-col gap-6 items-center lg:items-start text-center lg:text-left min-w-0">
                         {/* Badge de cargo */}
                         <Reveal>
                             <div className="inline-flex items-center gap-2 border border-accent/30 rounded-full px-4 py-1.5 text-xs text-accent/80 bg-accent/5">
@@ -101,16 +101,16 @@ export default function HomePage ({
                         <Reveal delay={0.24}>
                             <div className="flex flex-wrap items-center gap-4 mt-2">
                             <Link
-                                href="#contact"
-                                className="border-2 border-accent px-6 py-2.5 text-accent rounded-full font-bold hover:bg-accent hover:text-primary transition-all text-sm"
-                            >
-                                {t("home.contactButton")}
-                            </Link>
-                            <Link
                                 href="#projects"
-                                className="px-6 py-2.5 text-tertiary/80 rounded-full font-bold border border-hairline-strong hover:border-accent hover:text-accent transition-all text-sm"
+                                className="border-2 border-accent bg-accent px-6 py-2.5 text-primary rounded-full font-bold hover:bg-accent/90 transition-all text-sm"
                             >
                                 {language === "en" ? "View Projects" : "Conheça os Projetos"}
+                            </Link>
+                            <Link
+                                href="#contact"
+                                className="border-2 border-accent px-6 py-2.5 text-accent rounded-full font-bold hover:bg-accent/10 transition-all text-sm"
+                            >
+                                {t("home.contactButton")}
                             </Link>
 
                             <div className="flex items-center gap-3 text-tertiary/50">
@@ -129,48 +129,11 @@ export default function HomePage ({
                             </div>
                             </div>
                         </Reveal>
-
-                        {/* Snippet de destaque */}
-                        <Reveal delay={0.3}>
-                            <Link
-                            href="#projects"
-                            className="inline-flex items-center gap-3 mt-4 border border-hairline rounded-full px-4 py-2 text-sm text-tertiary/80 hover:text-accent hover:border-accent transition-colors"
-                        >
-                            <span className="w-8 h-8 rounded-full border border-accent/30 overflow-hidden shrink-0">
-                                <Image
-                                    src="https://github.com/alexand7e.png"
-                                    alt=""
-                                    width={32}
-                                    height={32}
-                                />
-                            </span>
-                            <span>
-                                {language === "en"
-                                    ? "See featured work"
-                                    : "Veja o trabalho em destaque"}
-                            </span>
-                            <FiArrowRight size={14} />
-                        </Link>
-                        </Reveal>
                     </div>
 
-                    {/* Coluna imagem */}
-                    <Reveal delay={0.15} className="relative shrink-0 flex items-center justify-center">
-                        <div className="absolute w-80 h-80 md:w-96 md:h-96 xl:w-[420px] xl:h-[420px] rounded-full border border-accent/10" />
-                        <div className="absolute w-64 h-64 md:w-80 md:h-80 xl:w-[360px] xl:h-[360px] rounded-full border border-accent/5" />
-
-                        <div className="relative w-52 h-52 md:w-64 md:h-64 xl:w-72 xl:h-72">
-                            <div className="absolute inset-0 rounded-full bg-accent/10 blur-xl scale-110" />
-                            <Image
-                                className="relative rounded-full border-2 border-accent/40 p-2 bg-primary/80"
-                                src="https://github.com/alexand7e.png"
-                                alt="Alexandre Barros - Profile Picture"
-                                fill
-                                sizes="(max-width: 1024px) 256px, 288px"
-                                style={{ objectFit: 'contain' }}
-                                priority
-                            />
-                        </div>
+                    {/* Coluna terminal — playground do assistente */}
+                    <Reveal delay={0.15} className="w-full max-w-xl mx-auto lg:max-w-none min-w-0">
+                        <AgentTerminal key={language} language={language} />
                     </Reveal>
                 </div>
 
